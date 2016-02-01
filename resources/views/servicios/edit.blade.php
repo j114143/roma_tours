@@ -1,6 +1,6 @@
 @extends('layout.user')
 @section('titulo')
-Agregar servicio
+Agregar servicio <a href="{{ url('servicios')}}" title="Listar"  class="btn btn-primary btn-xs"><i class="fa fa-list"> </i></a>
 @stop
 @section('contenido')
 <div class="row">

@@ -1,6 +1,6 @@
 @extends('layout.user')
 @section('titulo')
-Servicios <a href="{{ url('servicios/new')}}" title="Agregar"  class="btn btn-warning btn-xs"><i class="fa fa-plus-circle"> </i></a>
+Servicios <a href="{{ url('servicios/new')}}" title="Agregar"  class="btn btn-primary btn-xs"><i class="fa fa-plus-circle"> </i></a>
 @stop
 @section('contenido')
     <table class="table table-bordered table-striped">
@@ -16,8 +16,8 @@ Servicios <a href="{{ url('servicios/new')}}" title="Agregar"  class="btn btn-wa
     @foreach($objs as $obj)
         <tr>
             <td>{{$obj->nombre}}</td>
-            <td>{{$obj->precio_soles}}</td>
-            <td>{{$obj->precio_dolares}}</td>
+            <td>S/. {{$obj->precio_soles}}</td>
+            <td>USD $ {{$obj->precio_dolares}}</td>
             <td>{{ str_limit($obj->descripcion, 80)}}</td>
             <td>
             <a class="btn btn-info btn-xs" title="Ver detalles" href="{{ url ('servicios/'.$obj->id) }}"><i class="fa fa-eye"></i></a>
