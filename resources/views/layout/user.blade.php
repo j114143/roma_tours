@@ -64,6 +64,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1>@yield('titulo')</h1>
+                        <hr>
                         @if($errors->any())
                         <ul class="alert alert-danger">
                             @foreach($errors->all() as $error)

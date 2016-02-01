@@ -5,9 +5,8 @@ Agregar servicio
 @section('contenido')
 <div class="row">
           <div class="col-sm-8">
-            {!!Form::open(array('url' => 'servicios/new','id'=>'form','class'=>'form-horizontal'))!!}
-
-              <div class="form-group">
+            {!! Form::model($obj, [ 'method' => 'POST','id'=>'form','class'=>'form-horizontal']) !!}
+            <div class="form-group">
                 <label class="col-sm-2 control-label">Nombre</label>
                 <div class="col-sm-10">
                   {!!Form::input('text','nombre', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}

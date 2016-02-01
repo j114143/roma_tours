@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Session;
 use App\Servicio;
-
+use App\Http\Requests\Servicio\CreateServicioRequest;
 class ServicioController extends Controller
 {
     /**
@@ -37,9 +38,19 @@ class ServicioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateServicioRequest $request)
     {
-        //
+        $input = $request->all();
+
+        $obj = new Servicio ;
+        $obj->nombre = $input['nombre'];
+        $obj->precio_soles = $input['precio_soles'];
+        $obj->precio_dolares = $input['precio_dolares'];
+        $obj->descripcion = $input['descripcion'];
+        $obj->save();
+        Session::flash('mensaje', 'Servicio agregado');
+        Session::flash('alert-class','alert-success');
+        return redirect('/servicios');
     }
 
     /**
@@ -50,7 +61,8 @@ class ServicioController extends Controller
      */
     public function show($id)
     {
-        //
+        $obj = Servicio::findOrFail($id);
+        return view('servicios.show',array("obj"=>$obj));
     }
 
     /**
@@ -61,7 +73,8 @@ class ServicioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $obj = Servicio::findOrFail($id);
+        return view('servicios.edit', array('obj'=>$obj));
     }
 
     /**
@@ -71,9 +84,19 @@ class ServicioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateServicioRequest $request, $id)
     {
-        //
+        $input = $request->all();
+
+        $obj = Servicio::findOrFail($id);
+        $obj->nombre = $input['nombre'];
+        $obj->precio_soles = $input['precio_soles'];
+        $obj->precio_dolares = $input['precio_dolares'];
+        $obj->descripcion = $input['descripcion'];
+        $obj->save();
+        Session::flash('mensaje', 'Servicio actualizado');
+        Session::flash('alert-class','alert-success');
+        return redirect('/servicios');
     }
 
     /**

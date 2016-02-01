@@ -14,12 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('servicios/', 'ServicioController@index');
-Route::get('servicios/{ticket_id}', 'ServicioController@show');
-Route::get('servicios/{ticket_id}/edit', 'ServicioController@edit');
-Route::post('servicios/{ticket_id}/edit', 'ServicioController@update');
-Route::get('servicios/create', 'ServicioController@create');
-Route::post('servicios/create', 'ServicioController@store');
+Route::get('servicios/', 'ServicioController@index')->name("servicios");
+Route::get('servicios/new', 'ServicioController@create')->name("servicios_create");
+Route::post('servicios/new', 'ServicioController@store');
+Route::get('servicios/{id}', 'ServicioController@show')->name("servicios_detail");
+Route::get('servicios/{id}/edit', 'ServicioController@edit')->name("servicios");
+Route::post('servicios/{id}/edit', 'ServicioController@update');
 
 
 Route::get('conductores/', 'ConductorController@index');
