@@ -21,7 +21,6 @@ Route::get('servicios/{id}', 'ServicioController@show')->name("servicios_detail"
 Route::get('servicios/{id}/edit', 'ServicioController@edit')->name("servicios");
 Route::post('servicios/{id}/edit', 'ServicioController@update');
 
-
 Route::get('conductores/', 'ConductorController@index');
 Route::get('conductores/{conductor_id}', 'ConductorController@show');
 Route::get('conductores/{conductor_id}/edit', 'ConductorController@edit');
