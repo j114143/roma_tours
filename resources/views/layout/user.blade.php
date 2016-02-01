@@ -12,6 +12,7 @@
     <title>@yield('title') | Romas Tours</title>
 
     {!!Html::style('assets/css/bootstrap.min.css')!!}
+    {!!Html::style('assets/css/font-awesome.min.css')!!}
     {!!Html::style('assets/css/simple-sidebar.css')!!}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -34,6 +35,9 @@
                     <a href="#">
                         Roma Tours
                     </a>
+                </li>
+                <li>
+                    <a href="{{ url ('servicios') }}">Servicios</a>
                 </li>
                 <li>
                     <a href="#">Buses</a>
@@ -71,7 +75,8 @@
                         <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('mensaje') }}</p>
                         @endif
                         @yield('contenido')
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                        <hr>
+                        <p><a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a></p>
                     </div>
                 </div>
             </div>

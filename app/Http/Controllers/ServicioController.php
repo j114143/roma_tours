@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Servicio;
 
 class ServicioController extends Controller
 {
@@ -16,7 +17,8 @@ class ServicioController extends Controller
      */
     public function index()
     {
-        //
+        $objs = Servicio::paginate(10);
+        return view('servicios.index',array("objs"=>$objs));
     }
 
     /**
@@ -26,7 +28,7 @@ class ServicioController extends Controller
      */
     public function create()
     {
-        //
+        return view('servicios.create');
     }
 
     /**
