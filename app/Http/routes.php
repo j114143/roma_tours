@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('servicios/', 'ServicioController@index');
+Route::get('servicios/{ticket_id}', 'ServicioController@show');
+Route::get('servicios/{ticket_id}/edit', 'ServicioController@edit');
+Route::post('servicios/{ticket_id}/edit', 'ServicioController@update');
+Route::get('servicios/create', 'ServicioController@create');
+Route::post('servicios/create', 'ServicioController@store');
