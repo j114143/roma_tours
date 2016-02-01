@@ -63,7 +63,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>@yield('titulo')</h1>
+                        <h1>@yield('titulo') <span class="pull-right"> <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Menu</a> </span></h1>
                         <hr>
                         @if($errors->any())
                         <ul class="alert alert-danger">
@@ -77,7 +77,7 @@
                         @endif
                         @yield('contenido')
                         <hr>
-                        <p><a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a></p>
+
                     </div>
                 </div>
             </div>
