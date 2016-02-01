@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Conductor;
 
 class ConductorController extends Controller
 {
@@ -16,7 +17,8 @@ class ConductorController extends Controller
      */
     public function index()
     {
-        //
+        $conductores = Conductor::paginate(10);
+        return view('conductores.index', array("conductores"=> $conductores));
     }
 
     /**
@@ -26,7 +28,7 @@ class ConductorController extends Controller
      */
     public function create()
     {
-        //
+        return view('conductores.create');
     }
 
     /**

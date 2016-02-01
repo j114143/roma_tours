@@ -21,7 +21,6 @@ Route::post('servicios/{ticket_id}/edit', 'ServicioController@update');
 Route::get('servicios/create', 'ServicioController@create');
 Route::post('servicios/create', 'ServicioController@store');
 
-
 Route::get('conductores/', 'ConductorController@index');
 Route::get('conductores/{conductor_id}', 'ConductorController@show');
 Route::get('conductores/{conductor_id}/edit', 'ConductorController@edit');
