@@ -62,3 +62,7 @@ Route::post('clientes/new', 'ClienteController@store');
 Route::get('clientes/{id}', 'ClienteController@show')->name("clientes_detail");
 Route::get('clientes/{id}/edit', 'ClienteController@edit')->name("clientes_edit");
 Route::post('clientes/{id}/edit', 'ClienteController@update');
+
+
+Route::get('reservar/', 'BookController@create')->name("reservar");
+Route::post('reservar/', 'BookController@storage');
