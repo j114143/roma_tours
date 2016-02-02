@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Session;
+use App\Precio;
+use App\Http\Requests\Precio\CreatePrecioRequest;
+
 class PrecioController extends Controller
 {
     /**
@@ -16,7 +20,8 @@ class PrecioController extends Controller
      */
     public function index()
     {
-        //
+        $objs = Precio::paginate(10);
+        return view('precios.index',array("objs"=>$objs));
     }
 
     /**
@@ -26,7 +31,7 @@ class PrecioController extends Controller
      */
     public function create()
     {
-        //
+        return view('precios.create');
     }
 
     /**
@@ -35,9 +40,19 @@ class PrecioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePrecioRequest $request)
     {
-        //
+        $input = $request->all();
+
+        $obj = new Precio ;
+        $obj->servicio_id = $input['servicio_id'];
+        $obj->tipo_bus_id = $input['tipo_bus_id'];
+        $obj->precio_soles = $input['precio_soles'];
+        $obj->precio_dolares = $input['precio_dolares'];
+        $obj->save();
+        Session::flash('mensaje', 'Precio agregado');
+        Session::flash('alert-class','alert-success');
+        return redirect(route('precios'));
     }
 
     /**
@@ -46,9 +61,10 @@ class PrecioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($servicio_id,$tipo_bus_id)
     {
-        //
+        $obj = Precio::where(array("servicio_id"=>$servicio_id,"tipo_bus_id"=>$tipo_bus_id))->firstOrFail();;
+        return view('precios.show',array("obj"=>$obj));
     }
 
     /**
@@ -57,9 +73,10 @@ class PrecioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($servicio_id,$tipo_bus_id)
     {
-        //
+        $obj = Precio::where(array("servicio_id"=>$servicio_id,"tipo_bus_id"=>$tipo_bus_id))->firstOrFail();;
+        return view('precios.edit', array('obj'=>$obj));
     }
 
     /**
@@ -69,9 +86,19 @@ class PrecioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreatePrecioRequest $request, $servicio_id,$tipo_bus_id)
     {
-        //
+        $input = $request->all();
+
+        $obj = Precio::where(array("servicio_id"=>$servicio_id,"tipo_bus_id"=>$tipo_bus_id))->firstOrFail();;
+        $obj->servicio_id = $input['servicio_id'];
+        $obj->tipo_bus_id = $input['tipo_bus_id'];
+        $obj->precio_soles = $input['precio_soles'];
+        $obj->precio_dolares = $input['precio_dolares'];
+        $obj->save();
+        Session::flash('mensaje', 'Precio actualizado');
+        Session::flash('alert-class','alert-success');
+        return redirect(route('precios'));
     }
 
     /**

@@ -83,9 +83,9 @@ Route::post('admin/diponibilidades/{id}/edit', 'DiponibilidadController@update')
 Route::get('admin/precios/', 'PrecioController@index')->name("precios");
 Route::get('admin/precios/new', 'PrecioController@create')->name("precios_new");
 Route::post('admin/precios/new', 'PrecioController@store');
-Route::get('admin/precios/{id}', 'PrecioController@show')->name("precios_detail");
-Route::get('admin/precios/{id}/edit', 'PrecioController@edit')->name("precios_edit");
-Route::post('admin/precios/{id}/edit', 'PrecioController@update');
+Route::get('admin/precios/{servicio_id}/{tipo_bus_id}', 'PrecioController@show')->name("precios_detail");
+Route::get('admin/precios/{servicio_id}/{tipo_bus_id}/edit', 'PrecioController@edit')->name("precios_edit");
+Route::post('admin/precios/{servicio_id}/{tipo_bus_id}/edit', 'PrecioController@update');
 
 Route::get('reservar/', 'BookController@create')->name("reservar");
 Route::post('reservar/', 'BookController@storage');

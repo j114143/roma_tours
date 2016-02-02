@@ -38,6 +38,7 @@
                 <li><a href="{{  route('licencias') }}">Licencia</a></li>
                 <li><a href="{{  route('clientes') }}">Clientes</a></li>
                 <li><a href="{{  route('conductores') }}">Conductores</a></li>
+                <li><a href="{{  route('precios') }}">Precios</a></li>
                 <li>
                     <a href="#">Reservas</a>
                 </li>
