@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Session;
+use App\Disponibilidad;
+use App\Http\Requests\Disponibilidad\CreateDisponibilidadRequest;
 
 class DisponibilidadController extends Controller
 {
@@ -16,7 +19,8 @@ class DisponibilidadController extends Controller
      */
     public function index()
     {
-        //
+        $objs = Disponibilidad::paginate(10);
+        return view('disponibilidades.index',array("objs"=>$objs));
     }
 
     /**
@@ -26,7 +30,7 @@ class DisponibilidadController extends Controller
      */
     public function create()
     {
-        //
+        return view('disponibilidades.create');
     }
 
     /**
@@ -35,9 +39,19 @@ class DisponibilidadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateDisponibilidadRequest $request)
     {
-        //
+        $input = $request->all();
+
+        $obj = new Disponibilidad ;
+        $obj->servicio_id = $input['servicio_id'];
+        $obj->bus_id = $input['bus_id'];
+        $obj->hora = $input['hora'];
+        $obj->fecha = $input['fecha'];
+        $obj->save();
+        Session::flash('mensaje', 'Disponibilidad agregado');
+        Session::flash('alert-class','alert-success');
+        return redirect(route('disponibilidades'));
     }
 
     /**
@@ -48,7 +62,8 @@ class DisponibilidadController extends Controller
      */
     public function show($id)
     {
-        //
+        $obj = Disponibilidad::findOrFail($id);
+        return view('disponibilidades.show',array("obj"=>$obj));
     }
 
     /**
@@ -59,7 +74,8 @@ class DisponibilidadController extends Controller
      */
     public function edit($id)
     {
-        //
+        $obj = Disponibilidad::findOrFail($id);
+        return view('disponibilidades.edit', array('obj'=>$obj));
     }
 
     /**
@@ -71,7 +87,17 @@ class DisponibilidadController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+
+        $obj = Disponibilidad::findOrFail($id);
+        $obj->servicio_id = $input['servicio_id'];
+        $obj->bus_id = $input['bus_id'];
+        $obj->hora = $input['hora'];
+        $obj->fecha = $input['fecha'];
+        $obj->save();
+        Session::flash('mensaje', 'Disponibilidad actualizado');
+        Session::flash('alert-class','alert-success');
+        return redirect(route('disponibilidades'));
     }
 
     /**

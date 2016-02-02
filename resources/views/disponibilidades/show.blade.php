@@ -5,5 +5,8 @@
 <a href="{{ route('disponibilidades')}}" title="Listar"  class="btn btn-success btn-xs"><i class="fa fa-list"> </i></a>
 @stop
 @section('contenido')
-<p>Tipo de servicio</p>
+<p><b>Servicio : </b> {{$obj->servicio->nombre}}</p>
+<p><b>Bus : </b> {{$obj->bus->placa}}</p>
+<p><b>Hora : </b> {{$obj->hora}}</p>
+<p><b>Fecha : </b> {{$obj->fecha}}</p>
 @stop

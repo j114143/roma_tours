@@ -39,9 +39,14 @@
                 <li><a href="{{  route('clientes') }}">Clientes</a></li>
                 <li><a href="{{  route('conductores') }}">Conductores</a></li>
                 <li><a href="{{  route('precios') }}">Precios</a></li>
+                <li><a href="{{  route('disponibilidades') }}">Disponibilidad</a></li>
                 <li>
                     <a href="#">Reservas</a>
                 </li>
+                <!--if(Auth::user()->es_admin)
+                <li><a href="#">Mis reservas</a></li>
+                else
+                endif-->
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->

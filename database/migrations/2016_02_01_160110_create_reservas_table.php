@@ -22,8 +22,10 @@ class CreateReservasTable extends Migration
             $table->integer('cantidad_pasajeros');
             $table->date('fecha_reserva');
             $table->integer('duracion');
-            $table->string('hotel_inicio');
-            $table->string('hotel_fin');
+            $table->string('lugar_inicio');
+            $table->string('lugar_fin');
+
+            $table->boolean('confirmado')->default(false);
             $table->time('hora_inicio');
             $table->timestamps();
 

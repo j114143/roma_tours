@@ -13,7 +13,7 @@ class CreateDisponibilidadRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class CreateDisponibilidadRequest extends Request
     public function rules()
     {
         return [
-            //
+            'servicio_id' => 'required|exists:servicios,id',
+            'bus_id' => 'required|exists:buses,id',
+            'hora' => 'required',
+            'fecha' => 'required',
         ];
     }
 }

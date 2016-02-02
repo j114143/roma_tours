@@ -24,8 +24,8 @@ class CreatePrecioRequest extends Request
     public function rules()
     {
         return [
-            'servicio_id' => 'required|numeric',
-            'tipo_bus_id' => 'required|numeric',
+            'servicio_id' => 'required|exists:servicios,id',
+            'tipo_bus_id' => 'required|exists:tipo_buses,id',
             'precio_soles' => 'required|numeric',
             'precio_dolares' => 'required|numeric',
         ];

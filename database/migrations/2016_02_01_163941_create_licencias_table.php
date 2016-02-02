@@ -18,7 +18,6 @@ class CreateLicenciasTable extends Migration
             $table->date('fecha_emision');
             $table->date('fecha_revalidacion');
             $table->string('direccion');
-            $table->boolean('eliminado')->default(false);
             $table->timestamps();
 
             $table->primary('conductor_id');

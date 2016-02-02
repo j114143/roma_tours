@@ -18,6 +18,7 @@ class CreateDisponibilidadsTable extends Migration
             $table->integer('bus_id')->unsigned();
             $table->time('hora');
             $table->date('fecha');
+            $table->boolean('libre')->default(true);
             $table->timestamps();
 
             $table->foreign('servicio_id')

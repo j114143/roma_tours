@@ -24,7 +24,7 @@ class CreateBusRequest extends Request
     public function rules()
     {
         return [
-            'tipo_id'  => 'required|numeric',
+            'tipo_id'  => 'required|exists:tipo_buses,id',
             'placa'  => 'required',
             'cantidad_asientos'  => 'required',
             'numero_motor'  => 'required',

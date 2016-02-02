@@ -26,7 +26,7 @@ class CreateServicioRequest extends Request
         return [
             'nombre'     => 'required|min:3|max:32',
             'duracion' => 'required|numeric',
-            'tipo_id' => 'required|numeric',
+            'tipo_id' => 'required|exists:servicios,id',
             'descripcion'  => 'required',
         ];
     }
