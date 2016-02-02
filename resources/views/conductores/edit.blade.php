@@ -5,7 +5,7 @@ Editar Conductor
 @section('contenido')
 <div class="row">
           <div class="col-sm-8">
-            {!! Form::model($obj, [ 'method' => 'POST','id'=>'form','class'=>'form-horizontal']) !!}
+            {!! Form::model($obj, [ 'method' => 'POST',route('conductores_edit',['id'=>$obj->id]),'id'=>'form','class'=>'form-horizontal']) !!}
               <div class="form-group">
                 <label class="col-sm-2 control-label">Nombre</label>
                 <div class="col-sm-10">

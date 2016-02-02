@@ -39,7 +39,7 @@ Editar información del cliente <a href="{{ route('servicios')}}" title="Listar"
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
           <button class="btn btn-primary" type="submit">Guardar</button>
-          <a href="{{route('servicios')}}" class="btn btn-danger">Cancelar</a>
+          <a href="{{route('clientes')}}" class="btn btn-danger">Cancelar</a>
         </div>
       </div>
 

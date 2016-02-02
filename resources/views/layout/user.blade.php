@@ -30,15 +30,13 @@
                         Roma Tours
                     </a>
                 </li>
-                <li><a href="{{  route('tipos') }}">Tipos de servicio</a></li>
+                <li><a href="{{  route('tipo_servicios') }}">Tipos de servicio</a></li>
                 <li><a href="{{  route('servicios') }}">Servicios</a></li>
                 <li><a href="{{  route('buses') }}">Buses</a></li>
                 <li><a href="{{  route('empresas') }}">Empresas</a></li>
                 <li><a href="{{  route('licencias') }}">Licencia</a></li>
                 <li><a href="{{  route('clientes') }}">Clientes</a></li>
-                <li>
-                    <a href="#">Conductores</a>
-                </li>
+                <li><a href="{{  route('conductores') }}">Conductores</a></li>
                 <li>
                     <a href="#">Reservas</a>
                 </li>

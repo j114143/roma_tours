@@ -40,7 +40,7 @@ Agregar servicio <a href="{{ route('servicios')}}" title="Listar"  class="btn bt
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
             <button class="btn btn-primary" type="submit">Guardar</button>
-            <a href="{{route('servicios')}}" class="btn btn-danger">Cancelar</a>
+            <a href="{{route('empresas')}}" class="btn btn-danger">Cancelar</a>
           </div>
         </div>
 

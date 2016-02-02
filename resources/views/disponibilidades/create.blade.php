@@ -5,7 +5,7 @@ Agregar tipo de servicio
 @section('contenido')
 <div class="row">
           <div class="col-sm-8">
-            {!!Form::open(array('url' => route('tipos_new'),'id'=>'form','class'=>'form-horizontal'))!!}
+            {!!Form::open(array('url' => route('disponibilidades_new'),'id'=>'form','class'=>'form-horizontal'))!!}
               <div class="form-group">
                 <label class="col-sm-2 control-label">Nombre</label>
                 <div class="col-sm-10">
@@ -15,7 +15,7 @@ Agregar tipo de servicio
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                   <button class="btn btn-primary" type="submit">Guardar</button>
-                  <a href="{{route('servicios')}}" class="btn btn-danger">Cancelar</a>
+                  <a href="{{route('disponibilidades')}}" class="btn btn-danger">Cancelar</a>
                 </div>
               </div>
 

@@ -52,7 +52,7 @@ class ConductorController extends Controller
         $obj->save();
         Session::flash('mensaje', 'Conductor agregado');
         Session::flash('alert-class','alert-success');
-        return redirect('/conductores');
+        return redirect(route('conductores'));
     }
 
     /**
@@ -100,7 +100,7 @@ class ConductorController extends Controller
         $obj->save();
         Session::flash('mensaje', 'Conductor actualizado');
         Session::flash('alert-class','alert-success');
-        return redirect('/conductores');
+        return redirect(route('conductores'));
     }
 
     /**

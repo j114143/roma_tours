@@ -59,7 +59,7 @@ Editar bus {{$obj->placa}} <a href="{{ route('buses')}}" title="Listar"  class="
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
             <button class="btn btn-primary" type="submit">Guardar</button>
-            <a href="{{route('servicios')}}" class="btn btn-danger">Cancelar</a>
+            <a href="{{route('buses')}}" class="btn btn-danger">Cancelar</a>
           </div>
         </div>
      {!!Form::close()!!}
