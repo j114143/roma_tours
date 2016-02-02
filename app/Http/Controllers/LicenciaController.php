@@ -19,8 +19,8 @@ class LicenciaController extends Controller
      */
     public function index()
     {
-        $obj = Licencia::findOrFail($id);
-        return view('licencias.edit', array('obj'=>$obj));
+        $objs = Licencia::paginate(10);
+        return view('licencias.index',array("objs"=>$objs));
     }
 
     /**

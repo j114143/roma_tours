@@ -19,12 +19,12 @@ class CreateServiciosTable extends Migration
             $table->float('precio_soles');
             $table->float('precio_dolares');
             $table->text('descripcion');
-            $table->text('tipo_id');
+            $table->integer('tipo_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('conductor_id')
+            $table->foreign('tipo_id')
                   ->references('id')
-                  ->on('conductors');
+                  ->on('tipos');
         });
     }
 
