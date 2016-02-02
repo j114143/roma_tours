@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Session;
 use App\Servicio;
-use App\Tipo;
+use App\TipoServicio;
 use App\Http\Requests\Servicio\CreateServicioRequest;
 class ServicioController extends Controller
 {
@@ -30,7 +30,7 @@ class ServicioController extends Controller
      */
     public function create()
     {
-        $tipos = Tipo::lists('nombre','id');
+        $tipos = TipoServicio::lists('nombre','id');
         return view('servicios.create',array('tipos'=>$tipos));
     }
 
@@ -46,9 +46,7 @@ class ServicioController extends Controller
 
         $obj = new Servicio ;
         $obj->nombre = $input['nombre'];
-        $obj->precio_soles = $input['precio_soles'];
         $obj->duracion = $input['duracion'];
-        $obj->precio_dolares = $input['precio_dolares'];
         $obj->descripcion = $input['descripcion'];
         $obj->tipo_id = $input['tipo_id'];
         $obj->save();
@@ -98,8 +96,6 @@ class ServicioController extends Controller
         $obj->nombre = $input['nombre'];
         $obj->tipo_id = $input['tipo_id'];
         $obj->duracion = $input['duracion'];
-        $obj->precio_soles = $input['precio_soles'];
-        $obj->precio_dolares = $input['precio_dolares'];
         $obj->descripcion = $input['descripcion'];
         $obj->save();
         Session::flash('mensaje', 'Servicio actualizado');

@@ -11,6 +11,6 @@ class Servicio extends Model
     protected $fillable = ['nombre', 'tipo_id', 'precio_dolares','precio_soles','descripcion'];
     function tipo()
     {
-        return $this->belongsTo('App\Tipo', 'tipo_id');
+        return $this->belongsTo('App\TipoServicio', 'tipo_id');
     }
 }

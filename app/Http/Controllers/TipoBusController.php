@@ -7,16 +7,16 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class BookController extends Controller
+class TipoBusController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function servicio()
+    public function index()
     {
-        return view('book.servicio');
+        //
     }
 
     /**
@@ -26,7 +26,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('book.create');
+        //
     }
 
     /**

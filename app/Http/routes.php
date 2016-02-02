@@ -49,12 +49,12 @@ Route::get('licencias/{id}', 'LicenciaController@show')->name("licencias_detail"
 Route::get('licencias/{id}/edit', 'LicenciaController@edit')->name("licencias_edit");
 Route::post('licencias/{id}/edit', 'LicenciaController@update');
 
-Route::get('tipos/', 'TipoController@index')->name("tipos");
-Route::get('tipos/new', 'TipoController@create')->name("tipos_new");
-Route::post('tipos/new', 'TipoController@store');
-Route::get('tipos/{id}', 'TipoController@show')->name("tipos_detail");
-Route::get('tipos/{id}/edit', 'TipoController@edit')->name("tipos_edit");
-Route::post('tipos/{id}/edit', 'TipoController@update');
+Route::get('tipo_servicios/', 'TipoController@index')->name("tipo_servicios");
+Route::get('tipo_servicios/new', 'TipoController@create')->name("tipo_servicios_new");
+Route::post('tipo_servicios/new', 'TipoController@store');
+Route::get('tipo_servicios/{id}', 'TipoController@show')->name("tipo_servicios_detail");
+Route::get('tipo_servicios/{id}/edit', 'TipoController@edit')->name("tipo_servicios_edit");
+Route::post('tipo_servicios/{id}/edit', 'TipoController@update');
 
 Route::get('clientes/', 'ClienteController@index')->name("clientes");
 Route::get('clientes/new', 'ClienteController@create')->name("clientes_new");
@@ -66,3 +66,4 @@ Route::post('clientes/{id}/edit', 'ClienteController@update');
 
 Route::get('reservar/', 'BookController@create')->name("reservar");
 Route::post('reservar/', 'BookController@storage');
+Route::get('reservar/servicio', 'BookController@servicio')->name("reservar_servicio");

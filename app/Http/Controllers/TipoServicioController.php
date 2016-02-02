@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Session;
-use App\Tipo;
+use App\TipoServicio;
 use App\Http\Requests\Tipo\CreateTipoRequest;
 
-class TipoController extends Controller
+class TipoServicioController extends Controller
 {
     /**
      * Display a listing of the resource.

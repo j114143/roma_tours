@@ -16,15 +16,13 @@ class CreateServiciosTable extends Migration
             $table->increments('id');
             $table->string('nombre',128);
             $table->float('duracion');
-            $table->float('precio_soles');
-            $table->float('precio_dolares');
             $table->text('descripcion');
             $table->integer('tipo_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('tipo_id')
                   ->references('id')
-                  ->on('tipos');
+                  ->on('tipo_servicios');
         });
     }
 
