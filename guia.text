@@ -1,0 +1,8 @@
+Servidor Apache 2
+Php
+Mysql
+(XAMPP)
+- Instalar composer
+- Descargar el proyecto
+- composer install
+- php artisan migrate

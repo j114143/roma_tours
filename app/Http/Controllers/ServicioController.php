@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Session;
 use App\Servicio;
+use App\Tipo;
 use App\Http\Requests\Servicio\CreateServicioRequest;
 class ServicioController extends Controller
 {
@@ -29,7 +30,8 @@ class ServicioController extends Controller
      */
     public function create()
     {
-        return view('servicios.create');
+        $tipos = Tipo::lists('nombre','id');
+        return view('servicios.create',array('tipos'=>$tipos));
     }
 
     /**
@@ -47,6 +49,7 @@ class ServicioController extends Controller
         $obj->precio_soles = $input['precio_soles'];
         $obj->precio_dolares = $input['precio_dolares'];
         $obj->descripcion = $input['descripcion'];
+        $obj->tipo_id = $input['tipo_id'];
         $obj->save();
         Session::flash('mensaje', 'Servicio agregado');
         Session::flash('alert-class','alert-success');
@@ -74,7 +77,9 @@ class ServicioController extends Controller
     public function edit($id)
     {
         $obj = Servicio::findOrFail($id);
-        return view('servicios.edit', array('obj'=>$obj));
+        $tipos = Tipo::lists('nombre','id');
+
+        return view('servicios.edit', array('obj'=>$obj,'tipos'=>$tipos));
     }
 
     /**
@@ -90,6 +95,7 @@ class ServicioController extends Controller
 
         $obj = Servicio::findOrFail($id);
         $obj->nombre = $input['nombre'];
+        $obj->tipo_id = $input['tipo_id'];
         $obj->precio_soles = $input['precio_soles'];
         $obj->precio_dolares = $input['precio_dolares'];
         $obj->descripcion = $input['descripcion'];

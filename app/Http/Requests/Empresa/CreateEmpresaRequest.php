@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Servicio;
+namespace App\Http\Requests\Empresa;
 
 use App\Http\Requests\Request;
 
-class CreateServicioRequest extends Request
+class CreateEmpresaRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,11 @@ class CreateServicioRequest extends Request
     public function rules()
     {
         return [
-            'nombre'     => 'required|min:3|max:32',
-            'precio_soles' => 'required|numeric',
-            'tipo_id' => 'required|numeric',
-            'precio_dolares' => 'required|numeric',
-            'descripcion'  => 'required',
+            'razon_social'  => 'required',
+            'ruc'  => 'required',
+            'direccion'  => 'required',
+            'telefono'  => 'required',
+            'email'  => 'required',
         ];
     }
 }

@@ -36,18 +36,12 @@
                         Roma Tours
                     </a>
                 </li>
-                <li>
-                    <a href="{{ url ('servicios') }}">Servicios</a>
-                </li>
-                <li>
-                    <a href="#">Buses</a>
-                </li>
-                <li>
-                    <a href="#">Empresas</a>
-                </li>
-                <li>
-                    <a href="#">Usuarios</a>
-                </li>
+                <li><a href="{{  route('tipos') }}">Tipos de servicio</a></li>
+                <li><a href="{{  route('servicios') }}">Servicios</a></li>
+                <li><a href="{{  route('buses') }}">Buses</a></li>
+                <li><a href="{{  route('empresas') }}">Empresas</a></li>
+                <li><a href="{{  route('licencias') }}">Licencia</a></li>
+                <li><a href="#">Usuarios</a></li>
                 <li>
                     <a href="#">Conductores</a>
                 </li>
@@ -66,9 +60,9 @@
                         <h1>@yield('titulo') <span class="pull-right"> <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Menu</a> </span></h1>
                         <hr>
                         @if($errors->any())
-                        <ul class="alert alert-danger">
+                        <ul>
                             @foreach($errors->all() as $error)
-                                <li>{{$error}}</li>
+                                <li  class="alert alert-danger">{{$error}}</li>
                             @endforeach
                         </ul>
                         @endif

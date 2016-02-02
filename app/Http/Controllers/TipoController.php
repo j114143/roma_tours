@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Session;
-use App\Licencia;
-use App\Http\Requests\Licencia\CreateLicenciaRequest;
+use App\Tipo;
+use App\Http\Requests\Tipo\CreateTipoRequest;
 
-class LicenciaController extends Controller
+class TipoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +19,8 @@ class LicenciaController extends Controller
      */
     public function index()
     {
-        $obj = Licencia::findOrFail($id);
-        return view('licencias.edit', array('obj'=>$obj));
+        $objs = Tipo::paginate(10);
+        return view('tipos.index',array("objs"=>$objs));
     }
 
     /**
@@ -30,7 +30,7 @@ class LicenciaController extends Controller
      */
     public function create()
     {
-        return view('licencias.create');
+        return view('tipos.create');
     }
 
     /**
@@ -39,20 +39,16 @@ class LicenciaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateLicenciaRequest $request)
+    public function store(CreateTipoRequest $request)
     {
         $input = $request->all();
 
-        $obj = new Licencia ;
-        $obj->conductor_ir = $input['conductor_ir'];
-        $obj->numero_licencia = $input['numero_licencia'];
-        $obj->fecha_emision = $input['fecha_emision'];
-        $obj->fecha_revalidacion = $input['fecha_revalidacion'];
-        $obj->direccion = $input['direccion'];
+        $obj = new Tipo ;
+        $obj->nombre = $input['nombre'];
         $obj->save();
-        Session::flash('mensaje', 'Licencia agregado');
+        Session::flash('mensaje', 'Tipo agregado');
         Session::flash('alert-class','alert-success');
-        return redirect('/licencias');
+        return redirect('/tipos');
     }
 
     /**
@@ -63,8 +59,8 @@ class LicenciaController extends Controller
      */
     public function show($id)
     {
-        $obj = Licencia::findOrFail($id);
-        return view('licencias.show',array("obj"=>$obj));
+        $obj = Tipo::findOrFail($id);
+        return view('tipos.show',array("obj"=>$obj));
     }
 
     /**
@@ -75,8 +71,8 @@ class LicenciaController extends Controller
      */
     public function edit($id)
     {
-        $obj = Licencia::findOrFail($id);
-        return view('licencias.edit', array('obj'=>$obj));
+        $obj = Tipo::findOrFail($id);
+        return view('tipos.edit', array('obj'=>$obj));
     }
 
     /**
@@ -86,19 +82,16 @@ class LicenciaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateLicenciaRequest $request, $id)
+    public function update(CreateTipoRequest $request, $id)
     {
         $input = $request->all();
 
-        $obj = Licencia::findOrFail($id);
-        $obj->numero_licencia = $input['numero_licencia'];
-        $obj->fecha_emision = $input['fecha_emision'];
-        $obj->fecha_revalidacion = $input['fecha_revalidacion'];
-        $obj->direccion = $input['direccion'];
+        $obj = Tipo::findOrFail($id);
+        $obj->nombre = $input['nombre'];
         $obj->save();
-        Session::flash('mensaje', 'Licencia actualizado');
+        Session::flash('mensaje', 'Tipo actualizado');
         Session::flash('alert-class','alert-success');
-        return redirect('/licencias');
+        return redirect('/tipos');
     }
 
     /**

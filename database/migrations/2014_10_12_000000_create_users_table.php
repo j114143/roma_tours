@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->boolean('es_admin')->default(true);
             $table->string('email')->unique();
             $table->string('password', 60);
-            $table->string('nombre');
+            $table->string('nombre',64);
             $table->string('apellidos');
             $table->string('dni');
             $table->string('telefono', 64);
