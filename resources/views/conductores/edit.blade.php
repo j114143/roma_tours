@@ -1,11 +1,11 @@
 @extends('layout.user')
 @section('titulo')
-Agregar Conductor
+Editar Conductor
 @stop
 @section('contenido')
 <div class="row">
-        <div class="col-sm-8">
-            {!!Form::open(array('url' => 'conductores/new','id'=>'form','class'=>'form-horizontal'))!!}
+          <div class="col-sm-8">
+            {!! Form::model($obj, [ 'method' => 'POST','id'=>'form','class'=>'form-horizontal']) !!}
               <div class="form-group">
                 <label class="col-sm-2 control-label">Nombre</label>
                 <div class="col-sm-10">
@@ -50,6 +50,6 @@ Agregar Conductor
               </div>
 
            {!!Form::close()!!}
+          </div>
         </div>
-</div>
 @stop
