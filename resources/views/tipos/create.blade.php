@@ -5,7 +5,7 @@ Agregar tipo de servicio
 @section('contenido')
 <div class="row">
           <div class="col-sm-8">
-            {!!Form::open(array('url' => route('tipos_new',['id'=>$obj->id]),'id'=>'form','class'=>'form-horizontal'))!!}
+            {!!Form::open(array('url' => route('tipos_new'),'id'=>'form','class'=>'form-horizontal'))!!}
               <div class="form-group">
                 <label class="col-sm-2 control-label">Nombre</label>
                 <div class="col-sm-10">

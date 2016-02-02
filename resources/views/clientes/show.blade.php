@@ -5,8 +5,9 @@
 <a href="{{ route('servicios')}}" title="Listar"  class="btn btn-success btn-xs"><i class="fa fa-list"> </i></a>
 @stop
 @section('contenido')
-<p><b>Duraciòn: </b> {{$obj->duracion}} Horas</p>
-<p><b>Precio Soles: </b> S/: {{$obj->precio_soles}}</p>
-<p><b>Precio Dolares: </b> USD $ {{$obj->precio_dolares}}</p>
-<p><b>Descripción: </b> {{$obj->descripcion}}</p>
+<p><b>Nombres y apellidos: </b> {{$obj->nombre}} {{$obj->apellidos}}</p>
+<p><b>DNI: </b> {{$obj->dni}}</p>
+<p><b>Dirección: </b> {{$obj->direccion}}</p>
+<p><b>Teléfono: </b> {{$obj->telefono}}</p>
+<p><b>E-mail: </b> {{$obj->email}}</p>
 @stop

@@ -47,13 +47,14 @@ class ServicioController extends Controller
         $obj = new Servicio ;
         $obj->nombre = $input['nombre'];
         $obj->precio_soles = $input['precio_soles'];
+        $obj->duracion = $input['duracion'];
         $obj->precio_dolares = $input['precio_dolares'];
         $obj->descripcion = $input['descripcion'];
         $obj->tipo_id = $input['tipo_id'];
         $obj->save();
         Session::flash('mensaje', 'Servicio agregado');
         Session::flash('alert-class','alert-success');
-        return redirect('/servicios');
+        return redirect(route('servicios'));
     }
 
     /**
@@ -96,13 +97,14 @@ class ServicioController extends Controller
         $obj = Servicio::findOrFail($id);
         $obj->nombre = $input['nombre'];
         $obj->tipo_id = $input['tipo_id'];
+        $obj->duracion = $input['duracion'];
         $obj->precio_soles = $input['precio_soles'];
         $obj->precio_dolares = $input['precio_dolares'];
         $obj->descripcion = $input['descripcion'];
         $obj->save();
         Session::flash('mensaje', 'Servicio actualizado');
         Session::flash('alert-class','alert-success');
-        return redirect('/servicios');
+        return redirect(route('servicios'));
     }
 
     /**

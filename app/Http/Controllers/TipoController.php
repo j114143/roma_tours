@@ -48,7 +48,7 @@ class TipoController extends Controller
         $obj->save();
         Session::flash('mensaje', 'Tipo agregado');
         Session::flash('alert-class','alert-success');
-        return redirect('/tipos');
+        return redirect(route('tipos'));
     }
 
     /**
@@ -91,7 +91,7 @@ class TipoController extends Controller
         $obj->save();
         Session::flash('mensaje', 'Tipo actualizado');
         Session::flash('alert-class','alert-success');
-        return redirect('/tipos');
+        return redirect(route('tipos'));
     }
 
     /**

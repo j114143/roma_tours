@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>@yield('title') | Romas Tours</title>
+    <title>@yield('pagina_titulo') | Romas Tours</title>
 
     {!!Html::style('assets/css/bootstrap.min.css')!!}
     {!!Html::style('assets/css/font-awesome.min.css')!!}
@@ -21,13 +19,9 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
-
 <body>
-
     <div id="wrapper">
-
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
@@ -41,7 +35,7 @@
                 <li><a href="{{  route('buses') }}">Buses</a></li>
                 <li><a href="{{  route('empresas') }}">Empresas</a></li>
                 <li><a href="{{  route('licencias') }}">Licencia</a></li>
-                <li><a href="#">Usuarios</a></li>
+                <li><a href="{{  route('clientes') }}">Clientes</a></li>
                 <li>
                     <a href="#">Conductores</a>
                 </li>

@@ -106,7 +106,7 @@ class BusController extends Controller
         $obj->save();
         Session::flash('mensaje', 'Bus actualizado');
         Session::flash('alert-class','alert-success');
-        return redirect('/Buss');
+        return redirect(route('buses'));
     }
 
     /**

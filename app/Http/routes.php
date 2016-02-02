@@ -55,3 +55,10 @@ Route::post('tipos/new', 'TipoController@store');
 Route::get('tipos/{id}', 'TipoController@show')->name("tipos_detail");
 Route::get('tipos/{id}/edit', 'TipoController@edit')->name("tipos_edit");
 Route::post('tipos/{id}/edit', 'TipoController@update');
+
+Route::get('clientes/', 'ClienteController@index')->name("clientes");
+Route::get('clientes/new', 'ClienteController@create')->name("clientes_new");
+Route::post('clientes/new', 'ClienteController@store');
+Route::get('clientes/{id}', 'ClienteController@show')->name("clientes_detail");
+Route::get('clientes/{id}/edit', 'ClienteController@edit')->name("clientes_edit");
+Route::post('clientes/{id}/edit', 'ClienteController@update');

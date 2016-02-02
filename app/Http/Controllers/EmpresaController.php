@@ -52,7 +52,7 @@ class EmpresaController extends Controller
         $obj->save();
         Session::flash('mensaje', 'Empresa agregado');
         Session::flash('alert-class','alert-success');
-        return redirect('/empresas');
+        return redirect(route('empresas'));
     }
 
     /**
@@ -86,7 +86,7 @@ class EmpresaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateEmpresaRequest $request, $id)
     {
         $input = $request->all();
 
@@ -99,7 +99,7 @@ class EmpresaController extends Controller
         $obj->save();
         Session::flash('mensaje', 'Empresa actualizado');
         Session::flash('alert-class','alert-success');
-        return redirect('/empresas');
+        return redirect(route('empresas'));
     }
 
     /**
