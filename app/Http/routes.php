@@ -21,12 +21,13 @@ Route::get('servicios/{id}', 'ServicioController@show')->name("servicios_detail"
 Route::get('servicios/{id}/edit', 'ServicioController@edit')->name("servicios_edit");
 Route::post('servicios/{id}/edit', 'ServicioController@update');
 
-Route::get('conductores/', 'ConductorController@index');
-Route::get('conductores/{conductor_id}', 'ConductorController@show');
-Route::get('conductores/{conductor_id}/edit', 'ConductorController@edit');
-Route::post('conductores/{conductor_id}/edit', 'ConductorController@update');
-Route::get('conductores/create', 'ConductorController@create');
-Route::post('conductores/create', 'Conductorontroller@store');
+
+Route::get('conductores/', 'ConductorController@index')->name("conductores");
+Route::get('conductores/new', 'ConductorController@create')->name("conductores_create");
+Route::post('conductores/new', 'ConductorController@store');
+Route::get('conductores/{id}', 'ConductorController@show')->name("conductores_detail");
+Route::get('conductores/{id}/edit', 'ConductorController@edit')->name("conductores");
+Route::post('conductores/{id}/edit', 'ConductorController@update');
 
 Route::get('empresas/', 'EmpresaController@index')->name("empresas");
 Route::get('empresas/new', 'EmpresaController@create')->name("empresas_new");

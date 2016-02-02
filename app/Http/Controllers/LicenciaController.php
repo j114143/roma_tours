@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 use Session;
 use App\Licencia;
 use App\Http\Requests\Licencia\CreateLicenciaRequest;
-
 class LicenciaController extends Controller
 {
     /**
@@ -44,7 +43,7 @@ class LicenciaController extends Controller
         $input = $request->all();
 
         $obj = new Licencia ;
-        $obj->conductor_ir = $input['conductor_ir'];
+        $obj->conductor_id = $input['conductor_id'];
         $obj->numero_licencia = $input['numero_licencia'];
         $obj->fecha_emision = $input['fecha_emision'];
         $obj->fecha_revalidacion = $input['fecha_revalidacion'];
@@ -75,8 +74,11 @@ class LicenciaController extends Controller
      */
     public function edit($id)
     {
-        $obj = Licencia::findOrFail($id);
-        return view('licencias.edit', array('obj'=>$obj));
+        $obj = Licencia::where('conductor_id', '=', $id)->get();
+        if(!sizeof($obj))
+            return view('licencias.create', array('conductor_id'=>$id));   
+        else    
+            return view('licencias.edit', array('obj'=>$obj));
     }
 
     /**
@@ -86,16 +88,17 @@ class LicenciaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateLicenciaRequest $request, $id)
+    public function update(CreateLicenciaRequest $request, $conductor_id)
     {
         $input = $request->all();
-
-        $obj = Licencia::findOrFail($id);
-        $obj->numero_licencia = $input['numero_licencia'];
-        $obj->fecha_emision = $input['fecha_emision'];
-        $obj->fecha_revalidacion = $input['fecha_revalidacion'];
-        $obj->direccion = $input['direccion'];
-        $obj->save();
+        
+        Licencia::where('conductor_id', '=', $conductor_id)
+        ->update(array(
+        "numero_licencia" => $input['numero_licencia'],
+        "fecha_emision" => $input['fecha_emision'],
+        "fecha_revalidacion" => $input['fecha_revalidacion'],
+        "direccion" => $input['direccion'],   
+        ));
         Session::flash('mensaje', 'Licencia actualizado');
         Session::flash('alert-class','alert-success');
         return redirect(route('licencias'));
@@ -111,4 +114,5 @@ class LicenciaController extends Controller
     {
         //
     }
+
 }

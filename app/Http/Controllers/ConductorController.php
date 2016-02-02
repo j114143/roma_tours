@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Session;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Conductor;
+use App\Http\Requests\Conductor\CreateConductorRequest;
 
 class ConductorController extends Controller
 {
@@ -37,9 +38,21 @@ class ConductorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateConductorRequest $request)
     {
-        //
+        $input = $request->all();
+
+        $obj = new Conductor ;
+        $obj->nombres = $input['nombres'];
+        $obj->apellidos = $input['apellidos'];
+        $obj->dni = $input['dni'];
+        $obj->direccion = $input['direccion'];
+        $obj->telefono = $input['telefono'];
+        $obj->email = $input['email'];
+        $obj->save();
+        Session::flash('mensaje', 'Conductor agregado');
+        Session::flash('alert-class','alert-success');
+        return redirect('/conductores');
     }
 
     /**
@@ -50,7 +63,8 @@ class ConductorController extends Controller
      */
     public function show($id)
     {
-        //
+        $obj = Conductor::findOrFail($id);
+        return view('conductores.show',array("obj"=>$obj));
     }
 
     /**
@@ -61,7 +75,8 @@ class ConductorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $obj = Conductor::findOrFail($id);
+        return view('conductores.edit', array('obj'=>$obj));
     }
 
     /**
@@ -71,9 +86,21 @@ class ConductorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateConductorRequest $request, $id)
     {
-        //
+        $input = $request->all();
+
+        $obj = Conductor::findOrFail($id);
+        $obj->nombres = $input['nombres'];
+        $obj->apellidos = $input['apellidos'];
+        $obj->dni = $input['dni'];
+        $obj->direccion = $input['direccion'];
+        $obj->telefono = $input['telefono'];
+        $obj->email = $input['email'];
+        $obj->save();
+        Session::flash('mensaje', 'Conductor actualizado');
+        Session::flash('alert-class','alert-success');
+        return redirect('/conductores');
     }
 
     /**
