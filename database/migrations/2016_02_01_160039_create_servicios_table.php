@@ -15,10 +15,16 @@ class CreateServiciosTable extends Migration
         Schema::create('servicios', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre',128);
+            $table->float('duracion');
             $table->float('precio_soles');
             $table->float('precio_dolares');
             $table->text('descripcion');
+            $table->integer('tipo_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('tipo_id')
+                  ->references('id')
+                  ->on('tipos');
         });
     }
 
@@ -29,6 +35,9 @@ class CreateServiciosTable extends Migration
      */
     public function down()
     {
+        Schema::table('servicios', function (Blueprint $table) {
+            $table->dropForeign('servicios_tipo_id_foreign');
+        });
         Schema::drop('servicios');
     }
 }

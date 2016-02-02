@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Session;
+use App\Bus;
+use App\Http\Requests\Bus\CreateBusRequest;
 
 class BusController extends Controller
 {
@@ -16,7 +19,8 @@ class BusController extends Controller
      */
     public function index()
     {
-        //
+        $objs = Bus::paginate(10);
+        return view('buses.index',array("objs"=>$objs));
     }
 
     /**
@@ -26,7 +30,7 @@ class BusController extends Controller
      */
     public function create()
     {
-        //
+        return view('buses.create');
     }
 
     /**
@@ -35,9 +39,23 @@ class BusController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateBusRequest $request)
     {
-        //
+        $input = $request->all();
+
+        $obj = new Bus ;
+        $obj->placa = $input['placa'];
+        $obj->cantidad_asientos = $input['cantidad_asientos'];
+        $obj->numero_motor = $input['numero_motor'];
+        $obj->fecha_fabricacion = $input['fecha_fabricacion'];
+        $obj->modelo = $input['modelo'];
+        $obj->numero_soat = $input['numero_soat'];
+        $obj->numero_seguro = $input['numero_seguro'];
+        $obj->revision_tecnica = $input['revision_tecnica'];
+        $obj->save();
+        Session::flash('mensaje', 'Bus Agregado');
+        Session::flash('alert-class','alert-success');
+        return redirect(route('buses'));
     }
 
     /**
@@ -48,7 +66,8 @@ class BusController extends Controller
      */
     public function show($id)
     {
-        //
+        $obj = Bus::findOrFail($id);
+        return view('buses.show', array('obj'=>$obj));
     }
 
     /**
@@ -59,7 +78,8 @@ class BusController extends Controller
      */
     public function edit($id)
     {
-        //
+        $obj = Bus::findOrFail($id);
+        return view('buses.edit', array('obj'=>$obj));
     }
 
     /**
@@ -71,7 +91,22 @@ class BusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+
+        $obj = Bus::findOrFail($id);
+        $obj->placa = $input['placa'];
+        $obj->cantidad_acientos = $input['precio_soles'];
+        $obj->numero_motor = $input['numero_motor'];
+        $obj->fecha_fabricacion = $input['fecha_fabricacion'];
+        $obj->modelo = $input['modelo'];
+        $obj->numero_soat = $input['numero_soat'];
+        $obj->numero_seguro = $input['numero_seguro'];
+        $obj->servicio_tecnica = $input['servicio_tecnica'];
+        $obj->conductor_id = $input['conductor_id'];
+        $obj->save();
+        Session::flash('mensaje', 'Bus actualizado');
+        Session::flash('alert-class','alert-success');
+        return redirect(route('buses'));
     }
 
     /**

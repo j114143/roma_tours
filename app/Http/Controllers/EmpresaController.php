@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Session;
+use App\Empresa;
+use App\Http\Requests\Empresa\CreateEmpresaRequest;
 
 class EmpresaController extends Controller
 {
@@ -16,7 +19,8 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        //
+        $objs = Empresa::paginate(10);
+        return view('empresas.index',array("objs"=>$objs));
     }
 
     /**
@@ -26,7 +30,7 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        //
+        return view('empresas.create');
     }
 
     /**
@@ -35,9 +39,20 @@ class EmpresaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateEmpresaRequest $request)
     {
-        //
+        $input = $request->all();
+
+        $obj = new Empresa ;
+        $obj->razon_social = $input['razon_social'];
+        $obj->ruc = $input['ruc'];
+        $obj->direccion = $input['direccion'];
+        $obj->telefono = $input['telefono'];
+        $obj->email = $input['email'];
+        $obj->save();
+        Session::flash('mensaje', 'Empresa agregado');
+        Session::flash('alert-class','alert-success');
+        return redirect(route('empresas'));
     }
 
     /**
@@ -48,7 +63,8 @@ class EmpresaController extends Controller
      */
     public function show($id)
     {
-        //
+        $obj = Empresa::findOrFail($id);
+        return view('empresas.show',array("obj"=>$obj));
     }
 
     /**
@@ -59,7 +75,8 @@ class EmpresaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $obj = Empresa::findOrFail($id);
+        return view('empresas.edit', array('obj'=>$obj));
     }
 
     /**
@@ -69,9 +86,20 @@ class EmpresaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateEmpresaRequest $request, $id)
     {
-        //
+        $input = $request->all();
+
+        $obj = Empresa::findOrFail($id);
+        $obj->razon_social = $input['razon_social'];
+        $obj->ruc = $input['ruc'];
+        $obj->direccion = $input['direccion'];
+        $obj->telefono = $input['telefono'];
+        $obj->email = $input['email'];
+        $obj->save();
+        Session::flash('mensaje', 'Empresa actualizado');
+        Session::flash('alert-class','alert-success');
+        return redirect(route('empresas'));
     }
 
     /**

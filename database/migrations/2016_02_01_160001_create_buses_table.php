@@ -21,7 +21,7 @@ class CreateBusesTable extends Migration
             $table->string('modelo',32);
             $table->string('numero_soat',32);
             $table->string('numero_seguro',32);
-            $table->string('revicion_tecnica',32);
+            $table->string('revision_tecnica',32);
             $table->integer('conductor_id')->unsigned()->nullable();
             $table->timestamps();
 

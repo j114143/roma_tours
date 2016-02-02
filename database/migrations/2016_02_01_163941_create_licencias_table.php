@@ -20,6 +20,7 @@ class CreateLicenciasTable extends Migration
             $table->string('direccion');
             $table->boolean('eliminado')->default(false);
             $table->timestamps();
+
             $table->primary('conductor_id');
             $table->foreign('conductor_id')
                   ->references('id')
