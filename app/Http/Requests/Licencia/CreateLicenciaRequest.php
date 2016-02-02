@@ -24,7 +24,6 @@ class CreateLicenciaRequest extends Request
     public function rules()
     {
         return [
-            'conductor'  => 'required',
             'numero_licencia'  => 'required',
             'fecha_emision'  => 'required',
             'fecha_revalidacion'  => 'required',

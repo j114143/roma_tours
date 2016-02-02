@@ -24,8 +24,8 @@ class CreateConductorRequest extends Request
     public function rules()
     {
         return [
-            'nombre'     => 'required|min:3|max:32',
-            'apellido'     => 'required|min:3|max:32',
+            'nombres'     => 'required|min:3|max:32',
+            'apellidos'     => 'required|min:3|max:32',
             'dni' => 'required|integer|digits_between:6,8',
             'telefono'  => 'required|integer|digits:9',
             'email' =>'email',

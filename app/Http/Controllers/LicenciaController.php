@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 use Session;
 use App\Licencia;
 use App\Http\Requests\Licencia\CreateLicenciaRequest;
-
 class LicenciaController extends Controller
 {
     /**
@@ -44,7 +43,7 @@ class LicenciaController extends Controller
         $input = $request->all();
 
         $obj = new Licencia ;
-        $obj->conductor_ir = $input['conductor_ir'];
+        $obj->conductor_id = $input['conductor_id'];
         $obj->numero_licencia = $input['numero_licencia'];
         $obj->fecha_emision = $input['fecha_emision'];
         $obj->fecha_revalidacion = $input['fecha_revalidacion'];
@@ -75,8 +74,11 @@ class LicenciaController extends Controller
      */
     public function edit($id)
     {
-        $obj = Licencia::findOrFail($id);
-        return view('licencias.edit', array('obj'=>$obj));
+        $obj = Licencia::where('conductor_id', '=', $id)->get();
+        if(!sizeof($obj))
+            return view('licencias.create', array('conductor_id'=>$id));   
+        else    
+            return view('licencias.edit', array('obj'=>$obj));
     }
 
     /**
@@ -110,5 +112,11 @@ class LicenciaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function createWithID($id)
+    {
+         echo  $id;   
+        //return view('licencias.create', array('conductor_id'=>$id));
     }
 }
