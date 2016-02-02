@@ -2,7 +2,7 @@
 @section('titulo')
 {{$obj->nombres}} 
 <a href="{{ url ('conductores/'.$obj->id.'/edit') }}" title="Editar" class="btn btn-warning btn-xs"><i class="fa fa-pencil"> </i></a>
-<a href="{{ url ('licencias/'.$obj->id.'/create') }}" title="Agregar Licencia" class="btn btn-warning btn-xs"><i class="fa fa-plus"> </i></a>
+<a href="{{ url ('licencias/'.$obj->id.'/edit') }}" title="Agregar Licencia" class="btn btn-warning btn-xs"><i class="fa fa-plus"> </i></a>
 @stop
 @section('contenido')
     <p><b>Nombres: </b> {{$obj->nombres}}</p>

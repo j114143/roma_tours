@@ -22,8 +22,8 @@ Licencias <a href="{{ route('licencias_new')}}" title="Agregar"  class="btn btn-
             <td>{{$obj->fecha_revalidacion}}</td>
             <td>{{$obj->direccion}}</td>
             <td>
-            <a class="btn btn-info btn-xs" title="Ver detalles" href="{{ route('licencias_detail',['id'=>$obj->id]) }}"><i class="fa fa-eye"></i></a>
-            <a href="{{ route ('licencias_edit',['id'=>$obj->id]) }}" title="Editar" class="btn btn-warning btn-xs"><i class="fa fa-pencil"> </i></a>
+            <a class="btn btn-info btn-xs" title="Ver detalles" href="{{ route('licencias_detail',['id'=>$obj->conductor_id]) }}"><i class="fa fa-eye"></i></a>
+            <a href="{{ route ('licencias_edit',['id'=>$obj->conductor_id]) }}" title="Editar" class="btn btn-warning btn-xs"><i class="fa fa-pencil"> </i></a>
             </td>
         </tr>
     @endforeach
