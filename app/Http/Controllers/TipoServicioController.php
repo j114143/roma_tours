@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Session;
 use App\TipoServicio;
-use App\Http\Requests\Tipo\CreateTipoRequest;
+use App\Http\Requests\TipoServicio\CreateTipoServicioRequest;
 
 class TipoServicioController extends Controller
 {
@@ -19,8 +19,8 @@ class TipoServicioController extends Controller
      */
     public function index()
     {
-        $objs = Tipo::paginate(10);
-        return view('tipos.index',array("objs"=>$objs));
+        $objs = TipoServicio::paginate(10);
+        return view('tipo_servicios.index',array("objs"=>$objs));
     }
 
     /**
@@ -30,7 +30,7 @@ class TipoServicioController extends Controller
      */
     public function create()
     {
-        return view('tipos.create');
+        return view('tipo_servicios.create');
     }
 
     /**
@@ -39,16 +39,16 @@ class TipoServicioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateTipoRequest $request)
+    public function store(CreateTipoServicioRequest $request)
     {
         $input = $request->all();
 
-        $obj = new Tipo ;
+        $obj = new TipoServicio ;
         $obj->nombre = $input['nombre'];
         $obj->save();
-        Session::flash('mensaje', 'Tipo agregado');
+        Session::flash('mensaje', 'Tipo de servicio agregado');
         Session::flash('alert-class','alert-success');
-        return redirect(route('tipos'));
+        return redirect(route('tipo_servicios'));
     }
 
     /**
@@ -59,8 +59,8 @@ class TipoServicioController extends Controller
      */
     public function show($id)
     {
-        $obj = Tipo::findOrFail($id);
-        return view('tipos.show',array("obj"=>$obj));
+        $obj = TipoServicio::findOrFail($id);
+        return view('tipo_servicios.show',array("obj"=>$obj));
     }
 
     /**
@@ -71,8 +71,8 @@ class TipoServicioController extends Controller
      */
     public function edit($id)
     {
-        $obj = Tipo::findOrFail($id);
-        return view('tipos.edit', array('obj'=>$obj));
+        $obj = TipoServicio::findOrFail($id);
+        return view('tipo_servicios.edit', array('obj'=>$obj));
     }
 
     /**
@@ -82,16 +82,16 @@ class TipoServicioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateTipoRequest $request, $id)
+    public function update(CreateTipoServicioRequest $request, $id)
     {
         $input = $request->all();
 
-        $obj = Tipo::findOrFail($id);
+        $obj = TipoServicio::findOrFail($id);
         $obj->nombre = $input['nombre'];
         $obj->save();
-        Session::flash('mensaje', 'Tipo actualizado');
+        Session::flash('mensaje', 'Tipo de servicio actualizado');
         Session::flash('alert-class','alert-success');
-        return redirect(route('tipos'));
+        return redirect(route('tipo_servicios'));
     }
 
     /**

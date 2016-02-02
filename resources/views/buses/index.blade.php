@@ -7,6 +7,7 @@ Buses de la empresa <a href="{{ route('buses_new')}}" title="Agregar"  class="bt
     <thead>
         <tr>
             <th>Placa</th>
+            <th>Tipo</th>
             <th>Candidad asientos</th>
             <th>Número motor</th>
             <th>Número soat</th>
@@ -17,6 +18,7 @@ Buses de la empresa <a href="{{ route('buses_new')}}" title="Agregar"  class="bt
     @foreach($objs as $obj)
         <tr>
             <td>{{$obj->placa}}</td>
+            <td>{{$obj->tipo->nombre}}</td>
             <td>{{$obj->cantidad_asientos}}</td>
             <td>{{$obj->numero_motor}}</td>
             <td>{{$obj->numero_soat}}</td>

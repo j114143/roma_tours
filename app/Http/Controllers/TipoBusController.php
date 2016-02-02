@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Session;
+use App\TipoBus;
+use App\Http\Requests\TipoBus\CreateTipoBusRequest;
 
 class TipoBusController extends Controller
 {
@@ -16,7 +19,8 @@ class TipoBusController extends Controller
      */
     public function index()
     {
-        //
+        $objs = TipoBus::paginate(10);
+        return view('tipo_buses.index',array("objs"=>$objs));
     }
 
     /**
@@ -26,7 +30,7 @@ class TipoBusController extends Controller
      */
     public function create()
     {
-        //
+        return view('tipo_buses.create');
     }
 
     /**
@@ -35,9 +39,16 @@ class TipoBusController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateTipoBusRequest $request)
     {
-        //
+        $input = $request->all();
+
+        $obj = new TipoBus ;
+        $obj->nombre = $input['nombre'];
+        $obj->save();
+        Session::flash('mensaje', 'Tipo de Bus agregado');
+        Session::flash('alert-class','alert-success');
+        return redirect(route('tipo_buses'));
     }
 
     /**
@@ -48,7 +59,8 @@ class TipoBusController extends Controller
      */
     public function show($id)
     {
-        //
+        $obj = TipoBus::findOrFail($id);
+        return view('tipo_buses.show',array("obj"=>$obj));
     }
 
     /**
@@ -59,7 +71,8 @@ class TipoBusController extends Controller
      */
     public function edit($id)
     {
-        //
+        $obj = TipoBus::findOrFail($id);
+        return view('tipo_buses.edit', array('obj'=>$obj));
     }
 
     /**
@@ -69,9 +82,16 @@ class TipoBusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateTipoBusRequest $request, $id)
     {
-        //
+        $input = $request->all();
+
+        $obj = TipoBus::findOrFail($id);
+        $obj->nombre = $input['nombre'];
+        $obj->save();
+        Session::flash('mensaje', 'Tipo de Bus actualizado');
+        Session::flash('alert-class','alert-success');
+        return redirect(route('tipo_buses'));
     }
 
     /**

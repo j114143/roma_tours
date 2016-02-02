@@ -1,6 +1,6 @@
 @extends('layout.user')
 @section('titulo')
-Tipos de servicio <a href="{{ route('tipo_buses_new')}}" title="Agregar"  class="btn btn-primary btn-xs"><i class="fa fa-plus-circle"> </i></a>
+Tipos de bus <a href="{{ route('tipo_buses_new')}}" title="Agregar"  class="btn btn-primary btn-xs"><i class="fa fa-plus-circle"> </i></a>
 @stop
 @section('contenido')
     <table class="table table-bordered table-striped">

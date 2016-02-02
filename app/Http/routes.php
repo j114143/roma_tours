@@ -52,12 +52,12 @@ Route::get('admin/licencias/{id}', 'LicenciaController@show')->name("licencias_d
 Route::get('admin/licencias/{id}/edit', 'LicenciaController@edit')->name("licencias_edit");
 Route::post('admin/licencias/{id}/edit', 'LicenciaController@update');
 
-Route::get('admin/tipo_servicios/', 'TipoController@index')->name("tipo_servicios");
-Route::get('admin/tipo_servicios/new', 'TipoController@create')->name("tipo_servicios_new");
-Route::post('admin/tipo_servicios/new', 'TipoController@store');
-Route::get('admin/tipo_servicios/{id}', 'TipoController@show')->name("tipo_servicios_detail");
-Route::get('admin/tipo_servicios/{id}/edit', 'TipoController@edit')->name("tipo_servicios_edit");
-Route::post('admin/tipo_servicios/{id}/edit', 'TipoController@update');
+Route::get('admin/tipo_servicios/', 'TipoServicioController@index')->name("tipo_servicios");
+Route::get('admin/tipo_servicios/new', 'TipoServicioController@create')->name("tipo_servicios_new");
+Route::post('admin/tipo_servicios/new', 'TipoServicioController@store');
+Route::get('admin/tipo_servicios/{id}', 'TipoServicioController@show')->name("tipo_servicios_detail");
+Route::get('admin/tipo_servicios/{id}/edit', 'TipoServicioController@edit')->name("tipo_servicios_edit");
+Route::post('admin/tipo_servicios/{id}/edit', 'TipoServicioController@update');
 
 Route::get('admin/clientes/', 'ClienteController@index')->name("clientes");
 Route::get('admin/clientes/new', 'ClienteController@create')->name("clientes_new");
@@ -65,6 +65,27 @@ Route::post('admin/clientes/new', 'ClienteController@store');
 Route::get('admin/clientes/{id}', 'ClienteController@show')->name("clientes_detail");
 Route::get('admin/clientes/{id}/edit', 'ClienteController@edit')->name("clientes_edit");
 Route::post('admin/clientes/{id}/edit', 'ClienteController@update');
+
+Route::get('admin/tipo_buses/', 'TipoBusController@index')->name("tipo_buses");
+Route::get('admin/tipo_buses/new', 'TipoBusController@create')->name("tipo_buses_new");
+Route::post('admin/tipo_buses/new', 'TipoBusController@store');
+Route::get('admin/tipo_buses/{id}', 'TipoBusController@show')->name("tipo_buses_detail");
+Route::get('admin/tipo_buses/{id}/edit', 'TipoBusController@edit')->name("tipo_buses_edit");
+Route::post('admin/tipo_buses/{id}/edit', 'TipoBusController@update');
+
+Route::get('admin/diponibilidades/', 'DiponibilidadController@index')->name("diponibilidades");
+Route::get('admin/diponibilidades/new', 'DiponibilidadController@create')->name("diponibilidades_new");
+Route::post('admin/diponibilidades/new', 'DiponibilidadController@store');
+Route::get('admin/diponibilidades/{id}', 'DiponibilidadController@show')->name("diponibilidades_detail");
+Route::get('admin/diponibilidades/{id}/edit', 'DiponibilidadController@edit')->name("diponibilidades_edit");
+Route::post('admin/diponibilidades/{id}/edit', 'DiponibilidadController@update');
+
+Route::get('admin/precios/', 'PrecioController@index')->name("precios");
+Route::get('admin/precios/new', 'PrecioController@create')->name("precios_new");
+Route::post('admin/precios/new', 'PrecioController@store');
+Route::get('admin/precios/{id}', 'PrecioController@show')->name("precios_detail");
+Route::get('admin/precios/{id}/edit', 'PrecioController@edit')->name("precios_edit");
+Route::post('admin/precios/{id}/edit', 'PrecioController@update');
 
 Route::get('reservar/', 'BookController@create')->name("reservar");
 Route::post('reservar/', 'BookController@storage');

@@ -8,6 +8,12 @@ Editar bus {{$obj->placa}} <a href="{{ route('buses')}}" title="Listar"  class="
       {!! Form::model($obj, [ 'method' => 'POST','url'=>route('buses_edit'),'id'=>'form','class'=>'form-horizontal']) !!}
 
         <div class="form-group">
+          <label class="col-sm-2 control-label">Tipo de Bus</label>
+          <div class="col-sm-10">
+            {!! Form::select('tipo_id', $tipos->toArray(), null, array('class' => 'form-control','id' => 'tipo_id')) !!}
+          </div>
+        </div>
+        <div class="form-group">
           <label class="col-sm-2 control-label">Placa</label>
           <div class="col-sm-10">
             {!!Form::input('text','placa', null ,['class'=>'form-control','maxlength' => 6,'required'])!!}

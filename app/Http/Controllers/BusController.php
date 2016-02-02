@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Session;
 use App\Bus;
+use App\TipoBus;
 use App\Http\Requests\Bus\CreateBusRequest;
 
 class BusController extends Controller
@@ -30,7 +31,8 @@ class BusController extends Controller
      */
     public function create()
     {
-        return view('buses.create');
+        $tipos = TipoBus::lists('nombre','id');
+        return view('buses.create',array('tipos'=>$tipos));
     }
 
     /**
@@ -52,6 +54,7 @@ class BusController extends Controller
         $obj->numero_soat = $input['numero_soat'];
         $obj->numero_seguro = $input['numero_seguro'];
         $obj->revision_tecnica = $input['revision_tecnica'];
+        $obj->tipo_id = $input['tipo_id'];
         $obj->save();
         Session::flash('mensaje', 'Bus Agregado');
         Session::flash('alert-class','alert-success');
@@ -79,7 +82,9 @@ class BusController extends Controller
     public function edit($id)
     {
         $obj = Bus::findOrFail($id);
-        return view('buses.edit', array('obj'=>$obj));
+        $tipos = TipoBus::lists('nombre','id');
+
+        return view('buses.edit', array('obj'=>$obj,'tipos'=>$tipos));
     }
 
     /**
@@ -103,6 +108,7 @@ class BusController extends Controller
         $obj->numero_seguro = $input['numero_seguro'];
         $obj->servicio_tecnica = $input['servicio_tecnica'];
         $obj->conductor_id = $input['conductor_id'];
+        $obj->tipo_id = $input['tipo_id'];
         $obj->save();
         Session::flash('mensaje', 'Bus actualizado');
         Session::flash('alert-class','alert-success');

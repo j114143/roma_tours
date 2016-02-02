@@ -14,6 +14,7 @@ class CreateBusesTable extends Migration
     {
         Schema::create('buses', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('tipo_id')->unsigned();
             $table->string('placa',6);
             $table->integer('cantidad_asientos');
             $table->integer('numero_motor');
@@ -28,6 +29,10 @@ class CreateBusesTable extends Migration
             $table->foreign('conductor_id')
                   ->references('id')
                   ->on('conductors');
+
+            $table->foreign('tipo_id')
+                  ->references('id')
+                  ->on('tipo_buses');
         });
     }
 
@@ -41,6 +46,7 @@ class CreateBusesTable extends Migration
 
         Schema::table('buses', function (Blueprint $table) {
             $table->dropForeign('buses_conductor_id_foreign');
+            $table->dropForeign('buses_tipo_id_foreign');
         });
         Schema::drop('buses');
     }
