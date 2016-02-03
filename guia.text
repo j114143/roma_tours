@@ -1,8 +1,9 @@
 Servidor Apache 2
 Php
 Mysql
-(XAMPP)
-- Instalar composer
-- Descargar el proyecto
-- composer install
-- php artisan migrate
+1) Descargar he instalar (XAMPP)
+2) Descargar e Instalar composer
+3) Descargar el proyecto
+4) en cmd >:composer install
+5) Crear base de datos en local
+6) en cmd >:php artisan migrate
