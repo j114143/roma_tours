@@ -90,3 +90,6 @@ Route::post('admin/precios/{servicio_id}/{tipo_bus_id}/edit', 'PrecioController@
 Route::get('reservar/', 'BookController@create')->name("reservar");
 Route::post('reservar/', 'BookController@storage');
 Route::get('reservar/servicio', 'BookController@servicio')->name("reservar_servicio");
+Route::get('reservar/servicio/{disponibilidadId}', 'BookController@create')->name("reservar_create");
+
+Route::get('admin/disponibilidades/{servicio_id}/get_json', 'DisponibilidadController@getToJson')->name("disponibilidades_getjson");

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Session;
 use App\Disponibilidad;
+use App\Precio;
 use App\Http\Requests\Disponibilidad\CreateDisponibilidadRequest;
 
 class DisponibilidadController extends Controller
@@ -109,5 +110,23 @@ class DisponibilidadController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function getToJson(request $request,$servicio_id)
+    {
+        $objs = Disponibilidad::where('servicio_id',$servicio_id)->get();
+        $json = array();
+        foreach ($objs as $key => $obj)
+        {
+            $json[$key]["id"] = $obj->id;
+            $json[$key]["bus"] = $obj->bus->placa;
+            $json[$key]["tipo_bus"] = $obj->bus->tipo->nombre;
+            $precio = Precio::where(array("servicio_id"=>$servicio_id,"tipo_bus_id"=>$obj->bus->tipo_id))->first();;
+            $json[$key]["asientos"] = $obj->bus->cantidad_asientos;
+            $json[$key]["precio_soles"] = $precio->precio_soles;
+            $json[$key]["precio_dolares"] = $precio->precio_dolares;
+            $json[$key]["hora"] = $obj->hora;
+            $json[$key]["fecha"] = $obj->fecha;
+        }
+        return $json;
     }
 }

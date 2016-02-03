@@ -14,18 +14,20 @@ class CreateReservasTable extends Migration
     {
         Schema::create('reservas', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('disponibilidad_id')->unsigned();
             $table->integer('servicio_id')->unsigned();
-            $table->integer('cliente_id')->unsigned()->nullable();            
             $table->integer('bus_id')->unsigned();
+            $table->integer('cliente_id')->unsigned()->nullable();
 
-            $table->integer('cantidad_pasajeros');
             $table->date('fecha_reserva');
-            $table->integer('duracion');
+            $table->time('hora_inicio');
+            $table->float('precio_soles');
+            $table->float('precio_dolares');
+
             $table->string('lugar_inicio');
             $table->string('lugar_fin');
 
             $table->boolean('confirmado')->default(false);
-            $table->time('hora_inicio');
             $table->timestamps();
 
             $table->foreign('servicio_id')

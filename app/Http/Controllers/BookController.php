@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Servicio;
+use App\TipoServicio;
+use App\Disponibilidad;
 class BookController extends Controller
 {
     /**
@@ -16,7 +18,9 @@ class BookController extends Controller
      */
     public function servicio()
     {
-        return view('book.servicio');
+        $tipoServicios = TipoServicio::all();
+        $servicios = Servicio::all();
+        return view('book.servicio',array('tipoServicios'=>$tipoServicios,'servicios'=>$servicios));
     }
 
     /**
@@ -24,9 +28,10 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($disponibilidadId)
     {
-        return view('book.create');
+        $obj = Disponibilidad::findOrFail($disponibilidadId);
+        return view('book.create',array("obj"=>$obj));
     }
 
     /**
