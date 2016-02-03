@@ -6,11 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use Session;
-use App\User;
-use App\Http\Requests\User\CreateUserRequest;
-use App\Http\Requests\User\UpdateUserRequest;
+use App\Cliente;
+use App\Http\Requests\Empresa\CreateEmpresaRequest;
+
 class ClienteController extends Controller
 {
     /**
@@ -20,7 +19,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $objs = User::where('es_admin','0')->paginate(10);
+        $objs = Cliente::paginate(10);
         return view('clientes.index',array("objs"=>$objs));
     }
 
@@ -40,19 +39,19 @@ class ClienteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUserRequest $request)
+    public function store(CreateEmpresaRequest $request)
     {
         $input = $request->all();
-        $user = new User ;
-        $user->nombre = $input['nombre'];
-        $user->apellidos = $input['apellidos'];
-        $user->dni = $input['dni'];
-        $user->direccion = $input['direccion'];
-        $user->telefono = $input['telefono'];
-        $user->password = bcrypt($input['password']);
-        $user->email = $input['email'];
-        $user->es_admin = false;
-        $user->save();
+
+        $obj = new Cliente ;
+        $obj->empresa = $input['empresa'];
+        $obj->nombre = $input['nombre'];
+        $obj->ruc = $input['ruc'];
+        $obj->dni = $input['dni'];
+        $obj->direccion = $input['direccion'];
+        $obj->telefono = $input['telefono'];
+        $obj->email = $input['email'];
+        $obj->save();
         Session::flash('mensaje', 'Cliente agregado');
         Session::flash('alert-class','alert-success');
         return redirect(route('clientes'));
@@ -66,7 +65,7 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        $obj = User::findOrFail($id);
+        $obj = Cliente::findOrFail($id);
         return view('clientes.show',array("obj"=>$obj));
     }
 
@@ -78,7 +77,7 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        $obj = User::findOrFail($id);
+        $obj = Cliente::findOrFail($id);
         return view('clientes.edit', array('obj'=>$obj));
     }
 
@@ -89,18 +88,20 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, $id)
+    public function update(CreateEmpresaRequest $request, $id)
     {
         $input = $request->all();
 
-        $obj = User::findOrFail($id);
+        $obj = Cliente::findOrFail($id);
+        $obj->empresa = $input['empresa'];
         $obj->nombre = $input['nombre'];
-        $obj->apellidos = $input['apellidos'];
+        $obj->ruc = $input['ruc'];
         $obj->dni = $input['dni'];
         $obj->direccion = $input['direccion'];
         $obj->telefono = $input['telefono'];
+        $obj->email = $input['email'];
         $obj->save();
-        Session::flash('mensaje', 'Información de cliente actualizado');
+        Session::flash('mensaje', 'Cliente actualizado');
         Session::flash('alert-class','alert-success');
         return redirect(route('clientes'));
     }
