@@ -52,7 +52,7 @@ class ClienteController extends Controller
         $obj->telefono = $input['telefono'];
         $obj->email = $input['email'];
         $obj->save();
-        Session::flash('mensaje', 'Empresa agregado');
+        Session::flash('mensaje', 'Cliente agregado');
         Session::flash('alert-class','alert-success');
         return redirect(route('clientes'));
     }
@@ -77,7 +77,7 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        $obj = Empresa::findOrFail($id);
+        $obj = Cliente::findOrFail($id);
         return view('clientes.edit', array('obj'=>$obj));
     }
 
@@ -101,9 +101,9 @@ class ClienteController extends Controller
         $obj->telefono = $input['telefono'];
         $obj->email = $input['email'];
         $obj->save();
-        Session::flash('mensaje', 'Empresa actualizado');
+        Session::flash('mensaje', 'Cliente actualizado');
         Session::flash('alert-class','alert-success');
-        return redirect(route('empresas'));
+        return redirect(route('clientes'));
     }
 
     /**
