@@ -14,13 +14,13 @@ class CreateReservasTable extends Migration
     {
         Schema::create('reservas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('disponibilidad_id')->unsigned();
             $table->integer('servicio_id')->unsigned();
             $table->integer('bus_id')->unsigned();
             $table->integer('cliente_id')->unsigned()->nullable();
 
-            $table->date('fecha_reserva');
-            $table->time('hora_inicio');
+            $table->datetime('fecha_inicio');
+            $table->datetime('fecha_fin');
+
             $table->float('precio_soles');
             $table->float('precio_dolares');
 

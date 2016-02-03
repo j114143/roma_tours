@@ -44,7 +44,8 @@ class BookController extends Controller
      */
     public function store(Request $request, $disponibilidadId)
     {
-        $obj = Disponibilidad::findOrFail($disponibilidadId);
+        $input = $request->all();
+        $disponibilidad = Disponibilidad::findOrFail($disponibilidadId);
         $cliente = new Cliente;
         $cliente->empresa = false;
         $cliente->nombre = $input['nombre'];
@@ -56,16 +57,16 @@ class BookController extends Controller
 
         $reserva = new Reserva;
         $reserva->disponibilidad_id = $disponibilidadId;
-        $reserva->servicio_id = $disponibilidadId;
-        $reserva->bus_id = $disponibilidadId;
-        $reserva->cliente_id = $disponibilidadId;
+        $reserva->servicio_id = $disponibilidad->servicio_id;
+        $reserva->bus_id = $disponibilidad->bus_id;
+        $reserva->cliente_id = $cliente->id;
 
-        $reserva->fecha_reserva = $disponibilidadId;
-        $reserva->hora_inicio = $disponibilidadId;
-        $reserva->precio_soles = $disponibilidadId;
-        $reserva->precio_dolares = $disponibilidadId;
-        $reserva->lugar_inicio = $disponibilidadId;
-        $reserva->lugar_fin = $disponibilidadId;
+        $reserva->fecha_reserva = $disponibilidad->fecha;
+        $reserva->hora_inicio = $disponibilidad->hora;
+        $reserva->precio_soles = "10";
+        $reserva->precio_dolares = "10";
+        $reserva->lugar_inicio = "lugar inicio";
+        $reserva->lugar_fin = "lugar fin";
         $reserva->save();
 
         return redirect(route('book_detail',['id'=>$reserva->id]));
@@ -79,7 +80,8 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        //
+        $obj = Disponibilidad::findOrFail($id);
+        return view('book.show',array("obj"=>$obj));
     }
 
     /**
