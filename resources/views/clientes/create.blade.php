@@ -7,28 +7,29 @@ Agregar cliente
     <div class="col-sm-8">
       {!!Form::open(array('url' => route('clientes_new'),'id'=>'form','class'=>'form-horizontal'))!!}
 
+        
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Empresa</label>
+          <div class="col-sm-10">
+            {!! Form::checkbox('empresa', 'true') !!}
+          </div>
+        </div>
         <div class="form-group">
           <label class="col-sm-2 control-label">Nombre</label>
           <div class="col-sm-10">
-            {!!Form::input('text','nombre', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
+            {!!Form::input('text','nombre', null ,['class'=>'form-control','maxlength' => 64])!!}
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Apellidos</label>
+          <label class="col-sm-2 control-label">RUC/DNI</label>
           <div class="col-sm-10">
-            {!!Form::input('text','apellidos', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">DNI</label>
-          <div class="col-sm-10">
-            {!!Form::input('text','dni', null ,['class'=>'form-control','maxlength' => 64])!!}
+            {!!Form::input('text','documento', null ,['class'=>'form-control','maxlength' => 11])!!}
           </div>
         </div>
         <div class="form-group">
           <label class="col-sm-2 control-label">Teléfono</label>
           <div class="col-sm-10">
-            {!!Form::input('text','telefono', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
+            {!!Form::input('text','telefono', null ,['class'=>'form-control','maxlength' => 9,'required'])!!}
           </div>
         </div>
         <div class="form-group">
@@ -44,13 +45,6 @@ Agregar cliente
             <label class="col-sm-2 control-label">E-mail</label>
             <div class="col-sm-10">
               {!!Form::input('text','email', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-sm-2 control-label">Password</label>
-            <div class="col-sm-10">
-              {!!Form::input('password','password', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
             </div>
           </div>
         </fieldset>

@@ -6,8 +6,9 @@ Clientes <a href="{{ route('clientes_new')}}" title="Agregar"  class="btn btn-pr
 <table class="table table-bordered table-striped">
 <thead>
     <tr>
-        <th>Nombre Apellidos</th>
-        <th>DNI</th>
+        <th>Empresa</th>
+        <th>Nombre</th>
+        <th>Documento</th>
         <th>Teléfono</th>
         <th>E-mail</th>
         <th>Direción</th>
@@ -16,8 +17,23 @@ Clientes <a href="{{ route('clientes_new')}}" title="Agregar"  class="btn btn-pr
 </thead>
 @foreach($objs as $obj)
     <tr>
-        <td>{{$obj->nombre}} {{$obj->apellidos}}</td>
-        <td>{{$obj->dni}}</td>
+        <td>
+            <?php
+                if($obj->empresa)
+                    echo "Si";//echo "<input type=\"checkbox\" checked readonly> "; 
+                else
+                    echo "No";//echo "<input type=\"checkbox\" readonly> ";
+            ?>
+        </td>
+        <td>{{$obj->nombre}}</td>
+        <td>
+            <?php
+                if($obj->empresa)
+                    echo $obj->ruc;
+                else
+                    echo $obj->dni;
+            ?>
+        </td>
         <td>{{$obj->telefono}}</td>
         <td>{{$obj->email}}</td>
         <td>{{$obj->direccion}}</td>
