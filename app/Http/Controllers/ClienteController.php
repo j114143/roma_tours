@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Session;
 use App\Cliente;
-use App\Http\Requests\Empresa\CreateEmpresaRequest;
+use App\Http\Requests\Cliente\CreateClienteRequest;
 
 class ClienteController extends Controller
 {
@@ -39,15 +39,17 @@ class ClienteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateEmpresaRequest $request)
+    public function store(CreateClienteRequest $request)
     {
         $input = $request->all();
 
         $obj = new Cliente ;
-        $obj->empresa = $input['empresa'];
+        
+        if(isset($input['empresa'])) $obj->empresa = true;
+        else $obj->empresa = false;    
         $obj->nombre = $input['nombre'];
-        $obj->ruc = $input['ruc'];
-        $obj->dni = $input['dni'];
+        if($obj->empresa) $obj->ruc = $input['documento'];
+        else $obj->dni = $input['documento'];
         $obj->direccion = $input['direccion'];
         $obj->telefono = $input['telefono'];
         $obj->email = $input['email'];
@@ -88,15 +90,27 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateEmpresaRequest $request, $id)
+    public function update(CreateClienteRequest $request, $id)
     {
         $input = $request->all();
-
         $obj = Cliente::findOrFail($id);
-        $obj->empresa = $input['empresa'];
+        if(isset($input['empresa'])) $obj->empresa = true;
+        else $obj->empresa = false;  
         $obj->nombre = $input['nombre'];
-        $obj->ruc = $input['ruc'];
-        $obj->dni = $input['dni'];
+        if($obj->empresa)
+        {
+            if(array_key_exists('ruc', $input)) 
+                $obj->ruc = $input['ruc'];
+            else
+                $obj->ruc = $input['dni'];          
+        }
+        else
+        {
+            if(array_key_exists('ruc', $input)) 
+                $obj->dni = $input['ruc'];
+            else
+                $obj->dni = $input['dni'];
+        }   
         $obj->direccion = $input['direccion'];
         $obj->telefono = $input['telefono'];
         $obj->email = $input['email'];
