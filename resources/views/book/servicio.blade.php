@@ -63,7 +63,7 @@
                     items += "<td>"+val.hora+"</td>";
                     items += "<td>"+val.fecha+"</td>";
                     items += "<td> <b>S/</b> "+val.precio_soles+" - <b>USD $</b> "+val.precio_dolares+"</td>";
-                    items += "<td><a href='servicio/"+val.id+"' class='btn btn-success'>Reservar</a></td></tr>";
+                    items += "<td><a href='disponibilidades/"+val.id+"' class='btn btn-success'>Reservar</a></td></tr>";
                 });
 
                 $("#disponibles tbody").html(items);

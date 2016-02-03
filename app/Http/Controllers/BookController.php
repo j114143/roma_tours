@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Servicio;
 use App\TipoServicio;
+use App\Cliente;
+use App\Reserva;
 use App\Disponibilidad;
 class BookController extends Controller
 {
@@ -40,9 +42,33 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $disponibilidadId)
     {
-        //
+        $obj = Disponibilidad::findOrFail($disponibilidadId);
+        $cliente = new Cliente;
+        $cliente->empresa = false;
+        $cliente->nombre = $input['nombre'];
+        $cliente->direccion = $input['direccion'];
+        $cliente->dni = $input['dni'];
+        $cliente->telefono = $input['telefono'];
+        $cliente->email = $input['email'];
+        $cliente->save();
+
+        $reserva = new Reserva;
+        $reserva->disponibilidad_id = $disponibilidadId;
+        $reserva->servicio_id = $disponibilidadId;
+        $reserva->bus_id = $disponibilidadId;
+        $reserva->cliente_id = $disponibilidadId;
+
+        $reserva->fecha_reserva = $disponibilidadId;
+        $reserva->hora_inicio = $disponibilidadId;
+        $reserva->precio_soles = $disponibilidadId;
+        $reserva->precio_dolares = $disponibilidadId;
+        $reserva->lugar_inicio = $disponibilidadId;
+        $reserva->lugar_fin = $disponibilidadId;
+        $reserva->save();
+
+        return redirect(route('book_detail',['id'=>$reserva->id]));
     }
 
     /**

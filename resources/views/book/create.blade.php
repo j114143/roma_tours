@@ -21,21 +21,24 @@ Reservar
     <input type="text" name="user" placeholder="Lugar de finalización" class="form-control">
     </div>
     <h2 class="text-center">Sus datos</h2>
-    <form>
+    {!!Form::open(array('url' => route('reservar_create',['disponibilidadId'=>$obj->id]) ,'id'=>'form','class'=>'form-horizontal'))!!}
 
         <div class="form-group">
-            <input type="text" name="user" placeholder="Nombre o Razon Social" class="form-control">
+            <input type="text" name="nombre" placeholder="Nombre o Razon Social" class="form-control">
         </div>
         <div class="form-group">
-            <input type="text" name="user" placeholder="DNI ó RUC" class="form-control">
+            <input type="text" name="dni" placeholder="DNI ó RUC" class="form-control">
         </div>
         <div class="form-group">
-            <input type="text" name="user" placeholder="Teléfono" class="form-control">
+            <input type="text" name="telefono" placeholder="Teléfono" class="form-control">
         </div>
         <div class="form-group">
-            <input type="email" name="user" placeholder="E-mail" class="form-control">
+            <input type="email" name="email" placeholder="E-mail" class="form-control">
         </div>
-        <p class="text-right"><input type="submit" name="login" value="Registrarse" class="btn btn-info"></p>
+        <div class="form-group">
+            <input type="text" name="direccion" placeholder="Dirección" class="form-control">
+        </div>
+        <p class="text-right"><input type="submit" name="login" value="Reservar" class="btn btn-info"></p>
       </form>
 </div>
 @stop
