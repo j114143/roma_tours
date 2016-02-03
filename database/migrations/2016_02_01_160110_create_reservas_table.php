@@ -15,7 +15,7 @@ class CreateReservasTable extends Migration
         Schema::create('reservas', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('servicio_id')->unsigned();
-            $table->integer('empresa_id')->unsigned()->nullable();
+            $table->integer('cliente_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned()->nullable();
             $table->integer('bus_id')->unsigned();
 
@@ -32,9 +32,9 @@ class CreateReservasTable extends Migration
             $table->foreign('servicio_id')
                   ->references('id')
                   ->on('servicios');
-            $table->foreign('empresa_id')
+            $table->foreign('cliente_id')
                   ->references('id')
-                  ->on('empresas');
+                  ->on('clientes');
             $table->foreign('user_id')
                   ->references('id')
                   ->on('users');
