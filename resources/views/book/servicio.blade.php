@@ -2,11 +2,11 @@
 
 @section('contenido')
 <div class="col-sm-4 ">
-        <form action="reservar/servicio">
+        <form action="reservar/servicio" id="form" novalidate="novalidate">
 
         <div class="form-group">
             <p><b>Tipo de servicios</b></p>
-            <select class="form-control" id="id_tipo_servicio">
+            <select class="form-control" id="id_tipo_servicio" name="id_tipo_servicio">
                 <option>---</option>
                 @foreach ($tipoServicios as $tipo)
                 <option value="{{$tipo->id}}">{{$tipo->nombre}}</option>
@@ -15,7 +15,7 @@
         </div>
         <div class="form-group">
             <p><b>Elegir Servicio</b></p>
-            <select class="form-control" id="id_servicio">
+            <select class="form-control" id="id_servicio" name="id_servicio">
                 <option>---</option>
                 @foreach ($servicios as $servicio)
                 <option value="{{$servicio->id}}" class="{{$servicio->tipo_id}}">{{$servicio->nombre}}</option>
@@ -24,7 +24,7 @@
         </div>
         <div class="form-group">
             <p><b>Fecha y hora</b></p>
-            <input type="text" id="id_fecha_inicio" name="fecha_inicio" class="form-control">
+            <input type="text" id="id_fecha_inicio" name="fecha_inicio" class="form-control" required>
         </div>
         <div class="form-group text-right">
             <input type="button" class="btn btn-success" value="Buscar" id="id_buscar">
@@ -61,9 +61,25 @@ $("#id_fecha_inicio" ).datetimepicker({
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
+
     var servicio_id, fecha_inicio;
     var url = '{{ route("disponibilidad_bus") }}';
-    $("#id_buscar").click(function(){
+    $('#id_buscar').on('click', function() {
+
+        if ($("#form").valid()) {
+            buscarBus(url);
+        } else {
+            $('#resultado').text('Elegir servicio y fecha para el cual quiere reservar bus');
+            $('#resultado').removeClass("alert-success");
+            $('#resultado').removeClass("alert-danger");
+            $('#resultado').removeClass("alert-warning");
+            $('#resultado').addClass("alert-danger");
+            $('#resultado').show();
+        }
+    });
+});
+
+    function buscarBus(url){
         servicio_id = $("#id_servicio").val();
         fecha_inicio = $("#id_fecha_inicio").val();
 
@@ -107,26 +123,33 @@ $(document).ready(function(){
             error: function(){
             }
         });
-    });
+    }
+</script><script type="text/javascript">
+    $(document).ready(function(){
+ $('#form').validate({
+  errorElement: "span",
+  rules: {
+      fecha_inicio: {
+        required: true
+      },
+      id_tipo_servicio: {
+        required: true
+      },
+      id_servicio: {
+        required: true
+      }
+  },
+  highlight: function(element) {
+   $(element).closest('.form-group')
+   .removeClass('has-success').addClass('has-error');
+  },
+  success: function(element) {
+   element
+   .addClass('help-inline')
+   .closest('.form-group')
+   .removeClass('has-error').addClass('has-success');
+  }
+ });
 });
-/*
-        $("#id_tipo_servicio").change(function(){
-            servicio_id = $("#id_tipo_servicio").val();
-            $.getJSON( "/admin/disponibilidades/"+servicio_id+"/get_json", function( data ) {
-                var items = "";
-                $.each( data, function( key, val ) {
-                    items += "<tr> <td>"+val.bus+"</td>";
-                    items += "<td>"+val.tipo_bus+"</td>";
-                    items += "<td>"+val.asientos+"</td>";
-                    items += "<td>"+val.hora+"</td>";
-                    items += "<td>"+val.fecha+"</td>";
-                    items += "<td> <b>S/</b> "+val.precio_soles+" - <b>USD $</b> "+val.precio_dolares+"</td>";
-                    items += "<td><a href='disponibilidades/"+val.id+"' class='btn btn-success'>Reservar</a></td></tr>";
-                });
-
-                $("#disponibles tbody").html(items);
-            });
-        });
-*/
 </script>
 @stop

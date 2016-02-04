@@ -36,7 +36,9 @@ a:hover,
 a:focus {
     color: #eb3812;
 }
-
+.error {
+    color: red;
+}
 h1,
 h2,
 h3,
