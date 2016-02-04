@@ -41,4 +41,35 @@ Agregar servicio
      {!!Form::close()!!}
     </div>
   </div>
+<script type="text/javascript">
+$(document).ready(function(){
+ $('#form').validate({
+  errorElement: "span",
+  rules: {
+      nombre: {
+        required: true
+      },
+      tipo_id: {
+        required: true
+      },
+      duracion: {
+        required: true
+      },
+      descripcion: {
+        required: true
+      }
+  },
+  highlight: function(element) {
+   $(element).closest('.form-group')
+   .removeClass('has-success').addClass('has-error');
+  },
+  success: function(element) {
+   element
+   .addClass('help-inline')
+   .closest('.form-group')
+   .removeClass('has-error').addClass('has-success');
+  }
+ });
+});
+</script>
 @stop

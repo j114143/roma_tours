@@ -14,9 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('admin/', function () {
-    return view('admin');
-});
+
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+Route::group(['middleware' => ['auth']], function () {
+Route::get('admin/conductores/', 'ConductorController@index')->name("conductores");
+Route::get('admin/', function () { return view('admin');});
 Route::get('admin/servicios/', 'ServicioController@index')->name("servicios");
 Route::get('admin/servicios/new', 'ServicioController@create')->name("servicios_new");
 Route::post('admin/servicios/new', 'ServicioController@store');
@@ -24,7 +29,6 @@ Route::get('admin/servicios/{id}', 'ServicioController@show')->name("servicios_d
 Route::get('admin/servicios/{id}/edit', 'ServicioController@edit')->name("servicios_edit");
 Route::post('admin/servicios/{id}/edit', 'ServicioController@update');
 
-Route::get('admin/conductores/', 'ConductorController@index')->name("conductores");
 Route::get('admin/conductores/new', 'ConductorController@create')->name("conductores_new");
 Route::post('admin/conductores/new', 'ConductorController@store');
 Route::get('admin/conductores/{id}', 'ConductorController@show')->name("conductores_detail");
@@ -86,6 +90,7 @@ Route::post('admin/precios/new', 'PrecioController@store');
 Route::get('admin/precios/{servicio_id}/{tipo_bus_id}', 'PrecioController@show')->name("precios_detail");
 Route::get('admin/precios/{servicio_id}/{tipo_bus_id}/edit', 'PrecioController@edit')->name("precios_edit");
 Route::post('admin/precios/{servicio_id}/{tipo_bus_id}/edit', 'PrecioController@update');
+});
 
 Route::get('reservar/', 'BookController@create')->name("reservar");
 Route::post('reservar/', 'BookController@storage');
