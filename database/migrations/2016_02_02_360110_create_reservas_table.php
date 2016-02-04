@@ -18,7 +18,7 @@ class CreateReservasTable extends Migration
             $table->integer('bus_id')->unsigned();
             $table->integer('cliente_id')->unsigned()->nullable();
 
-            $table->datetime('fecha_inicio');
+            $table->datetime('fecha_inicio');//YYYY-MM-SS HH-MM-SS
             $table->datetime('fecha_fin');
 
             $table->float('precio_soles');

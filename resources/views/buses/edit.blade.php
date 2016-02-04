@@ -5,7 +5,7 @@ Editar bus {{$obj->placa}} <a href="{{ route('buses')}}" title="Listar"  class="
 @section('contenido')
 <div class="row">
     <div class="col-sm-8">
-      {!! Form::model($obj, [ 'method' => 'POST','url'=>route('buses_edit'),'id'=>'form','class'=>'form-horizontal']) !!}
+      {!! Form::model($obj, [ 'method' => 'POST','url'=>route('buses_edit',['id'=>$obj->id]),'id'=>'form','class'=>'form-horizontal']) !!}
 
         <div class="form-group">
           <label class="col-sm-2 control-label">Tipo de Bus</label>

@@ -100,14 +100,13 @@ class BusController extends Controller
 
         $obj = Bus::findOrFail($id);
         $obj->placa = $input['placa'];
-        $obj->cantidad_acientos = $input['precio_soles'];
+        $obj->cantidad_asientos = $input['cantidad_asientos'];
         $obj->numero_motor = $input['numero_motor'];
         $obj->fecha_fabricacion = $input['fecha_fabricacion'];
         $obj->modelo = $input['modelo'];
         $obj->numero_soat = $input['numero_soat'];
         $obj->numero_seguro = $input['numero_seguro'];
-        $obj->servicio_tecnica = $input['servicio_tecnica'];
-        $obj->conductor_id = $input['conductor_id'];
+        $obj->revision_tecnica = $input['revision_tecnica'];
         $obj->tipo_id = $input['tipo_id'];
         $obj->save();
         Session::flash('mensaje', 'Bus actualizado');

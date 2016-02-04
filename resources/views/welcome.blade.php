@@ -1,6 +1,6 @@
 @extends('layout.basico')
 @section('titulo')
-Agregar tipo de servicio
+Servicio de transporte
 @stop
 @section('feacture')
 <section class="bg-primary" id="about">
@@ -17,6 +17,7 @@ Agregar tipo de servicio
 </section>
 @stop
 @section('contenido')
+
 <div class="row">
     <div class="col-lg-3 col-md-6 text-center">
         <div class="service-box">
@@ -49,11 +50,16 @@ Agregar tipo de servicio
 </div>
 @stop
 @section('footer')
-    <aside class="bg-dark">
-        <div class="container text-center">
+<aside class="bg-dark">
+    <div class="container text-center">
+    {!!Form::open(array('id'=>'form','url'=>route('verify'),'class'=>'form-horizontal'))!!}
+        <div class="row">
+        <input class="form-control" name="reserva_id" id="reserva_sku" required placeholder="Código de reserva">
+        <input type="submit" class="btn btn-warning" value="Verificar reserva">
         </div>
-    </aside>
-
+    </form>
+    </div>
+</aside>
     <section id="contact">
         <div class="container">
             <div class="row">

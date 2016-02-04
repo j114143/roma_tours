@@ -1,18 +1,19 @@
 @extends('layout.basico')
 
 @section('titulo')
-Detalles de su reserva
+<small>CÓDIGO RESERVA: </small> {{$obj->sku()}}
 @stop
 @section('contenido')
 <div class="col-sm-6 ">
-<p><b>Precio total de la reserav</b> S/. {{$obj->precio_soles}} - USD $ {{$obj->precio_dolares}} </p>
-
-<p><b>Nota:</b> Una vez realziado el deposito enviar el baucher al correo de la empresa.</p>
-<p><b>Nota:</b> El monto debera ser cancelado en el plazo de las siguientes 5 horas, caso contrario debera contactarse con el administrador de la empresa</p>
+    <h3><small>ESTADO</small>@if ($obj->confirmado) <span class="label label-success">CONFIRMADO</span> @else <span class="label label-danger">NO CONFIRMADO </span>@endif</h3>
+    <p><b>Precio total de la resera</b> S/. {{$obj->precio_soles}} - USD $ {{$obj->precio_dolares}} </p>
+    <p><b>Fecha inicio :</b> {{$obj->fecha_inicio}}</p>
+    <p><b>Fecha fin :</b> {{$obj->fecha_fin}}</p>
+    <p><b>Servicio :</b> {{$obj->servicio->nombre}}</p>
+    <p><b>Bus :</b> {{$obj->bus->placa}} - {{$obj->bus->tipo->nombre}}</p>
 </div>
 
 <div class="col-sm-4 ">
-<p class="text-center"><b>Cuentas disponibles</b></p>
     <div class="list-group">
       <a href="#" class="list-group-item">
         <h4 class="list-group-item-heading">Cuenta BCP</h4>
@@ -29,5 +30,11 @@ Detalles de su reserva
         </p>
       </a>
     </div>
+    <p class="text-center"><a href="{{url()}}">Volver a inicio</a></p>
+</div>
+<div class="col-sm-12">
+<hr>
+<p><b>Nota:</b> Una vez realziado el deposito enviar el baucher al correo de la empresa.</br>
+<b>Nota:</b> El monto debera ser cancelado en el plazo de las siguientes 5 horas, caso contrario debera contactarse con el administrador de la empresa</p>
 </div>
 @stop

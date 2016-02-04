@@ -76,7 +76,7 @@ class ServicioController extends Controller
     public function edit($id)
     {
         $obj = Servicio::findOrFail($id);
-        $tipos = Tipo::lists('nombre','id');
+        $tipos = TipoServicio::lists('nombre','id');
 
         return view('servicios.edit', array('obj'=>$obj,'tipos'=>$tipos));
     }
