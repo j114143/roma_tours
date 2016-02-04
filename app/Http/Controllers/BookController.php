@@ -11,6 +11,9 @@ use App\TipoServicio;
 use App\Cliente;
 use App\Reserva;
 use App\Disponibilidad;
+use App\Bus;
+use App\Precio;
+use Carbon\Carbon;
 class BookController extends Controller
 {
     /**
@@ -22,7 +25,10 @@ class BookController extends Controller
     {
         $tipoServicios = TipoServicio::all();
         $servicios = Servicio::all();
-        return view('book.servicio',array('tipoServicios'=>$tipoServicios,'servicios'=>$servicios));
+        $now = Carbon::now();
+        return view('book.servicio',array('tipoServicios'=>$tipoServicios,
+                'servicios'=>$servicios,
+                'now'=>$now));
     }
 
     /**
@@ -30,10 +36,18 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($disponibilidadId)
+    public function create(Request $request, $busId,$servicioId)
     {
-        $obj = Disponibilidad::findOrFail($disponibilidadId);
-        return view('book.create',array("obj"=>$obj));
+        $servicio = Servicio::findOrFail($servicioId);
+        $bus = Bus::findOrFail($busId);
+        $precio = Precio::where(array("servicio_id"=>$servicioId,"tipo_bus_id"=>$bus->id))->firstOrFail();
+
+        $fecha_inicio = $request->input('fecha_inicio');
+
+        return view('book.create',array("servicio"=>$servicio,
+                                        "bus"=>$bus,
+                                        "precio"=>$precio,
+                                        "fecha_inicio"=>$fecha_inicio));
     }
 
     /**
@@ -42,10 +56,16 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $disponibilidadId)
+    public function store(Request $request, $busId, $servicioId)
     {
+        $servicio = Servicio::findOrFail($servicioId);
+        $bus = Bus::findOrFail($busId);
+        $precio = Precio::where(array("servicio_id"=>$servicioId,"tipo_bus_id"=>$bus->id))->firstOrFail();;
+        $fecha_inicio = $request->input('fecha_inicio');
+        $inicio = Carbon::createFromFormat('Y/m/d H:i',$fecha_inicio);
+
         $input = $request->all();
-        $disponibilidad = Disponibilidad::findOrFail($disponibilidadId);
+
         $cliente = new Cliente;
         $cliente->empresa = false;
         $cliente->nombre = $input['nombre'];
@@ -56,17 +76,21 @@ class BookController extends Controller
         $cliente->save();
 
         $reserva = new Reserva;
-        $reserva->disponibilidad_id = $disponibilidadId;
-        $reserva->servicio_id = $disponibilidad->servicio_id;
-        $reserva->bus_id = $disponibilidad->bus_id;
+        $reserva->servicio_id = $servicio->id;
+        $reserva->bus_id = $bus->id;
         $reserva->cliente_id = $cliente->id;
 
-        $reserva->fecha_reserva = $disponibilidad->fecha;
-        $reserva->hora_inicio = $disponibilidad->hora;
-        $reserva->precio_soles = "10";
-        $reserva->precio_dolares = "10";
-        $reserva->lugar_inicio = "lugar inicio";
-        $reserva->lugar_fin = "lugar fin";
+        $reserva->fecha_inicio = $inicio->toDateTimeString();
+        $reserva->precio_soles = $precio->precio_soles;
+        $reserva->precio_dolares = $precio->precio_soles;
+
+        $reserva->lugar_inicio = $input['lugar_inicio'];;
+        $reserva->lugar_fin = $input['lugar_fin'];;
+        $reserva->save();
+
+        $fin = $inicio;
+        $fin->addHours($servicio->duracion);
+        $reserva->fecha_fin = $fin->toDateTimeString();
         $reserva->save();
 
         return redirect(route('book_detail',['id'=>$reserva->id]));
@@ -80,7 +104,7 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        $obj = Disponibilidad::findOrFail($id);
+        $obj = Reserva::findOrFail($id);
         return view('book.show',array("obj"=>$obj));
     }
 
@@ -90,9 +114,9 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function verify($id)
     {
-        //
+        return view('book.verify');
     }
 
     /**
@@ -102,20 +126,52 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function check(Request $request)
     {
-        //
-    }
+        $input = $request->all();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+        $sku = $input['reserva_id'];
+        $id = (int)substr($sku, 2);
+        $obj = Reserva::findOrFail($id);
+        return view('book.show',array("obj"=>$obj));
+    }
+    public function buscarBusDisponible($fecha_inicio)
     {
-        //
+        $date = Carbon::createFromFormat('Y/m/d H:i',$fecha_inicio);
+
+        $reservas = Reserva::where('fecha_inicio', '<=', $date->format('Y-m-d H:i:s'))
+                            ->where('fecha_fin', '>=', $date->format('Y-m-d H:i:s'))
+                            ->select('bus_id','fecha_inicio','fecha_fin')
+                            ->get();
+
+        $buses = Bus::select("id","placa","cantidad_asientos","tipo_id","modelo")->get();
+
+        $disponibles = array();
+        $reservado = 0;
+        // Excluir los busses con reserva
+        foreach ($buses as $key => $bus)
+        {
+            $reservado = 1;
+            foreach ($reservas as $r => $reserva)
+            {
+                if ($reserva->bus_id == $bus->id)
+                {
+                    $reservado = 0;
+                }
+            }
+            if ($reservado)
+            {
+                $disponibles[$key] = $bus;
+            }
+        }
+        return $disponibles;
+    }
+    public function disponibilidad(Request $request)
+    {
+        $servicio_id = $request->input('servicio_id');
+        $fecha_inicio = $request->input('fecha_inicio');
+
+        return json_encode($this->buscarBusDisponible($fecha_inicio));
     }
     public function status()
     {

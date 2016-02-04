@@ -26,18 +26,6 @@ Agregar servicio <a href="{{ route('servicios')}}" title="Listar"  class="btn bt
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Precio en soles</label>
-        <div class="col-sm-10">
-          {!!Form::input('text','precio_soles', null ,['class'=>'form-control','maxlength' => 50,'required'])!!}
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Precio dolares</label>
-        <div class="col-sm-10">
-          {!!Form::input('text','precio_dolares', null ,['class'=>'form-control','maxlength' => 11,'required' ])!!}
-        </div>
-      </div>
-      <div class="form-group">
         <label class="col-sm-2 control-label">Descripción</label>
         <div class="col-sm-10">
           {!!Form::textarea('descripcion',null, ['class'=>'form-control','required'])!!}

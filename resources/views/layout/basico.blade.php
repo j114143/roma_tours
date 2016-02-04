@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Creative - Start Bootstrap Theme</title>
+    <title>@yield('titulo') | Pequeña Roma Tours Slta</title>
 
     <!-- Bootstrap Core CSS -->
     {!!Html::style('assets/css/bootstrap.min.css')!!}
@@ -17,7 +17,6 @@
     {!!Html::style('assets/css/creative.css')!!}
 
     {!!Html::script('assets/js/jquery.js')!!}
-    {!!Html::script('assets/js/jquery.chained.js')!!}
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

@@ -90,9 +90,15 @@ Route::post('admin/precios/{servicio_id}/{tipo_bus_id}/edit', 'PrecioController@
 Route::get('reservar/', 'BookController@create')->name("reservar");
 Route::post('reservar/', 'BookController@storage');
 Route::get('reservar/servicio', 'BookController@servicio')->name("reservar_servicio");
-Route::get('reservar/disponibilidades/{disponibilidadId}', 'BookController@create')->name("reservar_create");
-Route::post('reservar/disponibilidades/{disponibilidadId}', 'BookController@store');
 Route::get('book/{id}', 'BookController@show')->name("book_detail");
 Route::get('admin/reservas/status', 'BookController@status')->name("reservas_status");
 
+Route::get('reservar/now/{busId}/{servicioId}', 'BookController@create')->name("book_now");
+Route::post('reservar/now/{busId}/{servicioId}', 'BookController@store');
+Route::get('reservar/verify', 'BookController@verify')->name("verify");
+Route::post('reservar/verify', 'BookController@check');
+
+Route::get('disponibilidad_bus', 'BookController@disponibilidad')->name("disponibilidad_bus");
+Route::get('disponibilidad_bus', 'BookController@disponibilidad')->name("disponibilidad_bus");
+Route::post('disponibilidad_bus', 'BookController@disponibilidadBus');
 Route::get('admin/disponibilidades/{servicio_id}/get_json', 'DisponibilidadController@getToJson')->name("disponibilidades_getjson");
