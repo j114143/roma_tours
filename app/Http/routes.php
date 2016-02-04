@@ -93,5 +93,6 @@ Route::get('reservar/servicio', 'BookController@servicio')->name("reservar_servi
 Route::get('reservar/disponibilidades/{disponibilidadId}', 'BookController@create')->name("reservar_create");
 Route::post('reservar/disponibilidades/{disponibilidadId}', 'BookController@store');
 Route::get('book/{id}', 'BookController@show')->name("book_detail");
+Route::get('admin/reservas/status', 'BookController@status')->name("reservas_status");
 
 Route::get('admin/disponibilidades/{servicio_id}/get_json', 'DisponibilidadController@getToJson')->name("disponibilidades_getjson");

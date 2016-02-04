@@ -117,4 +117,8 @@ class BookController extends Controller
     {
         //
     }
+    public function status()
+    {
+        return view('book.status');
+    }
 }
