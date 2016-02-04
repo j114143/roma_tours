@@ -8,7 +8,7 @@ Clientes <a href="{{ route('clientes_new')}}" title="Agregar"  class="btn btn-pr
     <tr>
         <th>Empresa</th>
         <th>Nombre</th>
-        <th>Documento</th>
+        <th>DNI/RUC</th>
         <th>Teléfono</th>
         <th>E-mail</th>
         <th>Direción</th>

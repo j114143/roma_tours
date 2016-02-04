@@ -38,8 +38,6 @@ Agregar cliente
             {!!Form::input('text','direccion', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
           </div>
         </div>
-        <fieldset>
-          <legend >Datos de inicio de sesión</legend>
 
           <div class="form-group">
             <label class="col-sm-2 control-label">E-mail</label>
@@ -47,7 +45,6 @@ Agregar cliente
               {!!Form::input('text','email', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
             </div>
           </div>
-        </fieldset>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
             <button class="btn btn-primary" type="submit">Guardar</button>

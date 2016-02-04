@@ -173,4 +173,8 @@ class BookController extends Controller
 
         return json_encode($this->buscarBusDisponible($fecha_inicio));
     }
+    public function status()
+    {
+        return view('book.status');
+    }
 }

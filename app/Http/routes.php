@@ -96,6 +96,7 @@ Route::get('reservar/', 'BookController@create')->name("reservar");
 Route::post('reservar/', 'BookController@storage');
 Route::get('reservar/servicio', 'BookController@servicio')->name("reservar_servicio");
 Route::get('book/{id}', 'BookController@show')->name("book_detail");
+Route::get('admin/reservas/status', 'BookController@status')->name("reservas_status");
 
 Route::get('reservar/now/{busId}/{servicioId}', 'BookController@create')->name("book_now");
 Route::post('reservar/now/{busId}/{servicioId}', 'BookController@store');
