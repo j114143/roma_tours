@@ -33,7 +33,7 @@
 </div>
 <div class="col-sm-7">
     <p><b>Servicios disponibles:</b></p>
-    <div id="resultado"></div>
+    <div id="resultado" class="alert text-center"></div>
     <table class="table" id="disponibles">
         <thead>
             <tr>
@@ -73,21 +73,38 @@ $(document).ready(function(){
             data: {servicio_id:servicio_id,fecha_inicio:fecha_inicio},
             dataType: "json",
             beforeSend: function() {
-                $('#resultado').text("Buscando buses");
+                $('#resultado').html('<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Buscando...');
+                $('#resultado').removeClass("alert-success");
+                $('#resultado').removeClass("alert-danger");
+                $('#resultado').removeClass("alert-warning");
+                $('#resultado').addClass("alert-warning");
+                $('#resultado').show();
             },
             success: function(data) {
-                var items = "";
-                $.each( data, function( key, bus ) {
-                    items += "<tr> <td>"+bus.placa+"</td>";
-                    items += "<td>"+bus.modelo+"</td>";
-                    items += "<td>"+bus.cantidad_asientos+"</td>";
-                    items += "<td><a href='now/"+bus.id+"/"+servicio_id+"?fecha_inicio="+fecha_inicio+"' class='btn btn-success'>Reservar</a></td></tr>";
-                });
+                if (data.length>0)
+                {
+                    var items = "";
+                    $.each( data, function( key, bus ) {
+                        items += "<tr> <td>"+bus.placa+"</td>";
+                        items += "<td>"+bus.modelo+"</td>";
+                        items += "<td>"+bus.cantidad_asientos+"</td>";
+                        items += "<td><a href='now/"+bus.id+"/"+servicio_id+"?fecha_inicio="+fecha_inicio+"' class='btn btn-success'>Reservar</a></td></tr>";
+                    });
 
-                $("#disponibles tbody").html(items);
+                    $('#resultado').removeClass("alert-success");
+                    $('#resultado').removeClass("alert-danger");
+                    $('#resultado').removeClass("alert-warning");
+
+                    $('#resultado').text(data.length+" bus(es) disponibles");
+                    $('#resultado').addClass("alert-success");
+                    $("#disponibles tbody").html(items);
+                }else{
+                    $('#resultado').text("Buses no disponibles");
+                    $('#resultado').addClass("alert-danger");
+                }
+                $('#resultado').show();
             },
             error: function(){
-                alert('opps error occured');
             }
         });
     });
