@@ -7,23 +7,26 @@ Agregar cliente
     <div class="col-sm-8">
       {!!Form::open(array('url' => route('clientes_new'),'id'=>'form','class'=>'form-horizontal'))!!}
 
-
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Empresa</label>
-          <div class="col-sm-10">
-            {!! Form::checkbox('empresa', 'true') !!}
-          </div>
+        <div class="form-group personal">
+          <label class="col-sm-2 control-label"> </label>
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-primary active" id="persona">
+                <input type="radio" name="empresa" id="option1"  checked value="0">Como persona </label>
+              <label class="btn btn-primary" id="empresa">
+                <input type="radio" name="empresa" id="option2"  autocomplete="off" value="1"> Como empresa
+              </label>
+            </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Nombre</label>
+          <label class="col-sm-2 control-label" id="id_nombre">Nombre</label>
           <div class="col-sm-10">
             {!!Form::input('text','nombre', null ,['class'=>'form-control','maxlength' => 64])!!}
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">RUC/DNI</label>
+          <label class="col-sm-2 control-label" id="id_dni">RUC/DNI</label>
           <div class="col-sm-10">
-            {!!Form::input('text','documento', null ,['class'=>'form-control','maxlength' => 11])!!}
+            {!!Form::input('text','di', null ,['class'=>'form-control','maxlength' => 11])!!}
           </div>
         </div>
         <div class="form-group">
@@ -58,6 +61,15 @@ Agregar cliente
 
 <script type="text/javascript">
 $(document).ready(function(){
+
+    personaPlaceholder();
+    $("#persona").click(function(){
+        personaPlaceholder();
+    });
+    $("#empresa").click(function(){
+        empresaPlaceholder();
+    });
+
  $('#form').validate({
   errorElement: "span",
   rules: {
@@ -79,5 +91,17 @@ $(document).ready(function(){
   }
  });
 });
+function personaPlaceholder()
+{
+    $("#id_nombre").text("Apellidos y nombres");
+    $("#id_dni").text("DNI");
+    $("#es_empresa").val("0");
+}
+function empresaPlaceholder()
+{
+    $("#es_empresa").val("1");
+    $("#id_nombre").text("Razon social");
+    $("#id_dni").text("RUC");
+}
 </script>
 @stop

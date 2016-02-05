@@ -39,7 +39,7 @@ Reservar
                 <input type="text" name="nombre" id="id_nombre" placeholder="Nombre o Razon Social" class="form-control" required>
             </div>
             <div class="form-group">
-                <input type="text" name="dni" id="id_dni" placeholder="DNI ó RUC" class="form-control" required>
+                <input type="text" name="documento" id="id_dni" placeholder="DNI ó RUC" class="form-control" required>
             </div>
             <div class="form-group">
                 <input type="text" name="telefono" placeholder="Teléfono" class="form-control" required>

@@ -29,6 +29,7 @@ class BookNowReservaRequest extends Request
             'es_empresa'  => 'required|numeric',
             'servicio_id'  => 'required|numeric',
             'bus_id'  => 'required|numeric',
+            'documento'  => 'required',
             'fecha_inicio'  => 'required',
             'nombre'  => 'required',
             'direccion'  => 'required',

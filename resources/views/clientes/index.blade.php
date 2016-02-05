@@ -25,14 +25,7 @@ Clientes <a href="{{ route('clientes_new')}}" title="Agregar"  class="btn btn-pr
         @endif
         </td>
         <td>{{$obj->nombre}}</td>
-        <td>
-            <?php
-                if($obj->empresa)
-                    echo $obj->ruc;
-                else
-                    echo $obj->dni;
-            ?>
-        </td>
+        <td>{{$obj->di}}</td>
         <td>{{$obj->telefono}}</td>
         <td>{{$obj->email}}</td>
         <td>{{$obj->direccion}}</td>

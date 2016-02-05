@@ -70,20 +70,18 @@ class BookController extends Controller
         $inicio = Carbon::createFromFormat('Y/m/d H:i',$fecha_inicio);
 
         $input = $request->all();
-
-        $cliente = new Cliente;
-        $cliente->empresa = $input['es_empresa'];
-        $cliente->nombre = $input['nombre'];
-        $cliente->direccion = $input['direccion'];
-        if ($input['es_empresa']=="1")
+        $cliente = Cliente::where('di','=',$input['documento'])->first();
+        if (count($cliente)<1)
         {
-            $cliente->ruc = $input['dni'];
-        } else {
-            $cliente->dni = $input['dni'];
+            $cliente = new Cliente;
+            $cliente->empresa = $input['es_empresa'];
+            $cliente->nombre = $input['nombre'];
+            $cliente->direccion = $input['direccion'];
+            $cliente->di = $input['documento'];
+            $cliente->telefono = $input['telefono'];
+            $cliente->email = $input['email'];
+            $cliente->save();
         }
-        $cliente->telefono = $input['telefono'];
-        $cliente->email = $input['email'];
-        $cliente->save();
 
         $reserva = new Reserva;
         $reserva->servicio_id = $servicio->id;

@@ -42,14 +42,22 @@ class ClienteController extends Controller
     public function store(CreateClienteRequest $request)
     {
         $input = $request->all();
-
+        $cliente = Cliente::where('di','=',$input['di'])->first();
+        if (count($cliente)>0)
+        {
+            Session::flash('mensaje', 'Cliente ya esta registrado');
+            Session::flash('alert-class','alert-info');
+            return redirect(route('clientes_detail',['id'=>$cliente->id]));
+        }
         $obj = new Cliente ;
 
-        if(isset($input['empresa'])) $obj->empresa = true;
-        else $obj->empresa = false;
+        if($input['empresa']=="1")
+            $obj->empresa = true;
+        else
+            $obj->empresa = false;
+
         $obj->nombre = $input['nombre'];
-        if($obj->empresa) $obj->ruc = $input['documento'];
-        else $obj->dni = $input['documento'];
+        $obj->di = $input['di'];
         $obj->direccion = $input['direccion'];
         $obj->telefono = $input['telefono'];
         $obj->email = $input['email'];
@@ -94,23 +102,12 @@ class ClienteController extends Controller
     {
         $input = $request->all();
         $obj = Cliente::findOrFail($id);
-        if(isset($input['empresa'])) $obj->empresa = true;
-        else $obj->empresa = false;
-        $obj->nombre = $input['nombre'];
-        if($obj->empresa)
-        {
-            if(array_key_exists('ruc', $input))
-                $obj->ruc = $input['ruc'];
-            else
-                $obj->ruc = $input['dni'];
-        }
+        if($input['empresa']=="1")
+            $obj->empresa = true;
         else
-        {
-            if(array_key_exists('ruc', $input))
-                $obj->dni = $input['ruc'];
-            else
-                $obj->dni = $input['dni'];
-        }
+            $obj->empresa = false;
+        $obj->nombre = $input['nombre'];
+        $obj->di = $input['di'];
         $obj->direccion = $input['direccion'];
         $obj->telefono = $input['telefono'];
         $obj->email = $input['email'];

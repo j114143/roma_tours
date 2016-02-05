@@ -19,6 +19,7 @@ class CreateBusesTable extends Migration
             $table->integer('cantidad_asientos');
             $table->integer('numero_motor');
             $table->timestamp('fecha_fabricacion');
+            $table->string('image')->default("bus.png");
             $table->string('modelo',32);
             $table->string('numero_soat',32);
             $table->string('numero_seguro',32);
