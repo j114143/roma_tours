@@ -23,28 +23,24 @@ Servicio de transporte
         <div class="service-box">
             <i class="fa fa-4x fa-diamond wow bounceIn text-primary"></i>
             <h3>Traslados locales</h3>
-            <p class="text-muted">Our templates are updated regularly so they don't break.</p>
         </div>
     </div>
     <div class="col-lg-3 col-md-6 text-center">
         <div class="service-box">
             <i class="fa fa-4x fa-paper-plane wow bounceIn text-primary" data-wow-delay=".1s"></i>
             <h3>Tours de medio día</h3>
-            <p class="text-muted">You can use this theme as is, or you can make changes!</p>
         </div>
     </div>
     <div class="col-lg-3 col-md-6 text-center">
         <div class="service-box">
             <i class="fa fa-4x fa-newspaper-o wow bounceIn text-primary" data-wow-delay=".2s"></i>
             <h3>Tours de un día</h3>
-            <p class="text-muted">We update dependencies to keep things fresh.</p>
         </div>
     </div>
     <div class="col-lg-3 col-md-6 text-center">
         <div class="service-box">
             <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".3s"></i>
             <h3>Otras servicios</h3>
-            <p class="text-muted">You have to make your websites with love these days!</p>
         </div>
     </div>
 </div>

@@ -15,13 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::get('auth/login', 'Auth\AuthController@getLogin')->name("login");
 Route::post('auth/login', 'Auth\AuthController@postLogin');
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
+Route::get('auth/logout', 'Auth\AuthController@getLogout')->name("logout");
 
 Route::group(['middleware' => ['auth']], function () {
-Route::get('admin/conductores/', 'ConductorController@index')->name("conductores");
 Route::get('admin/', function () { return view('admin');});
+Route::get('admin/conductores/', 'ConductorController@index')->name("conductores");
 Route::get('admin/servicios/', 'ServicioController@index')->name("servicios");
 Route::get('admin/servicios/new', 'ServicioController@create')->name("servicios_new");
 Route::post('admin/servicios/new', 'ServicioController@store');
