@@ -39,9 +39,7 @@
                 <li><a href="{{  route('clientes') }}">Clientes</a></li>
                 <li><a href="{{  route('conductores') }}">Conductores</a></li>
                 <li><a href="{{  route('precios') }}">Precios</a></li>
-                <li>
-                    <a href="#">Reservas</a>
-                </li>
+                <li><a href="{{  route('reservas') }}">Reservas</a></li>
                 <li><a href="{{url('auth/logout')}}"><i class="fa"></i>   Salir</a></li>
             </ul>
         </div>

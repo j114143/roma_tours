@@ -21,4 +21,8 @@ class Reserva extends Model
 
         return "R-".str_pad($this->id, 10, "0", STR_PAD_LEFT);;
     }
+    function cliente()
+    {
+        return $this->belongsTo('App\Cliente', 'servicio_id');
+    }
 }

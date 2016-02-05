@@ -90,12 +90,19 @@ Route::post('admin/precios/new', 'PrecioController@store');
 Route::get('admin/precios/{servicio_id}/{tipo_bus_id}', 'PrecioController@show')->name("precios_detail");
 Route::get('admin/precios/{servicio_id}/{tipo_bus_id}/edit', 'PrecioController@edit')->name("precios_edit");
 Route::post('admin/precios/{servicio_id}/{tipo_bus_id}/edit', 'PrecioController@update');
+
+Route::get('admin/reservas/', 'ReservaController@index')->name("reservas");
+Route::get('admin/reservas/new', 'ReservaController@create')->name("reservas_new");
+Route::post('admin/reservas/new', 'ReservaController@store');
+Route::get('admin/reservas/{id}', 'ReservaController@show')->name("reservas_detail");
+Route::get('admin/reservas/{id}/edit', 'ReservaController@edit')->name("reservas_edit");
+Route::post('admin/reservas/{id}/edit', 'ReservaController@update');
+Route::get('admin/reservas/{id}/confirmar', 'ReservaController@confirmar')->name("reservas_confirmar");
+Route::post('admin/reservas/{id}/confirmar', 'ReservaController@confirmarUpdate');
+
 });
 
-Route::get('reservar/', 'BookController@create')->name("reservar");
-Route::post('reservar/', 'BookController@storage');
-
-Route::get('book_now/servicio', 'BookController@servicio')->name("reservar_servicio");
+Route::get('book_now/servicio', 'BookController@servicio')->name("book_now_servicio");
 Route::get('book/{id}', 'BookController@show')->name("book_detail");
 Route::get('book_now/now/{busId}/{servicioId}', 'BookController@create')->name("book_now");
 Route::post('book_now/now/{busId}/{servicioId}', 'BookController@store');

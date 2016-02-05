@@ -40,14 +40,18 @@ class BookController extends Controller
     {
         $servicio = Servicio::findOrFail($servicioId);
         $bus = Bus::findOrFail($busId);
-        $precio = Precio::where(array("servicio_id"=>$servicioId,"tipo_bus_id"=>$bus->id))->firstOrFail();
+        $precio = Precio::where(array("servicio_id"=>$servicioId,"tipo_bus_id"=>$bus->id))->get();
 
         $fecha_inicio = $request->input('fecha_inicio');
-
-        return view('book.create',array("servicio"=>$servicio,
-                                        "bus"=>$bus,
-                                        "precio"=>$precio,
-                                        "fecha_inicio"=>$fecha_inicio));
+        if (count($precio))
+        {
+            return view('book.create',array("servicio"=>$servicio,
+                                            "bus"=>$bus,
+                                            "precio"=>$precio,
+                                            "fecha_inicio"=>$fecha_inicio));
+        } else {
+            return view('book.mensaje',array("servicio"=>$servicio,"bus"=>$bus));
+        }
     }
 
     /**

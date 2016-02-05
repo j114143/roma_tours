@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Session;
+use App\Bus;
+use App\Servicio;
+use App\Precio;
+use App\Reserva;
 class ReservaController extends Controller
 {
     /**
@@ -16,7 +21,8 @@ class ReservaController extends Controller
      */
     public function index()
     {
-        //
+        $objs = Reserva::paginate(10);
+        return view('reservas.index',array("objs"=>$objs));
     }
 
     /**
@@ -48,7 +54,8 @@ class ReservaController extends Controller
      */
     public function show($id)
     {
-        //
+        $obj = Reserva::findOrFail($id);
+        return view('reservas.show',array("obj"=>$obj));
     }
 
     /**
@@ -83,5 +90,34 @@ class ReservaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmar($id)
+    {
+        $obj = Reserva::findOrFail($id);
+        return view('reservas.confirmar', array('obj'=>$obj));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmarUpdate(Request $request, $id)
+    {
+        $obj = Reserva::findOrFail($id);
+        $obj->confirmado = true;
+        $obj->save();
+        Session::flash('mensaje', 'Reserva '.$obj->sku().' confirmado');
+        Session::flash('alert-class','alert-success');
+        return redirect(route('reservas'));
     }
 }
