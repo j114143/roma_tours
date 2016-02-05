@@ -94,6 +94,7 @@ Route::post('admin/precios/{servicio_id}/{tipo_bus_id}/edit', 'PrecioController@
 Route::get('admin/reservas/', 'ReservaController@index')->name("reservas");
 Route::get('admin/reservas/new', 'ReservaController@create')->name("reservas_new");
 Route::post('admin/reservas/new', 'ReservaController@store');
+Route::get('admin/reservas/status', 'BookController@status')->name("reservas_status");
 Route::get('admin/reservas/{id}', 'ReservaController@show')->name("reservas_detail");
 Route::get('admin/reservas/{id}/edit', 'ReservaController@edit')->name("reservas_edit");
 Route::post('admin/reservas/{id}/edit', 'ReservaController@update');
@@ -111,5 +112,4 @@ Route::post('book_now/verify', 'BookController@check');
 Route::get('disponibilidad_bus', 'BookController@disponibilidad')->name("disponibilidad_bus");
 Route::post('disponibilidad_bus', 'BookController@disponibilidadBus');
 
-Route::get('admin/reservas/status', 'BookController@status')->name("reservas_status");
 
