@@ -50,8 +50,8 @@ Route::get('admin/buses/{id}/edit', 'BusController@edit')->name("buses_edit");
 Route::post('admin/buses/{id}/edit', 'BusController@update');
 
 Route::get('admin/licencias/', 'LicenciaController@index')->name("licencias");
-Route::get('admin/licencias/new', 'LicenciaController@create')->name("licencias_new");
-Route::post('admin/licencias/new', 'LicenciaController@store');
+Route::get('admin/licencias/new/{id}', 'LicenciaController@create')->name("licencias_new");
+Route::post('admin/licencias/new/{id}', 'LicenciaController@store');
 Route::get('admin/licencias/{id}', 'LicenciaController@show')->name("licencias_detail");
 Route::get('admin/licencias/{id}/edit', 'LicenciaController@edit')->name("licencias_edit");
 Route::post('admin/licencias/{id}/edit', 'LicenciaController@update');

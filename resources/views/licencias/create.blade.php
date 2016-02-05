@@ -5,7 +5,7 @@ Agregar Licencia
 @section('contenido')
 <div class="row">
           <div class="col-sm-8">
-            {!!Form::open(array('url' => route('licencias_new'),'id'=>'form','class'=>'form-horizontal'))!!}
+            {!!Form::open(array('url' => route('licencias_new',['id'=>$conductor_id]),'id'=>'form','class'=>'form-horizontal'))!!}
             {!!Form::input('hidden','conductor_id', $conductor_id)!!}
             <div class="form-group">
                 <label class="col-sm-2 control-label">Número de Licencia</label>

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Session;
 use App\Licencia;
+use App\Conductor;
 use App\Http\Requests\Licencia\CreateLicenciaRequest;
 class LicenciaController extends Controller
 {
@@ -23,6 +24,39 @@ class LicenciaController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create($id)
+    {
+        $obj = Conductor::findOrFail($id);
+        return view('licencias.create',array('conductor_id'=>$id));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CreateLicenciaRequest $request)
+    {
+        $input = $request->all();
+
+        $obj = new Licencia ;
+        $obj->conductor_id = $input['conductor_id'];
+        $obj->numero_licencia = $input['numero_licencia'];
+        $obj->fecha_emision = $input['fecha_emision'];
+        $obj->fecha_revalidacion = $input['fecha_revalidacion'];
+        $obj->direccion = $input['direccion'];
+        $obj->save();
+        Session::flash('mensaje', 'Licencia agregado');
+        Session::flash('alert-class','alert-success');
+        return redirect(route('licencias'));
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -30,7 +64,7 @@ class LicenciaController extends Controller
      */
     public function show($id)
     {
-        $obj = Licencia::findOrFail($id);
+        $obj = Licencia::where('conductor_id', '=', $id)->firstOrFail();
         return view('licencias.show',array("obj"=>$obj));
     }
 
@@ -42,11 +76,8 @@ class LicenciaController extends Controller
      */
     public function edit($id)
     {
-        $obj = Licencia::where('conductor_id', '=', $id)->get();
-        if(!sizeof($obj))
-            return view('licencias.create', array('conductor_id'=>$id));
-        else
-            return view('licencias.edit', array('obj'=>$obj));
+        $obj = Licencia::where('conductor_id', '=', $id)->firstOrFail();
+        return view('licencias.edit', array('obj'=>$obj));
     }
 
     /**
@@ -69,7 +100,8 @@ class LicenciaController extends Controller
         ));
         Session::flash('mensaje', 'Licencia actualizado');
         Session::flash('alert-class','alert-success');
-        return redirect(route('licencias'));
+        return redirect(route('conductores_detail',['id'=>$conductor_id]));
+
     }
 
     /**

@@ -2,7 +2,6 @@
 @section('titulo')
 {{$obj->nombres}}
 <a href="{{ route('conductores_edit',['id'=>$obj->id]) }}" title="Editar" class="btn btn-warning btn-xs"><i class="fa fa-pencil"> </i></a>
-<a href="{{ route('licencias_edit',['id'=>$obj->id]) }}" title="Agregar Licencia" class="btn btn-info btn-xs"><i class="fa fa-plus"> </i></a>
 @stop
 @section('contenido')
 <div class="col-sm-6">
@@ -24,7 +23,7 @@
         <p><b>Fecha revalidación</b>: {{$obj->licencia->fecha_revalidacion}}</p>
         <p><b>Dirección</b>: {{$obj->licencia->direcion}}</p>
         @else
-        <p><a href="{{ route('licencias_edit',['id'=>$obj->id]) }}" title="Agregar Licencia" class="btn btn-info"><i class="fa fa-plus"> </i> Agregar licencia</a></p>
+        <p><a href="{{ route('licencias_new',['id'=>$obj->id]) }}" title="Agregar Licencia" class="btn btn-info"><i class="fa fa-plus"> </i> Agregar licencia</a></p>
         @endif
         </div>
     </div>

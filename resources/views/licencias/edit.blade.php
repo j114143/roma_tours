@@ -5,7 +5,7 @@ Editar Licencia <a href="{{ route('licencias')}}" title="Listar"  class="btn btn
 @section('contenido')
 <div class="row">
   <div class="col-sm-8">
-    {!! Form::model($obj, [ 'method' => 'POST', 'url'=>route('licencia_edit',['id'=>$obj->id]),'id'=>'form','class'=>'form-horizontal']) !!}
+    {!! Form::model($obj, [ 'method' => 'POST', 'url'=>route('licencias_edit',['id'=>$obj->conductor_id]),'id'=>'form','class'=>'form-horizontal']) !!}
     <div class="form-group">
         <label class="col-sm-2 control-label">Número de Licencia</label>
         <div class="col-sm-10">
@@ -14,14 +14,14 @@ Editar Licencia <a href="{{ route('licencias')}}" title="Listar"  class="btn btn
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">Fecha emisión</label>
-        <div class='input-group date' id='datetimepicker1'>
-            {!!Form::input('text','fecha_emision', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
+        <div class="col-sm-10">
+            {!!Form::input('text','fecha_emision', null ,['class'=>'form-control','id'=>'fecha_emision','maxlength' => 64,'required'])!!}
       </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">Fecha revalidación</label>
-        <div class='input-group date' id='datetimepicker1'>
-            {!!Form::input('text','fecha_revalidacion', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
+        <div class="col-sm-10">
+            {!!Form::input('text','fecha_revalidacion', null ,['class'=>'form-control','id'=>'fecha_revalidacion','maxlength' => 64,'required'])!!}
       </div>
     </div>
     <div class="form-group">
