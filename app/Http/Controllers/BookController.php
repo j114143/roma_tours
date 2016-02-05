@@ -67,7 +67,7 @@ class BookController extends Controller
         $input = $request->all();
 
         $cliente = new Cliente;
-        $cliente->empresa = false;
+        $cliente->empresa = $input['es_empresa'];
         $cliente->nombre = $input['nombre'];
         $cliente->direccion = $input['direccion'];
         $cliente->dni = $input['dni'];

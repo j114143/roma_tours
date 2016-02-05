@@ -42,10 +42,7 @@
                 <li>
                     <a href="#">Reservas</a>
                 </li>
-                <!--if(Auth::user()->es_admin)
-                <li><a href="#">Mis reservas</a></li>
-                else
-                endif-->
+                <li><a href="{{url('auth/logout')}}"><i class="fa"></i>   Salir</a></li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -81,6 +78,7 @@
 
     <!-- jQuery -->
     {!!Html::script('assets/js/bootstrap.min.js')!!}
+    {!!Html::script('assets/js/jquery.validate.min.js')!!}
 
     <!-- Menu Toggle Script -->
     <script>

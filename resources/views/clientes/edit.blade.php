@@ -25,7 +25,7 @@ Editar información del cliente <a href="{{ route('clientes')}}" title="Listar" 
                 {!!Form::input('text','ruc', null ,['class'=>'form-control','maxlength' => 11])!!}
             <?php } else {?>
                 {!!Form::input('text','dni', null ,['class'=>'form-control','maxlength' => 11])!!}
-            <?php } ?>    
+            <?php } ?>
           </div>
         </div>
         <div class="form-group">
@@ -56,4 +56,29 @@ Editar información del cliente <a href="{{ route('clientes')}}" title="Listar" 
    {!!Form::close()!!}
   </div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+ $('#form').validate({
+  errorElement: "span",
+  rules: {
+      nombre: {
+        required: true,
+        minlength: 5,
+        maxlength: 32,
+      }
+  },
+  highlight: function(element) {
+   $(element).closest('.form-group')
+   .removeClass('has-success').addClass('has-error');
+  },
+  success: function(element) {
+   element
+   .addClass('help-inline')
+   .closest('.form-group')
+   .removeClass('has-error').addClass('has-success');
+  }
+ });
+});
+</script>
 @stop

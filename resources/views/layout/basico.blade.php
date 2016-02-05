@@ -53,9 +53,6 @@
                     <li>
                         <a class="page-scroll" href="#contact">Contactenos</a>
                     </li>
-                    <li>
-                        <a href="/user">Iniciar sesión</a>
-                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -82,6 +79,7 @@
     <!-- jQuery -->
     {!!Html::script('assets/js/jquery.js')!!}
     {!!Html::script('assets/js/bootstrap.min.js')!!}
+    {!!Html::script('assets/js/jquery.validate.min.js')!!}
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 @extends('layout.user')
 @section('titulo')
-Licencias <a href="{{ route('licencias_new')}}" title="Agregar"  class="btn btn-primary btn-xs"><i class="fa fa-plus-circle"> </i></a>
+Licencias
 @stop
 @section('contenido')
     <table class="table table-bordered table-striped">

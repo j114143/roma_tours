@@ -35,7 +35,7 @@ Agregar bus
         <div class="form-group">
           <label class="col-sm-2 control-label">Fecha fabricación</label>
           <div class="col-sm-10">
-            {!!Form::input('text','fecha_fabricacion', null ,['class'=>'form-control','maxlength' => 11,'required' ])!!}
+            {!!Form::input('text','fecha_fabricacion', null ,['class'=>'form-control','id'=>'fecha_fabricacion_id','maxlength' => 11,'required' ])!!}
           </div>
         </div>
         <div class="form-group">
@@ -45,19 +45,19 @@ Agregar bus
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">numero_soat</label>
+          <label class="col-sm-2 control-label">Soat</label>
           <div class="col-sm-10">
             {!!Form::input('text','numero_soat', null ,['class'=>'form-control','maxlength' => 11,'required' ])!!}
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">numero_seguro</label>
+          <label class="col-sm-2 control-label">Seguro</label>
           <div class="col-sm-10">
             {!!Form::input('text','numero_seguro', null ,['class'=>'form-control','maxlength' => 11,'required' ])!!}
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">revision_tecnica</label>
+          <label class="col-sm-2 control-label">Revisión técnica</label>
           <div class="col-sm-10">
             {!!Form::input('text','revision_tecnica', null ,['class'=>'form-control','maxlength' => 11,'required' ])!!}
           </div>
@@ -72,4 +72,41 @@ Agregar bus
            {!!Form::close()!!}
           </div>
         </div>
+
+{!!Html::script('assets/js/jquery-ui.js')!!}
+<script type="text/javascript">
+$( "#fecha_fabricacion_id" ).datepicker({
+    dateFormat: "yy-mm-dd" ,
+    changeMonth: true,
+    changeYear: true,
+    maxDate: "+1Y",
+    beforeShow: function() {
+        setTimeout(function(){
+            $('.ui-datepicker').css('z-index', 9999);
+        }, 0);
+    }
+}) ;
+$(document).ready(function(){
+ $('#form').validate({
+  errorElement: "span",
+  rules: {
+      nombre: {
+        required: true,
+        minlength: 5,
+        maxlength: 32,
+      }
+  },
+  highlight: function(element) {
+   $(element).closest('.form-group')
+   .removeClass('has-success').addClass('has-error');
+  },
+  success: function(element) {
+   element
+   .addClass('help-inline')
+   .closest('.form-group')
+   .removeClass('has-error').addClass('has-success');
+  }
+ });
+});
+</script>
 @stop

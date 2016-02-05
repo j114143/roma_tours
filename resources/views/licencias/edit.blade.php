@@ -5,54 +5,25 @@ Editar Licencia <a href="{{ route('licencias')}}" title="Listar"  class="btn btn
 @section('contenido')
 <div class="row">
   <div class="col-sm-8">
-    {!! Form::model($obj, [ 'method' => 'POST', 'url'=>route('licencia_edit',['id'=>$obj->id]),'id'=>'form','class'=>'form-horizontal']) !!}
+    {!! Form::model($obj, [ 'method' => 'POST', 'url'=>route('licencias_edit',['id'=>$obj->conductor_id]),'id'=>'form','class'=>'form-horizontal']) !!}
     <div class="form-group">
         <label class="col-sm-2 control-label">Número de Licencia</label>
         <div class="col-sm-10">
           {!!Form::input('text','numero_licencia', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
         </div>
     </div>
-
     <div class="form-group">
-    	<label class="col-sm-2 control-label">Fecha de Emisión</label>
-		    <div class="row">
-		        <div class='col-sm-6'>
-		            <div class="form-group">
-		                <div class='input-group date' id='datetimepicker1'>
-		                	{!!Form::input('text','fecha_emision', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
-		                    <span class="input-group-addon">
-		                        <span class="glyphicon glyphicon-calendar"></span>
-		                    </span>
-		                </div>
-		            </div>
-		        </div>
-		        <script type="text/javascript">
-		            $(function () {
-		                $('#datetimepicker1').datetimepicker();
-		            });
-		        </script>
-			</div>
-	</div>
-	<div class="form-group">
-    	<label class="col-sm-2 control-label">Fecha de Revalidación</label>
-		    <div class="row">
-		        <div class='col-sm-6'>
-		            <div class="form-group">
-		                <div class='input-group date' id='datetimepicker1'>
-		                	{!!Form::input('text','fecha_revalidacion', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
-		                    <span class="input-group-addon">
-		                        <span class="glyphicon glyphicon-calendar"></span>
-		                    </span>
-		                </div>
-		            </div>
-		        </div>
-		        <script type="text/javascript">
-		            $(function () {
-		                $('#datetimepicker1').datetimepicker();
-		            });
-		        </script>
-			</div>
-	</div>
+        <label class="col-sm-2 control-label">Fecha emisión</label>
+        <div class="col-sm-10">
+            {!!Form::input('text','fecha_emision', null ,['class'=>'form-control','id'=>'fecha_emision','maxlength' => 64,'required'])!!}
+      </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Fecha revalidación</label>
+        <div class="col-sm-10">
+            {!!Form::input('text','fecha_revalidacion', null ,['class'=>'form-control','id'=>'fecha_revalidacion','maxlength' => 64,'required'])!!}
+      </div>
+    </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">Dirección</label>
         <div class="col-sm-10">
@@ -69,4 +40,30 @@ Editar Licencia <a href="{{ route('licencias')}}" title="Listar"  class="btn btn
     {!!Form::close()!!}
   </div>
 </div>
+
+{!!Html::script('assets/js/jquery-ui.js')!!}
+<script type="text/javascript">
+$( "#fecha_emision" ).datepicker({
+    dateFormat: "yy-mm-dd" ,
+    changeMonth: true,
+    changeYear: true,
+    maxDate: "+1Y",
+    beforeShow: function() {
+        setTimeout(function(){
+            $('.ui-datepicker').css('z-index', 9999);
+        }, 0);
+    }
+}) ;
+$( "#fecha_revalidacion" ).datepicker({
+    dateFormat: "yy-mm-dd" ,
+    changeMonth: true,
+    changeYear: true,
+    maxDate: "+1Y",
+    beforeShow: function() {
+        setTimeout(function(){
+            $('.ui-datepicker').css('z-index', 9999);
+        }, 0);
+    }
+}) ;
+</script>
 @stop
