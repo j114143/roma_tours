@@ -24,7 +24,7 @@ class CreateTipoBusRequest extends Request
     public function rules()
     {
         return [
-            'nombre' => 'required|min:3|max:32',
+            'nombre' => 'required|min:3|max:32|unique:tipo_buses',
         ];
     }
 }

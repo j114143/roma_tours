@@ -5,7 +5,7 @@ Agregar bus
 @section('contenido')
 <div class="row">
     <div class="col-sm-8">
-      {!!Form::open(array('url' => route('buses_new'),'id'=>'form','class'=>'form-horizontal'))!!}
+      {!!Form::open(array('url' => route('buses_new'),'id'=>'form','class'=>'form-horizontal','onsubmit'=>'return checkSubmit();'))!!}
 
         <div class="form-group">
           <label class="col-sm-2 control-label">Tipo de Bus</label>

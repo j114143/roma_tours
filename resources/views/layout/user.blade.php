@@ -20,6 +20,13 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+    function checkSubmit() {
+        document.getElementById("btsubmit").value = "Enviando...";
+        document.getElementById("btsubmit").disabled = true;
+        return true;
+    }
+    </script>
 </head>
 <body>
     <div id="wrapper">

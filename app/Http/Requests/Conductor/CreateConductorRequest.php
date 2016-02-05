@@ -26,7 +26,7 @@ class CreateConductorRequest extends Request
         return [
             'nombres'     => 'required|min:3|max:32',
             'apellidos'     => 'required|min:3|max:32',
-            'dni' => 'required|integer|digits_between:6,8',
+            'dni' => 'required|integer|digits_between:6,8|unique:conductors',
             'telefono'  => 'required|integer|digits:9',
             'email' =>'email',
         ];

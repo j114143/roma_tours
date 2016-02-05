@@ -14,7 +14,7 @@ Reservar
     <h2> <small>S/</small> {{$precio->precio_soles}} - <small>USD $</small> {{$precio->precio_dolares}}</h2>
 </div>
 <div class="col-sm-4">
-    {!!Form::open(array('id'=>'form','class'=>'form-horizontal'))!!}
+    {!!Form::open(array('id'=>'form','class'=>'form-horizontal','onsubmit'=>'return checkSubmit();'))!!}
         <div class="form-group">
         <input type="text" name="lugar_inicio" placeholder="Lugar de inicio" class="form-control" required>
         </div>

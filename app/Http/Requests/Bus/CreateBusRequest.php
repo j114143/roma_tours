@@ -25,7 +25,7 @@ class CreateBusRequest extends Request
     {
         return [
             'tipo_id'  => 'required|exists:tipo_buses,id',
-            'placa'  => 'required',
+            'placa'  => 'required|unique:buses',
             'cantidad_asientos'  => 'required',
             'numero_motor'  => 'required',
             'fecha_fabricacion'  => 'required',
