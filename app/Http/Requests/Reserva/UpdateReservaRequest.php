@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Cliente;
+namespace App\Http\Requests\Reserva;
 
 use App\Http\Requests\Request;
 
-class CreateClienteRequest extends Request
+class UpdateReservaRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,10 @@ class CreateClienteRequest extends Request
     public function rules()
     {
         return [
-            'nombre'  => 'required',
-            'direccion'  => 'required',
-            'telefono'  => 'required|numeric',
-            'email'  => 'required|email',
+            'lugar_inicio' => 'required',
+            'lugar_fin' => 'required',
+            'precio_soles' => 'required|numeric',
+            'precio_dolares' => 'required|numeric',
         ];
     }
 }

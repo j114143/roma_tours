@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Cliente;
+namespace App\Http\Requests\Reserva;
 
 use App\Http\Requests\Request;
 
-class CreateClienteRequest extends Request
+class BookNowReservaRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,12 @@ class CreateClienteRequest extends Request
     public function rules()
     {
         return [
+            'lugar_inicio'  => 'required',
+            'lugar_fin'  => 'required',
+            'es_empresa'  => 'required|numeric',
+            'servicio_id'  => 'required|numeric',
+            'bus_id'  => 'required|numeric',
+            'fecha_inicio'  => 'required',
             'nombre'  => 'required',
             'direccion'  => 'required',
             'telefono'  => 'required|numeric',

@@ -23,6 +23,6 @@ class Reserva extends Model
     }
     function cliente()
     {
-        return $this->belongsTo('App\Cliente', 'servicio_id');
+        return $this->belongsTo('App\Cliente', 'cliente_id');
     }
 }

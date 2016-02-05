@@ -20,9 +20,9 @@ Clientes <a href="{{ route('clientes_new')}}" title="Agregar"  class="btn btn-pr
         <td>
             <?php
                 if($obj->empresa)
-                    echo "Si";//echo "<input type=\"checkbox\" checked readonly> "; 
+                    echo "Si";
                 else
-                    echo "No";//echo "<input type=\"checkbox\" readonly> ";
+                    echo "No";
             ?>
         </td>
         <td>{{$obj->nombre}}</td>

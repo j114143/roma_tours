@@ -1,55 +1,39 @@
 @extends('layout.user')
 @section('titulo')
-Editar información del cliente <a href="{{ route('clientes')}}" title="Listar"  class="btn btn-success btn-xs"><i class="fa fa-list"> </i></a>
+Editar reserva <a href="{{ route('reservas')}}" title="Listar"  class="btn btn-success btn-xs"><i class="fa fa-list"> </i></a>
 @stop
 @section('contenido')
 <div class="row">
   <div class="col-sm-8">
-    {!! Form::model($obj, [ 'method' => 'POST','url'=>route('clientes_edit',['id'=>$obj->id]),'id'=>'form','class'=>'form-horizontal']) !!}
-      <div class="form-group">
-          <label class="col-sm-2 control-label">Empresa</label>
+    {!! Form::model($obj, [ 'method' => 'POST','url'=>route('reservas_edit',['id'=>$obj->id]),'id'=>'form','class'=>'form-horizontal']) !!}
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Lugar inicio</label>
           <div class="col-sm-10">
-            {!! Form::checkbox('empresa', 'true') !!}
+            {!!Form::input('text','lugar_inicio', null ,['class'=>'form-control', 'required'])!!}
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Nombre</label>
+          <label class="col-sm-2 control-label">Lugar fin</label>
           <div class="col-sm-10">
-            {!!Form::input('text','nombre', null ,['class'=>'form-control','maxlength' => 64])!!}
+            {!!Form::input('text','lugar_fin', null ,['class'=>'form-control', 'required'])!!}
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">RUC/DNI</label>
+          <label class="col-sm-2 control-label">Precio soles</label>
           <div class="col-sm-10">
-            <?php if($obj->empresa) {?>
-                {!!Form::input('text','ruc', null ,['class'=>'form-control','maxlength' => 11])!!}
-            <?php } else {?>
-                {!!Form::input('text','dni', null ,['class'=>'form-control','maxlength' => 11])!!}
-            <?php } ?>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Teléfono</label>
-          <div class="col-sm-10">
-            {!!Form::input('text','telefono', null ,['class'=>'form-control','maxlength' => 9,'required'])!!}
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Dirección</label>
-          <div class="col-sm-10">
-            {!!Form::input('text','direccion', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
+            {!!Form::input('text','precio_soles', null ,['class'=>'form-control','required'])!!}
           </div>
         </div>
           <div class="form-group">
-            <label class="col-sm-2 control-label">E-mail</label>
+            <label class="col-sm-2 control-label">Precio dolares</label>
             <div class="col-sm-10">
-              {!!Form::input('text','email', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
+              {!!Form::input('text','precio_dolares', null ,['class'=>'form-control','required'])!!}
             </div>
           </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
             <button class="btn btn-primary" type="submit">Guardar</button>
-            <a href="{{route('clientes')}}" class="btn btn-danger">Cancelar</a>
+            <a href="{{route('reservas_detail',['id'=>$obj->id])}}" class="btn btn-danger">Cancelar</a>
           </div>
         </div>
 
@@ -62,10 +46,13 @@ $(document).ready(function(){
  $('#form').validate({
   errorElement: "span",
   rules: {
-      nombre: {
+      lugar_inicio: {
         required: true,
-        minlength: 5,
-        maxlength: 32,
+        minlength: 5
+      },
+      lugar_fin: {
+        required: true,
+        minlength: 5
       }
   },
   highlight: function(element) {

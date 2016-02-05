@@ -30,12 +30,12 @@
     <div class="panel panel-default">
         <div class="panel-heading"><b>Cliente</b></div>
         <div class="panel-body">
-            @if($obj->empresa)
+            @if($obj->cliente->empresa)
             <p><b>Razon social:</b> {{$obj->cliente->nombre}}</p>
             <p><b>RUC:</b> {{$obj->cliente->ruc}}</p>
             @else
             <p><b>Nombres y apellidos:</b> {{$obj->cliente->nombre}}</p>
-            <p><b>DNI:</b> {{$obj->cliente->ruc}}</p>
+            <p><b>DNI:</b> {{$obj->cliente->dni}}</p>
             @endif
             <p><b>Dirección:</b> {{$obj->cliente->direccion}}</p>
             <p><b>Teléfono:</b> {{$obj->cliente->telefono}}</p>

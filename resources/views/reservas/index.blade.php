@@ -6,6 +6,7 @@ Reservas <a href="{{ route('clientes_new')}}" title="Agregar"  class="btn btn-pr
 <table class="table table-bordered table-striped">
 <thead>
     <tr>
+        <th>Código</th>
         <th>Confirmado</th>
         <th>Servicio</th>
         <th>Bus</th>
@@ -22,6 +23,7 @@ Reservas <a href="{{ route('clientes_new')}}" title="Agregar"  class="btn btn-pr
     @else
     <tr class="danger">
     @endif
+        <td>{{$obj->sku()}}</td>
         <td>
         @if($obj->confirmado)
         Confirmado

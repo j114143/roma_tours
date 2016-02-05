@@ -12,6 +12,7 @@ use App\Bus;
 use App\Servicio;
 use App\Precio;
 use App\Reserva;
+use App\Http\Requests\Reserva\UpdateReservaRequest;
 class ReservaController extends Controller
 {
     /**
@@ -66,7 +67,8 @@ class ReservaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $obj = Reserva::findOrFail($id);
+        return view('reservas.edit', array('obj'=>$obj));
     }
 
     /**
@@ -76,9 +78,19 @@ class ReservaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateReservaRequest $request, $id)
     {
-        //
+        $input = $request->all();
+        $obj = Reserva::findOrFail($id);
+        $obj->lugar_inicio = $input['lugar_inicio'];
+        $obj->lugar_fin = $input['lugar_fin'];
+        $obj->precio_soles = $input['precio_soles'];
+        $obj->precio_dolares = $input['precio_dolares'];
+        $obj->save();
+
+        Session::flash('mensaje', 'Reserva '.$obj->sku().' actualizado');
+        Session::flash('alert-class','alert-success');
+        return redirect(route('reservas_detail',['id'=>$obj->id]));
     }
 
     /**
@@ -118,6 +130,6 @@ class ReservaController extends Controller
         $obj->save();
         Session::flash('mensaje', 'Reserva '.$obj->sku().' confirmado');
         Session::flash('alert-class','alert-success');
-        return redirect(route('reservas'));
+        return redirect(route('reservas_detail',['id'=>$obj->id]));
     }
 }

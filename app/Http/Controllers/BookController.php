@@ -14,6 +14,7 @@ use App\Disponibilidad;
 use App\Bus;
 use App\Precio;
 use Carbon\Carbon;
+use App\Http\Requests\Reserva\BookNowReservaRequest;
 class BookController extends Controller
 {
     /**
@@ -40,11 +41,11 @@ class BookController extends Controller
     {
         $servicio = Servicio::findOrFail($servicioId);
         $bus = Bus::findOrFail($busId);
-        $precio = Precio::where(array("servicio_id"=>$servicioId,"tipo_bus_id"=>$bus->id))->get();
+        $precio = Precio::where(array("servicio_id"=>$servicioId,"tipo_bus_id"=>$bus->id))->first();
 
-        $fecha_inicio = $request->input('fecha_inicio');
-        if (count($precio))
+        if (count($precio)>0)
         {
+        $fecha_inicio = $request->input('fecha_inicio');
             return view('book.create',array("servicio"=>$servicio,
                                             "bus"=>$bus,
                                             "precio"=>$precio,
@@ -60,7 +61,7 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $busId, $servicioId)
+    public function store(BookNowReservaRequest $request, $busId, $servicioId)
     {
         $servicio = Servicio::findOrFail($servicioId);
         $bus = Bus::findOrFail($busId);
@@ -74,7 +75,12 @@ class BookController extends Controller
         $cliente->empresa = $input['es_empresa'];
         $cliente->nombre = $input['nombre'];
         $cliente->direccion = $input['direccion'];
-        $cliente->dni = $input['dni'];
+        if ($input['es_empresa']=="1")
+        {
+            $cliente->ruc = $input['dni'];
+        } else {
+            $cliente->dni = $input['dni'];
+        }
         $cliente->telefono = $input['telefono'];
         $cliente->email = $input['email'];
         $cliente->save();
