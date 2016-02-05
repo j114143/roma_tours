@@ -181,8 +181,55 @@ class BookController extends Controller
 
         return json_encode($this->buscarBusDisponible($fecha_inicio));
     }
+    public function getColor($reserva) //YYYY-MM-SS HH-MM-SS
+    {
+        $colors_cnf = array('#FF0000','#54FF00','#FBD300','#0515FB','#B406F9','#FF04E9','#e67e22','#03CDFD');
+        $colors_sin = array('#F76F6F','#6FF77B','#F7E16D','#7A83F9','#D372F9','#FF7EF4','#d58512','#71DFF9');
+        $ind = (($reserva->id + 7) % 8) ;
+        if($reserva->confirmado)
+            return $colors_cnf[$ind];
+        else    
+            return $colors_sin[$ind];
+    }
+    public function getName($reserva) 
+    {
+        if($reserva->confirmado)
+            return "Servicio: ".$reserva->servicio."   Bus:".$reserva->bus."\nCLiente: ".$reserva->cliente."\nLugar de Origen:".$reserva->lugar_inicio."   Lugar de Destino: ".$reserva->lugar_fin."\n Estado: CONFIRMADO";
+        else 
+            return "Servicio: ".$reserva->servicio."   Bus:".$reserva->bus."\nCLiente: ".$reserva->cliente."\nLugar de Origen:".$reserva->lugar_inicio."   Lugar de Destino: ".$reserva->lugar_fin."\n Estado: SIN CONFIRMAR";     
+    }
     public function status()
     {
+        $reservas = Reserva::getReservas();
+        $xml = new \DOMDocument("1.0");
+        $xml_montly = $xml->createElement("monthly");
+        foreach($reservas as $reserva)
+        {
+            $xml_event = $xml->createElement("event");
+            $xml_id = $xml->createElement("id", $reserva->id);
+            $xml_name = $xml->createElement("name", $this->getName($reserva));
+            $xml_startdate = $xml->createElement("startdate", substr($reserva->fecha_inicio, 0, 10));
+            $xml_enddate = $xml->createElement("enddate", substr($reserva->fecha_fin, 0, 10));
+            $xml_starttime = $xml->createElement("starttime", substr($reserva->fecha_inicio, 11, 5));
+            $xml_endtime = $xml->createElement("endtime", substr($reserva->fecha_fin, 11, 5));
+            $xml_color = $xml->createElement("color", $this->getColor($reserva));
+            //$xml_url = $xml->createElement("url", getURL($reserva));
+            $xml_event->appendChild($xml_id);
+            $xml_event->appendChild($xml_name);
+            $xml_event->appendChild($xml_startdate);
+            $xml_event->appendChild($xml_enddate);
+            $xml_event->appendChild($xml_starttime);
+            $xml_event->appendChild($xml_endtime);
+            $xml_event->appendChild($xml_color);
+            //$xml_event->appendChild($xml_url);
+
+            $xml_montly->appendChild( $xml_event );
+            
+            //echo $xml_event;
+        }
+        $xml->appendChild( $xml_montly );
+
+        $xml->save("../public/assets/monthly/events.xml");    
         return view('book.status');
     }
 }

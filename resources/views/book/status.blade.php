@@ -3,21 +3,18 @@
 Reservas
 @stop
 
-{!!Html::style('assets/css/monthly.css') !!}
+{!!Html::style('assets/monthly/css/monthly.css') !!}
 
 @section('contenido')
-<div class="monthly" id="mycalendar">
-
-</div>
-
-    
-    {!!Html::script('assets/js/monthly.js') !!}
-    {!!Html::script('assets/js/monthly_jquery.js') !!}
+<div class="monthly" id="mycalendar"></div>
+    {!!Html::script('assets/monthly/js/jquery.js') !!}
+    {!!Html::script('assets/monthly/js/monthly.js') !!}
     <script type="text/javascript">
         $(window).load( function() {
+            
             $('#mycalendar').monthly({
                 mode: 'event',
-                xmlUrl: 'events.xml'
+                xmlUrl: '/assets/monthly/events.xml'
             });    
         });
     </script>     

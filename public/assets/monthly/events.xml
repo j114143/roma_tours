@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<monthly><event><id>1</id><name>Servicio: economico   Bus:123123
+CLiente: llika
+Lugar de Origen:cusco   Lugar de Destino: urubamba
+ Estado: CONFIRMADO</name><startdate>2016-01-28</startdate><enddate>2016-02-03</enddate><starttime>09:00</starttime><endtime>04:00</endtime><color>#FF0000</color></event><event><id>2</id><name>Servicio: cusco historico   Bus:123123
+CLiente: rodo
+Lugar de Origen:calca   Lugar de Destino: ollantaytambo
+ Estado: CONFIRMADO</name><startdate>2016-02-03</startdate><enddate>2016-02-14</enddate><starttime>09:00</starttime><endtime>04:00</endtime><color>#54FF00</color></event><event><id>3</id><name>Servicio: economico   Bus:123123
+CLiente: rodo
+Lugar de Origen:calca   Lugar de Destino: ollantaytambo
+ Estado: SIN CONFIRMAR</name><startdate>2016-02-05</startdate><enddate>2016-02-06</enddate><starttime>07:00</starttime><endtime>17:00</endtime><color>#F7E16D</color></event></monthly>

@@ -9,7 +9,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			var defaults = {
 				weekStart: 'Sun',
 				mode: '',
-				xmlUrl: 'roro',
+				xmlUrl: '',
 				target: '',
 				eventList: true,
 				maxWidth: false,
@@ -26,7 +26,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 				currentMonth = d.getMonth() + 1,
 				currentYear = d.getFullYear(),
 				currentDay = d.getDate(),
-				monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+				monthNames = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"],
 				dayNames = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
 
 		if (options.maxWidth != false){
@@ -151,7 +151,6 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			if (options.mode == 'event') {
 				// Remove previous events
 				// Add Events
-				
 				$.get(''+options.xmlUrl+'', function(d){
 					$(d).find('event').each(function(){
 						// Year [0]   Month [1]   Day [2]
