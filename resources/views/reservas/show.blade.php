@@ -50,7 +50,7 @@
         <div class="panel-heading"><b>Servicio</b></div>
         <div class="panel-body">
             <p><b>Nombre:</b> {{$obj->servicio->nombre}}</p>
-            <p><b>Duración:</b> {{$obj->servicio->duracion}}</p>
+            <p><b>Duración:</b> {{$obj->servicio->duracion}} Horas</p>
             <p><b>Tipo de servicio:</b> {{$obj->servicio->tipo->nombre}}</p>
         </div>
     </div>

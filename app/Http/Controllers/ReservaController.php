@@ -22,7 +22,7 @@ class ReservaController extends Controller
      */
     public function index()
     {
-        $objs = Reserva::paginate(10);
+        $objs = Reserva::orderBy('id', 'desc')->paginate(10);
         return view('reservas.index',array("objs"=>$objs));
     }
 

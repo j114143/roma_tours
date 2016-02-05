@@ -6,7 +6,7 @@ Clientes <a href="{{ route('clientes_new')}}" title="Agregar"  class="btn btn-pr
 <table class="table table-bordered table-striped">
 <thead>
     <tr>
-        <th>Empresa</th>
+        <th> </th>
         <th>Nombre</th>
         <th>DNI/RUC</th>
         <th>Teléfono</th>
@@ -18,12 +18,11 @@ Clientes <a href="{{ route('clientes_new')}}" title="Agregar"  class="btn btn-pr
 @foreach($objs as $obj)
     <tr>
         <td>
-            <?php
-                if($obj->empresa)
-                    echo "Si";
-                else
-                    echo "No";
-            ?>
+        @if($obj->empresa)
+        <span class="label label-primary">Empresa</span>
+        @else
+        <span class="label label-success">Persona</span>
+        @endif
         </td>
         <td>{{$obj->nombre}}</td>
         <td>

@@ -19,7 +19,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $objs = Cliente::paginate(10);
+        $objs = Cliente::orderBy('id', 'desc')->paginate(10);
         return view('clientes.index',array("objs"=>$objs));
     }
 
@@ -44,9 +44,9 @@ class ClienteController extends Controller
         $input = $request->all();
 
         $obj = new Cliente ;
-        
+
         if(isset($input['empresa'])) $obj->empresa = true;
-        else $obj->empresa = false;    
+        else $obj->empresa = false;
         $obj->nombre = $input['nombre'];
         if($obj->empresa) $obj->ruc = $input['documento'];
         else $obj->dni = $input['documento'];
@@ -95,22 +95,22 @@ class ClienteController extends Controller
         $input = $request->all();
         $obj = Cliente::findOrFail($id);
         if(isset($input['empresa'])) $obj->empresa = true;
-        else $obj->empresa = false;  
+        else $obj->empresa = false;
         $obj->nombre = $input['nombre'];
         if($obj->empresa)
         {
-            if(array_key_exists('ruc', $input)) 
+            if(array_key_exists('ruc', $input))
                 $obj->ruc = $input['ruc'];
             else
-                $obj->ruc = $input['dni'];          
+                $obj->ruc = $input['dni'];
         }
         else
         {
-            if(array_key_exists('ruc', $input)) 
+            if(array_key_exists('ruc', $input))
                 $obj->dni = $input['ruc'];
             else
                 $obj->dni = $input['dni'];
-        }   
+        }
         $obj->direccion = $input['direccion'];
         $obj->telefono = $input['telefono'];
         $obj->email = $input['email'];
