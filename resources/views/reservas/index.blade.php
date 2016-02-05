@@ -28,7 +28,7 @@ Reservas <a href="{{ route('clientes_new')}}" title="Agregar"  class="btn btn-pr
         @if($obj->confirmado)
         Confirmado
         @else
-        No confirmado
+        <a title="Confirmar reserva" class="text-danger" href="{{ route('reservas_confirmar',['id'=>$obj->id]) }}">No confirmado</a>
         @endif
         </td>
         <td>{{$obj->servicio->nombre}}</td>
