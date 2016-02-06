@@ -68,6 +68,14 @@
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">@yield('titulo')</h2>
                     <hr class="primary">
+                    @if($errors->any())
+                        @foreach($errors->all() as $error)
+                            <div  class="alert alert-danger">{{$error}}</div>
+                        @endforeach
+                    @endif
+                    @if(Session::has('mensaje'))
+                    <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('mensaje') }}</p>
+                    @endif
                 </div>
             </div>
         </div>

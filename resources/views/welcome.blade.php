@@ -10,7 +10,7 @@ Servicio de transporte
                 <h2 class="section-heading">Servicio de transporte turistico</h2>
                 <hr class="light">
                 <p class="text-faded">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p>
-                <a href="{{ route('book_now_servicio') }}" class="btn btn-default btn-xl">Reservar bus</a>
+                <a href="{{ route('book_now_cliente') }}" class="btn btn-default btn-xl">Reservar bus</a>
             </div>
         </div>
     </div>

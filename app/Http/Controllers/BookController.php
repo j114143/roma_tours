@@ -15,14 +15,42 @@ use App\Bus;
 use App\Precio;
 use Carbon\Carbon;
 use App\Http\Requests\Reserva\BookNowReservaRequest;
+use App\Http\Requests\Cliente\CreateClienteRequest;
 class BookController extends Controller
 {
+    public function cliente()
+    {
+        return view('book.cliente');
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function clienteStore(CreateClienteRequest $request)
+    {
+        $input = $request->all();
+        $cliente = Cliente::where('di','=',$input['di'])->first();
+        if (count($cliente)<1)
+        {
+            $cliente = new Cliente;
+            $cliente->empresa = $input['es_empresa'];
+            $cliente->nombre = $input['nombre'];
+            $cliente->direccion = $input['direccion'];
+            $cliente->di = $input['di'];
+            $cliente->telefono = $input['telefono'];
+            $cliente->email = $input['email'];
+            $cliente->save();
+        }
+        return redirect(route('book_now_servicio',['cliente_id'=>$cliente->di]));
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function servicio()
+    public function servicio($cliente_di)
     {
         $tipoServicios = TipoServicio::all();
         $servicios = Servicio::all();
@@ -31,7 +59,6 @@ class BookController extends Controller
                 'servicios'=>$servicios,
                 'now'=>$now));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -188,15 +215,15 @@ class BookController extends Controller
         $ind = (($reserva->id + 7) % 8) ;
         if($reserva->confirmado)
             return $colors_cnf[$ind];
-        else    
+        else
             return $colors_sin[$ind];
     }
-    public function getName($reserva) 
+    public function getName($reserva)
     {
         if($reserva->confirmado)
             return "Servicio: ".$reserva->servicio."   Bus:".$reserva->bus."\nCLiente: ".$reserva->cliente."\nLugar de Origen:".$reserva->lugar_inicio."   Lugar de Destino: ".$reserva->lugar_fin."\n Estado: CONFIRMADO";
-        else 
-            return "Servicio: ".$reserva->servicio."   Bus:".$reserva->bus."\nCLiente: ".$reserva->cliente."\nLugar de Origen:".$reserva->lugar_inicio."   Lugar de Destino: ".$reserva->lugar_fin."\n Estado: SIN CONFIRMAR";     
+        else
+            return "Servicio: ".$reserva->servicio."   Bus:".$reserva->bus."\nCLiente: ".$reserva->cliente."\nLugar de Origen:".$reserva->lugar_inicio."   Lugar de Destino: ".$reserva->lugar_fin."\n Estado: SIN CONFIRMAR";
     }
     public function status()
     {
@@ -224,12 +251,12 @@ class BookController extends Controller
             //$xml_event->appendChild($xml_url);
 
             $xml_montly->appendChild( $xml_event );
-            
+
             //echo $xml_event;
         }
         $xml->appendChild( $xml_montly );
 
-        $xml->save("../public/assets/monthly/events.xml");    
+        $xml->save("../public/assets/monthly/events.xml");
         return view('book.status');
     }
 }

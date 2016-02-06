@@ -20,7 +20,7 @@ Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout')->name("logout");
 
 Route::group(['middleware' => ['auth']], function () {
-Route::get('admin/', function () { return view('admin');});
+Route::get('home/', function () { return view('admin');})->name("admin");
 Route::get('admin/conductores/', 'ConductorController@index')->name("conductores");
 Route::get('admin/servicios/', 'ServicioController@index')->name("servicios");
 Route::get('admin/servicios/new', 'ServicioController@create')->name("servicios_new");
@@ -103,8 +103,12 @@ Route::post('admin/reservas/{id}/confirmar', 'ReservaController@confirmarUpdate'
 
 });
 
-Route::get('book_now/servicio', 'BookController@servicio')->name("book_now_servicio");
+Route::get('book_bus/cliente', 'BookController@cliente')->name("book_now_cliente");
+Route::post('book_bus/cliente', 'BookController@clienteStore');
+
+Route::get('book_now/{cliente_di}/servicio', 'BookController@servicio')->name("book_now_servicio");
 Route::get('book/{id}', 'BookController@show')->name("book_detail");
+
 Route::get('book_now/now/{busId}/{servicioId}', 'BookController@create')->name("book_now");
 Route::post('book_now/now/{busId}/{servicioId}', 'BookController@store');
 Route::get('book_now/verify', 'BookController@verify')->name("verify");
