@@ -59,28 +59,6 @@ class BookController extends Controller
                 'servicios'=>$servicios,
                 'now'=>$now));
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request, $busId,$servicioId)
-    {
-        $servicio = Servicio::findOrFail($servicioId);
-        $bus = Bus::findOrFail($busId);
-        $precio = Precio::where(array("servicio_id"=>$servicioId,"tipo_bus_id"=>$bus->id))->first();
-
-        if (count($precio)>0)
-        {
-        $fecha_inicio = $request->input('fecha_inicio');
-            return view('book.create',array("servicio"=>$servicio,
-                                            "bus"=>$bus,
-                                            "precio"=>$precio,
-                                            "fecha_inicio"=>$fecha_inicio));
-        } else {
-            return view('book.mensaje',array("servicio"=>$servicio,"bus"=>$bus));
-        }
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -88,27 +66,19 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BookNowReservaRequest $request, $busId, $servicioId)
+    public function store(BookNowReservaRequest $request, $cliente_id)
     {
-        $servicio = Servicio::findOrFail($servicioId);
-        $bus = Bus::findOrFail($busId);
-        $precio = Precio::where(array("servicio_id"=>$servicioId,"tipo_bus_id"=>$bus->id))->firstOrFail();;
-        $fecha_inicio = $request->input('fecha_inicio');
+        $input = $request->all();
+
+        $servicio = Servicio::findOrFail($input['servicio_id']);
+        $bus = Bus::findOrFail($input['bus_id']);
+        $precio = Precio::where(array("servicio_id"=>$servicio->id,"tipo_bus_id"=>$bus->tipo_id))->firstOrFail();;
+
+
+        $fecha_inicio = $input['fecha_inicio'];
         $inicio = Carbon::createFromFormat('Y/m/d H:i',$fecha_inicio);
 
-        $input = $request->all();
-        $cliente = Cliente::where('di','=',$input['documento'])->first();
-        if (count($cliente)<1)
-        {
-            $cliente = new Cliente;
-            $cliente->empresa = $input['es_empresa'];
-            $cliente->nombre = $input['nombre'];
-            $cliente->direccion = $input['direccion'];
-            $cliente->di = $input['documento'];
-            $cliente->telefono = $input['telefono'];
-            $cliente->email = $input['email'];
-            $cliente->save();
-        }
+        $cliente = Cliente::where('di','=',$cliente_id)->first();
 
         $reserva = new Reserva;
         $reserva->servicio_id = $servicio->id;
@@ -119,7 +89,7 @@ class BookController extends Controller
         $reserva->precio_soles = $precio->precio_soles;
         $reserva->precio_dolares = $precio->precio_soles;
 
-        $reserva->lugar_inicio = $input['lugar_inicio'];;
+        $reserva->lugar_inicio = $input['lugar_inicio'];
         $reserva->lugar_fin = $input['lugar_fin'];;
         $reserva->save();
 

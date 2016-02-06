@@ -26,15 +26,9 @@ class BookNowReservaRequest extends Request
         return [
             'lugar_inicio'  => 'required',
             'lugar_fin'  => 'required',
-            'es_empresa'  => 'required|numeric',
             'servicio_id'  => 'required|numeric',
             'bus_id'  => 'required|numeric',
-            'documento'  => 'required',
             'fecha_inicio'  => 'required',
-            'nombre'  => 'required',
-            'direccion'  => 'required',
-            'telefono'  => 'required|numeric',
-            'email'  => 'required|email',
         ];
     }
 }

@@ -60,7 +60,7 @@
         <h4 class="modal-title" id="myModalLabel">Reservar bus</h4>
       </div>
       <div class="modal-body">
-          <form action="reservar/servicio" id="form-1" novalidate="novalidate" class="form-horizontal">
+          {!!Form::open(array('id'=>'form-1','class'=>'form-horizontal'))!!}
                 <input type="hidden" name="fecha_inicio" id="fecha_inicio_h" value="">
                 <input type="hidden" name="servicio_id" id="servicio_id_h" value="">
                 <input type="hidden" name="bus_id" id="bus_id_h" value="">
@@ -106,8 +106,8 @@ $(document).ready(function(){
     $('#id_buscar').on('click', function() {
 
         if ($("#form").valid()) {
-            $("#fecha_inicio_h").val($("#id_servicio").val());
-            $("#servicio_id_h").val($("#id_fecha_inicio").val());
+            $("#fecha_inicio_h").val($("#id_fecha_inicio").val());
+            $("#servicio_id_h").val($("#id_servicio").val());
             buscarBus(url);
         } else {
             $('#resultado').text('Elegir servicio y fecha para el cual quiere reservar bus');

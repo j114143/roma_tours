@@ -107,10 +107,9 @@ Route::get('book_bus/cliente', 'BookController@cliente')->name("book_now_cliente
 Route::post('book_bus/cliente', 'BookController@clienteStore');
 
 Route::get('book_now/{cliente_di}/servicio', 'BookController@servicio')->name("book_now_servicio");
+Route::post('book_now/{cliente_di}/servicio', 'BookController@store');
 Route::get('book/{id}', 'BookController@show')->name("book_detail");
 
-Route::get('book_now/now/{busId}/{servicioId}', 'BookController@create')->name("book_now");
-Route::post('book_now/now/{busId}/{servicioId}', 'BookController@store');
 Route::get('book_now/verify', 'BookController@verify')->name("verify");
 Route::post('book_now/verify', 'BookController@check');
 Route::get('disponibilidad_bus', 'BookController@disponibilidad')->name("disponibilidad_bus");
