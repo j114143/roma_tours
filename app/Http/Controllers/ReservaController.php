@@ -175,4 +175,33 @@ class ReservaController extends Controller
         Session::flash('alert-class','alert-success');
         return redirect(route('reservas_detail',['id'=>$obj->id]));
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function finalizar($id)
+    {
+        $obj = Reserva::findOrFail($id);
+        return view('reservas.finalizar', array('obj'=>$obj));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function finalizarUpdate(Request $request, $id)
+    {
+        $obj = Reserva::findOrFail($id);
+        $obj->finalizado = true;
+        $obj->save();
+        Session::flash('mensaje', 'Reserva '.$obj->sku().' finalizado');
+        Session::flash('alert-class','alert-success');
+        return redirect(route('reservas_detail',['id'=>$obj->id]));
+    }
 }

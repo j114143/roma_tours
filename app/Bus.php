@@ -18,4 +18,8 @@ class Bus extends Model
         $obj = Precio::where(array("servicio_id"=>$servicioId,"tipo_bus_id"=>$this->tipo_id))->firstOrFail();
         return $obj;
     }
+    function reservas()
+    {
+        return $this->hasMany('App\Reserva','bus_id', 'id');
+    }
 }

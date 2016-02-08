@@ -7,7 +7,7 @@ Reservas <a href="{{ route('reservas_new')}}" title="Agregar"  class="btn btn-pr
 <thead>
     <tr>
         <th>Código</th>
-        <th>Confirmado</th>
+        <th>Estado</th>
         <th>Servicio</th>
         <th>Bus</th>
         <th>Fecha Inicio</th>
@@ -18,17 +18,25 @@ Reservas <a href="{{ route('reservas_new')}}" title="Agregar"  class="btn btn-pr
     </tr>
 </thead>
 @foreach($objs as $obj)
-    @if($obj->confirmado)
-    <tr class="success">
+    @if($obj->finalizado)
+        <tr class="info">
     @else
-    <tr class="danger">
+        @if($obj->confirmado)
+        <tr class="success">
+        @else
+        <tr class="danger">
+        @endif
     @endif
         <td>{{$obj->sku()}}</td>
         <td>
-        @if($obj->confirmado)
-        Confirmado
+        @if($obj->finalizado)
+        Finalizado
         @else
-        <a title="Confirmar reserva" class="text-danger" href="{{ route('reservas_confirmar',['id'=>$obj->id]) }}">No confirmado</a>
+            @if($obj->confirmado)
+            Confirmado
+            @else
+            <a title="Confirmar reserva" class="text-danger" href="{{ route('reservas_confirmar',['id'=>$obj->id]) }}">No confirmado</a>
+            @endif
         @endif
         </td>
         <td>{{$obj->servicio->nombre}}</td>

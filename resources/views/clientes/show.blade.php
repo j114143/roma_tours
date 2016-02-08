@@ -25,7 +25,7 @@
             <thead>
                 <tr>
                     <th>Código</th>
-                    <th>Confirmado</th>
+                    <th>Estado</th>
                     <th>Servicio</th>
                     <th>Bus</th>
                     <th>Fecha Inicio</th>
@@ -36,17 +36,25 @@
             </thead>
             <tbody>
             @foreach($obj->reservas  as $reserva)
-                @if($reserva->confirmado)
-                <tr class="success">
+                @if($reserva->finalizado)
+                    <tr class="info">
                 @else
-                <tr class="danger">
+                    @if($reserva->confirmado)
+                    <tr class="success">
+                    @else
+                    <tr class="danger">
+                    @endif
                 @endif
                     <td>{{$reserva->sku()}}</td>
                     <td>
-                    @if($reserva->confirmado)
-                    Confirmado
+                    @if($reserva->finalizado)
+                    Finalizado
                     @else
-                    <a title="Confirmar reserva" class="text-danger" href="{{ route('reservas_confirmar',['id'=>$reserva->id]) }}">No confirmado</a>
+                        @if($reserva->confirmado)
+                        Confirmado
+                        @else
+                        <a title="Confirmar reserva" class="text-danger" href="{{ route('reservas_confirmar',['id'=>$reserva->id]) }}">No confirmado</a>
+                        @endif
                     @endif
                     </td>
                     <td>{{$reserva->servicio->nombre}}</td>

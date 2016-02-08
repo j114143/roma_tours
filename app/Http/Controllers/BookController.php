@@ -142,6 +142,7 @@ class BookController extends Controller
 
         $reservas = Reserva::where('fecha_inicio', '<=', $date->format('Y-m-d H:i:s'))
                             ->where('fecha_fin', '>=', $date->format('Y-m-d H:i:s'))
+                            ->where('finalizado', '=', '0')
                             ->select('bus_id','fecha_inicio','fecha_fin')
                             ->get();
 

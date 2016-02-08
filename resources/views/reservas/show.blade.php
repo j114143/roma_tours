@@ -15,12 +15,18 @@
             <p><b>Lugar de inicio:</b> {{$obj->lugar_inicio}} </p>
             <p><b>Lugar de fin:</b> {{$obj->lugar_fin}} </p>
             <h2 class="text-center">
+            @if($obj->finalizado)
+                FINALIZADO
+            @else
                 @if($obj->confirmado)
                 Confirmado
+                <br>
+                <a class="btn btn-info" href="{{route('reservas_finalizar',['id'=>$obj->id])}}">Finalizar</a>
                 @else
                 No confirmado<br>
                 <a class="btn btn-primary" href="{{route('reservas_confirmar',['id'=>$obj->id])}}">Confirmar</a>
                 @endif
+            @endif
             </h2>
         </div>
     </div>

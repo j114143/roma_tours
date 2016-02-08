@@ -101,6 +101,8 @@ Route::get('admin/reservas/{id}/edit', 'ReservaController@edit')->name("reservas
 Route::post('admin/reservas/{id}/edit', 'ReservaController@update');
 Route::get('admin/reservas/{id}/confirmar', 'ReservaController@confirmar')->name("reservas_confirmar");
 Route::post('admin/reservas/{id}/confirmar', 'ReservaController@confirmarUpdate');
+Route::get('admin/reservas/{id}/finalizar', 'ReservaController@finalizar')->name("reservas_finalizar");
+Route::post('admin/reservas/{id}/finalizar', 'ReservaController@finalizarUpdate');
 
 });
 
