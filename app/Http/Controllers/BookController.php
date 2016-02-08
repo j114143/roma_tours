@@ -221,7 +221,11 @@ class BookController extends Controller
         }
         $xml->appendChild( $xml_montly );
 
-        $xml->save("../public/assets/monthly/events.xml");    
-        return view('book.status');
+        $xml->save("../public/assets/monthly/events.xml"); 
+
+        $tipoServicios = TipoServicio::all();
+        $servicios = Servicio::all();
+
+        return view('book.status', array('tipoServicios'=>$tipoServicios,'servicios'=>$servicios));
     }
 }

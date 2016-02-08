@@ -20,6 +20,7 @@ Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 Route::group(['middleware' => ['auth']], function () {
+});
 Route::get('admin/conductores/', 'ConductorController@index')->name("conductores");
 Route::get('admin/', function () { return view('admin');});
 Route::get('admin/servicios/', 'ServicioController@index')->name("servicios");
@@ -90,13 +91,13 @@ Route::post('admin/precios/new', 'PrecioController@store');
 Route::get('admin/precios/{servicio_id}/{tipo_bus_id}', 'PrecioController@show')->name("precios_detail");
 Route::get('admin/precios/{servicio_id}/{tipo_bus_id}/edit', 'PrecioController@edit')->name("precios_edit");
 Route::post('admin/precios/{servicio_id}/{tipo_bus_id}/edit', 'PrecioController@update');
-});
 
 Route::get('reservar/', 'BookController@create')->name("reservar");
 Route::post('reservar/', 'BookController@storage');
 Route::get('reservar/servicio', 'BookController@servicio')->name("reservar_servicio");
 Route::get('book/{id}', 'BookController@show')->name("book_detail");
 Route::get('admin/reservas/status', 'BookController@status')->name("reservas_status");
+Route::get('admin/reservas/status', 'BookController@load')->name("calendario_load");
 
 Route::get('reservar/now/{busId}/{servicioId}', 'BookController@create')->name("book_now");
 Route::post('reservar/now/{busId}/{servicioId}', 'BookController@store');
