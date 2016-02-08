@@ -54,10 +54,8 @@ class BookController extends Controller
     {
         $tipoServicios = TipoServicio::all();
         $servicios = Servicio::all();
-        $now = Carbon::now();
         return view('book.servicio',array('tipoServicios'=>$tipoServicios,
-                'servicios'=>$servicios,
-                'now'=>$now));
+                'servicios'=>$servicios ));
     }
 
     /**
