@@ -138,7 +138,7 @@ class BookController extends Controller
         $obj = Reserva::findOrFail($id);
         return view('book.show',array("obj"=>$obj));
     }
-    public function buscarBusDisponible($fecha_inicio)
+    public function buscarBusDisponible($fecha_inicio,$servicio_id)
     {
         $date = Carbon::createFromFormat('Y/m/d H:i',$fecha_inicio);
 
@@ -151,7 +151,7 @@ class BookController extends Controller
 
         $disponibles = array();
         $reservado = 0;
-        // Excluir los busses con reserva
+
         $n =0;
         foreach ($buses as $key => $bus)
         {
@@ -165,11 +165,13 @@ class BookController extends Controller
             }
             if ($reservado)
             {
+                $precios = $bus->precios($servicio_id);
+                $bus["precio_soles"] = $precios->precio_soles;
+                $bus["precio_dolares"] = $precios->precio_dolares;
                 $disponibles[$n] = $bus;
                 $n++;
             }
         }
-        //return $cadena;
         return $disponibles;
     }
     public function disponibilidad(Request $request)
@@ -177,7 +179,7 @@ class BookController extends Controller
         $servicio_id = $request->input('servicio_id');
         $fecha_inicio = $request->input('fecha_inicio');
 
-        return json_encode($this->buscarBusDisponible($fecha_inicio));
+        return json_encode($this->buscarBusDisponible($fecha_inicio,$servicio_id));
     }
     public function getColor($reserva) //YYYY-MM-SS HH-MM-SS
     {

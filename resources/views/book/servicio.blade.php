@@ -1,44 +1,37 @@
 @extends('layout.basico')
 
 @section('contenido')
-<div class="col-sm-5 ">
+<div class="col-sm-4 ">
         <form id="form" novalidate="novalidate" class="form-horizontal">
 
         <div class="form-group">
-            <label class="col-sm-4 control-label">Tipo de servicios</label>
-            <div class="col-sm-8">
-                <select class="form-control" id="id_tipo_servicio" name="id_tipo_servicio">
-                    <option>---</option>
-                    @foreach ($tipoServicios as $tipo)
-                    <option value="{{$tipo->id}}">{{$tipo->nombre}}</option>
-                    @endforeach
-                </select>
-            </div>
+            <label class="control-label">Tipo de servicios</label>
+            <select class="form-control" id="id_tipo_servicio" name="id_tipo_servicio">
+                <option>---</option>
+                @foreach ($tipoServicios as $tipo)
+                <option value="{{$tipo->id}}">{{$tipo->nombre}}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
-            <label class="col-sm-4 control-label">Servicio</label>
-            <div class="col-sm-8">
-                <select class="form-control" id="id_servicio" name="id_servicio">
-                    <option>---</option>
-                    @foreach ($servicios as $servicio)
-                    <option value="{{$servicio->id}}" class="{{$servicio->tipo_id}}">{{$servicio->nombre}}</option>
-                    @endforeach
-                </select>
-            </div>
+            <label class="control-label">Servicio</label>
+            <select class="form-control" id="id_servicio" name="id_servicio">
+                <option>---</option>
+                @foreach ($servicios as $servicio)
+                <option value="{{$servicio->id}}" class="{{$servicio->tipo_id}}">{{$servicio->nombre}}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
-            <label class="col-sm-4 control-label">Fecha y hora</label>
-            <div class="col-sm-8">
-                <input type="text" id="id_fecha_inicio" name="fecha_inicio" class="form-control" placeholder="2016/02/18 10:00" required>
-            </div>
+            <label class="control-label">Fecha y hora</label>
+            <input type="text" id="id_fecha_inicio" name="fecha_inicio" class="form-control" placeholder="2016/02/18 10:00" required>
         </div>
         <div class="form-group text-right">
             <input type="button" class="btn btn-success" value="Buscar" id="id_buscar">
         </div>
       </form>
 </div>
-<div class="col-sm-7">
-    <p><b>Servicios disponibles:</b></p>
+<div class="col-sm-8">
     <div id="resultado" class="alert text-center"></div>
     <table class="table" id="disponibles">
         <thead>
@@ -47,6 +40,7 @@
                 <th>Bus</th>
                 <th>Modelo</th>
                 <th>Asientos</th>
+                <th>Precios</th>
             </tr>
         </thead>
         <tbody>
@@ -150,8 +144,8 @@ $(document).ready(function(){
                         items += "<td>"+bus.placa+"</td>";
                         items += "<td>"+bus.modelo+"</td>";
                         items += "<td>"+bus.cantidad_asientos+"</td>";
+                        items += "<td><b>S/.</b> "+bus.precio_soles+" - <b>USD $</b> "+bus.precio_dolares+"</td>";
                         items += '<td><a class="btn btn-primary reservarbus" id="'+bus.id+'" onClick="print(this)">Reservar</a></td></tr>';
-                        //items += "<td><a href='now/"+bus.id+"/"+servicio_id+"?fecha_inicio="+fecha_inicio+"' class='btn btn-success'>Reservar</a></td></tr>";
                     });
 
                     $('#resultado').removeClass("alert-success");
