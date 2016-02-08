@@ -97,6 +97,8 @@ Route::get('admin/reservas/new', 'ReservaController@create')->name("reservas_new
 Route::post('admin/reservas/new', 'ReservaController@store');
 Route::get('admin/reservas/status', 'BookController@status')->name("reservas_status");
 //Route::get('admin/reservas/status', 'BookController@load')->name("calendario_load");
+Route::get('admin/reservas/calendario', 'ReservaController@calendario')->name("reservas_calendario");
+Route::get('admin/reservas/tojson', 'ReservaController@tojson')->name("reservas_tojson");
 Route::get('admin/reservas/{id}', 'ReservaController@show')->name("reservas_detail");
 Route::get('admin/reservas/{id}/edit', 'ReservaController@edit')->name("reservas_edit");
 Route::post('admin/reservas/{id}/edit', 'ReservaController@update');

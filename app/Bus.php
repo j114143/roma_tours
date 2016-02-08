@@ -15,8 +15,15 @@ class Bus extends Model
     }
     function precios($servicioId)
     {
-        $obj = Precio::where(array("servicio_id"=>$servicioId,"tipo_bus_id"=>$this->tipo_id))->firstOrFail();
-        return $obj;
+        $obj = Precio::where(array("servicio_id"=>$servicioId,"tipo_bus_id"=>$this->tipo_id))->first();
+        if (count($obj)>0)
+        {
+            return $obj;
+        }
+        $precio = new Precio;
+        $precio->precio_soles = "-.--";
+        $precio->precio_dolares = "-.--";
+        return $precio;
     }
     function reservas()
     {

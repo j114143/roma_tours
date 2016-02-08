@@ -9,7 +9,10 @@ use App\Http\Controllers\Controller;
 
 use Session;
 use App\Precio;
+use App\Servicio;
+use App\TipoBus;
 use App\Http\Requests\Precio\CreatePrecioRequest;
+use App\Http\Requests\Precio\UpdatePrecioRequest;
 
 class PrecioController extends Controller
 {
@@ -31,7 +34,9 @@ class PrecioController extends Controller
      */
     public function create()
     {
-        return view('precios.create');
+        $tipos = TipoBus::lists('nombre','id');
+        $servicios = Servicio::lists('nombre','id');
+        return view('precios.create',array('tipos'=>$tipos,'servicios'=>$servicios));
     }
 
     /**
@@ -43,7 +48,14 @@ class PrecioController extends Controller
     public function store(CreatePrecioRequest $request)
     {
         $input = $request->all();
+        $obj2 = Precio::where(array("servicio_id"=>$input['servicio_id'],"tipo_bus_id"=>$input['tipo_bus_id']))->get();
 
+        if (count($obj2)>0)
+        {
+            Session::flash('mensaje', 'Precio existe. Puede cambiar los precio');
+            Session::flash('alert-class','alert-info');
+            return redirect(route('precios_edit',['servicio_id'=>$input['servicio_id'],'tipo_bus_id'=>$input['tipo_bus_id']]));
+        }
         $obj = new Precio ;
         $obj->servicio_id = $input['servicio_id'];
         $obj->tipo_bus_id = $input['tipo_bus_id'];
@@ -86,16 +98,21 @@ class PrecioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreatePrecioRequest $request, $servicio_id,$tipo_bus_id)
+    public function update(UpdatePrecioRequest $request, $servicio_id,$tipo_bus_id)
     {
         $input = $request->all();
 
+<<<<<<< HEAD
         $obj = Precio::where(array("servicio_id"=>$servicio_id,"tipo_bus_id"=>$tipo_bus_id))->firstOrFail();
         $obj->servicio_id = $input['servicio_id'];
         $obj->tipo_bus_id = $input['tipo_bus_id'];
         $obj->precio_soles = $input['precio_soles'];
         $obj->precio_dolares = $input['precio_dolares'];
         $obj->save();
+=======
+        $obj = Precio::where(array("servicio_id"=>$servicio_id,"tipo_bus_id"=>$tipo_bus_id))
+        ->update(['precio_soles' => $input['precio_soles'],'precio_dolares'=>$input['precio_dolares']]) ;
+>>>>>>> 222943803a337ad35edbe0c287e3c45e208e03ec
         Session::flash('mensaje', 'Precio actualizado');
         Session::flash('alert-class','alert-success');
         return redirect(route('precios'));
