@@ -99,9 +99,54 @@ Reservas <a href="{{ route('reservas_new')}}" title="Agregar"  class="btn btn-pr
             @endif
         @endif
         </td>
-        <td>{{$obj->servicio->nombre}}</td>
         <td>
+        <a type="button" class="btn btn-md" data-toggle="modal" data-target="#myModalS{{$obj->servicio_id}}">
+          {{$obj->servicio->nombre}}
+        </a>
+
+        <div class="modal fade" id="myModalS{{$obj->servicio_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{$obj->servicio->nombre}}</h4>
+      </div>
+      <div class="modal-body">
+      <p><b>DURACIÓN : </b> {{$obj->servicio->duracion}}</p>
+      <p><b>TIPO : </b> {{$obj->servicio->tipo->nombre}}</p>
+      <p><a href="{{ route('servicios_detail',['id'=>$obj->servicio_id]) }}">Más detalles</a></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+            </td>
+        <td>
+        <a class="btn btn-md" data-toggle="modal" data-target="#myModal{{$obj->bus->placa}}">
           {{$obj->bus->placa}}
+        </a>
+            <div class="modal fade" id="myModal{{$obj->bus->placa}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">BUS {{$obj->bus->placa}}</h4>
+                  </div>
+                  <div class="modal-body">
+                  <p><b>PLACA</b>: {{$obj->bus->placa}}</p>
+                  <p><b>TIPO</b>: {{$obj->bus->tipo->nombre}}</p>
+                  <p><b>MODELO</b>: {{$obj->bus->modelo}}</p>
+                  <p><b>CANT. ASIENTOS</b>: {{$obj->bus->cantidad_asientos}}</p>
+                  <p><a href="{{ route('buses_detail',['id'=>$obj->bus_id]) }}">Más detalles</a></p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
         </td>
         <td>{{$obj->fecha_inicio}}</td>
         <td>{{$obj->fecha_fin}}</td>

@@ -6,6 +6,7 @@
 @stop
 @section('contenido')
 <p><b>Duración: </b> {{$obj->duracion}} Horas</p>
+<p><b>Tipo: </b> {{$obj->tipo->nombre}}</p>
 <p><b>Descripción: </b> </p>
 <p>{{$obj->descripcion}}</p>
 @stop

@@ -8,7 +8,7 @@ Reservas
     {!!Html::style('assets/css/fullcalendar.min.css')!!}
 <div class="row form-horizontal">
     <div class="col-sm-2">
-        <p>Confirmado: <label class="label" style="background:red;"> # R-0000000</label></br>No confirmado: <label class="label" style="background:green;"> # R-0000000</label></p>
+        <p>Confirmado: <label class="label" style="background:green;"> # R-0000000</label></br>No confirmado: <label class="label" style="background:red;"> # R-0000000</label></p>
     </div>
     <div class="col-sm-4">
         <div class="form-group">

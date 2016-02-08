@@ -31,7 +31,7 @@ Bus {{$obj->placa}}
                     <th>Código</th>
                     <th>Estado</th>
                     <th>Servicio</th>
-                    <th>Bus</th>
+                    <th>Cliente</th>
                     <th>Fecha Inicio</th>
                     <th>Fecha Fin</th>
                     <th>Precios</th>
@@ -52,17 +52,17 @@ Bus {{$obj->placa}}
                     <td>{{$reserva->sku()}}</td>
                     <td>
                     @if($reserva->finalizado)
-                    Finalizado
+                    <i class="fa fa-check-ok fa-lg text-info" ></i>
                     @else
                         @if($reserva->confirmado)
-                        Confirmado
+                        <i class="fa fa-check-circle fa-lg text-success" ></i>
                         @else
-                        <a title="Confirmar reserva" class="text-danger" href="{{ route('reservas_confirmar',['id'=>$reserva->id]) }}">No confirmado</a>
+                        <a title="Confirmar reserva" class="text-danger" href="{{ route('reservas_confirmar',['id'=>$reserva->id]) }}"><i class="fa fa-remove fa-lg text-danger" ></i></a>
                         @endif
                     @endif
                     </td>
                     <td>{{$reserva->servicio->nombre}}</td>
-                    <td>{{$reserva->bus->placa}}</td>
+                    <td>{{$reserva->cliente->nombre}}</td>
                     <td>{{$reserva->fecha_inicio}}</td>
                     <td>{{$reserva->fecha_fin}}</td>
                     <td>
