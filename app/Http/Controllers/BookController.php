@@ -147,7 +147,7 @@ class BookController extends Controller
                             ->select('bus_id','fecha_inicio','fecha_fin')
                             ->get();
 
-        $buses = Bus::select("id","placa","cantidad_asientos","tipo_id","modelo")->get();
+        $buses = Bus::select("id","placa","cantidad_asientos","tipo_id","modelo","image")->get();
 
         $disponibles = array();
         $reservado = 0;

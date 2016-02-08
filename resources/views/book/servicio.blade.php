@@ -43,6 +43,7 @@
     <table class="table" id="disponibles">
         <thead>
             <tr>
+                <th> </th>
                 <th>Bus</th>
                 <th>Modelo</th>
                 <th>Asientos</th>
@@ -126,7 +127,7 @@ $(document).ready(function(){
     function buscarBus(url){
         servicio_id = $("#id_servicio").val();
         fecha_inicio = $("#id_fecha_inicio").val();
-
+        var urlBase = '{{ url("images") }}';
         $.ajax({
             type: "GET",
             url: url,
@@ -143,9 +144,10 @@ $(document).ready(function(){
             success: function(data) {
                 if (data.length>0)
                 {
-                    var items = "";
+                    var items = "";http:
                     $.each( data, function( key, bus ) {
-                        items += "<tr> <td>"+bus.placa+"</td>";
+                        items += "<tr> <td><img src='"+urlBase+"/"+bus.image+"' height='60px'></td>";
+                        items += "<td>"+bus.placa+"</td>";
                         items += "<td>"+bus.modelo+"</td>";
                         items += "<td>"+bus.cantidad_asientos+"</td>";
                         items += '<td><a class="btn btn-primary reservarbus" id="'+bus.id+'" onClick="print(this)">Reservar</a></td></tr>';
