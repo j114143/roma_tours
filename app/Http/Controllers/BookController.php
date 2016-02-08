@@ -77,6 +77,8 @@ class BookController extends Controller
 
         $fecha_inicio = $input['fecha_inicio'];
         $inicio = Carbon::createFromFormat('Y/m/d H:i',$fecha_inicio);
+        $fin = $inicio->copy();
+        $fin->addHours($servicio->duracion);
 
         $cliente = Cliente::where('di','=',$cliente_id)->first();
 
@@ -91,10 +93,6 @@ class BookController extends Controller
 
         $reserva->lugar_inicio = $input['lugar_inicio'];
         $reserva->lugar_fin = $input['lugar_fin'];;
-        $reserva->save();
-
-        $fin = $inicio;
-        $fin->addHours($servicio->duracion);
         $reserva->fecha_fin = $fin->toDateTimeString();
         $reserva->save();
 
@@ -154,6 +152,7 @@ class BookController extends Controller
         $disponibles = array();
         $reservado = 0;
         // Excluir los busses con reserva
+        $n =0;
         foreach ($buses as $key => $bus)
         {
             $reservado = 1;
@@ -166,9 +165,11 @@ class BookController extends Controller
             }
             if ($reservado)
             {
-                $disponibles[$key] = $bus;
+                $disponibles[$n] = $bus;
+                $n++;
             }
         }
+        //return $cadena;
         return $disponibles;
     }
     public function disponibilidad(Request $request)

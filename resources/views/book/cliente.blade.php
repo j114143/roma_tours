@@ -4,7 +4,7 @@
 Ingrese sus datos
 @stop
 @section('contenido')
-<div class="col-sm-4">
+<div class="col-sm-4 col-centered">
     {!!Form::open(array('id'=>'form','class'=>'form-horizontal'))!!}
         <input type="hidden" name="es_empresa" id="es_empresa" value="0">
         <div class="form-group personal">
@@ -18,7 +18,7 @@ Ingrese sus datos
         </div>
         <div class="datos">
             <div class="form-group">
-              {!!Form::input('text','nombre', null ,['class'=>'form-control','maxlength' => 8,'id'=>'id_nombre','placeholder'=>'Nombre o Razon Social','required'])!!}
+              {!!Form::input('text','nombre', null ,['class'=>'form-control','maxlength' => 64,'id'=>'id_nombre','placeholder'=>'Nombre o Razon Social','required'])!!}
             </div>
             <div class="form-group">
                 {!!Form::input('text','di', null ,['class'=>'form-control','maxlength' => 11,'id'=>'id_dni','placeholder'=>'DNI ó RUC','required'])!!}
@@ -60,8 +60,11 @@ $(document).ready(function(){
             minlength: 5,
             maxlength: 128
           },
-          dni: {
-            required: true
+          di: {
+            required: true,
+            minlength: 8,
+            maxlength: 11,
+            digits: true
           },
           telefono: {
             required: true

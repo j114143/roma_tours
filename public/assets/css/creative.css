@@ -966,3 +966,7 @@ body {
     from { transform: scale(1) rotate(0deg);}
     to { transform: scale(1) rotate(360deg);}
 }
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
