@@ -970,6 +970,6 @@ body {
     float: none;
     margin: 0 auto;
 }
-#resultado .table>tbody>tr>td{
+table#disponibles >tbody>tr>td{
     vertical-align: middle;
 }

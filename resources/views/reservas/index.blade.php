@@ -12,7 +12,7 @@ Reservas <a href="{{ route('clientes_new')}}" title="Agregar"  class="btn btn-pr
         <th>Bus</th>
         <th>Fecha Inicio</th>
         <th>Fecha Fin</th>
-        <th>Precio</th>
+        <th>Precios</th>
         <th>Cliente</th>
         <th> </th>
     </tr>

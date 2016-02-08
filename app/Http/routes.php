@@ -21,6 +21,7 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout')->name("logout");
 
 Route::group(['middleware' => ['auth']], function () {
 Route::get('home/', function () { return view('admin');})->name("admin");
+Route::get('admin/', function () { return view('admin');})->name("admin");
 Route::get('admin/conductores/', 'ConductorController@index')->name("conductores");
 Route::get('admin/servicios/', 'ServicioController@index')->name("servicios");
 Route::get('admin/servicios/new', 'ServicioController@create')->name("servicios_new");

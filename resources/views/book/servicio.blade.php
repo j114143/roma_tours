@@ -1,5 +1,7 @@
 @extends('layout.basico')
-
+@section('titulo')
+Buscar Bus
+@stop
 @section('contenido')
 <div class="col-sm-4 ">
         <form id="form" novalidate="novalidate" class="form-horizontal">
