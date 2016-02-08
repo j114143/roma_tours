@@ -1,21 +1,21 @@
 @extends('layout.user')
 @section('titulo')
-Agregar precio
+Definir precio
 @stop
 @section('contenido')
 <div class="row">
   <div class="col-sm-8">
     {!!Form::open(array('url' => route('precios_new'),'id'=>'form','class'=>'form-horizontal'))!!}
         <div class="form-group">
-            <label class="col-sm-2 control-label">Servicio</label>
+            <label class="col-sm-2 control-label">Tipo  de bus</label>
             <div class="col-sm-10">
-              {!!Form::input('text','servicio_id', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
+              {!! Form::select('tipo_bus_id', $tipos->toArray(), null, array('class' => 'form-control')) !!}
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">Tipo bus</label>
+            <label class="col-sm-2 control-label">Servicio</label>
             <div class="col-sm-10">
-              {!!Form::input('text','tipo_bus_id', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
+              {!! Form::select('servicio_id', $servicios->toArray(), null, array('class' => 'form-control')) !!}
             </div>
         </div>
         <div class="form-group">

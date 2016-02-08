@@ -9,13 +9,14 @@ Editar precio <a href="{{ route('precios')}}" title="Listar"  class="btn btn-suc
         <div class="form-group">
             <label class="col-sm-2 control-label">Servicio</label>
             <div class="col-sm-10">
-              {!!Form::input('text','servicio_id', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
+            <p class="btn btn-link">{{$obj->servicio->nombre}}</p>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Tipo bus</label>
             <div class="col-sm-10">
-              {!!Form::input('text','tipo_bus_id', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
+            <p class="btn btn-link">{{$obj->tipoBus->nombre}}</p>
+
             </div>
         </div>
         <div class="form-group">

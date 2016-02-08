@@ -53,8 +53,13 @@ class ReservaController extends Controller
         $cliente_id = $input['di'];
         $servicio = Servicio::findOrFail($input['servicio_id']);
         $bus = Bus::findOrFail($input['bus_id']);
-        $precio = Precio::where(array("servicio_id"=>$servicio->id,"tipo_bus_id"=>$bus->tipo_id))->firstOrFail();;
-
+        $precio = Precio::where(array("servicio_id"=>$servicio->id,"tipo_bus_id"=>$bus->tipo_id))->first();
+        if (count($precio)<1)
+        {
+            $precio = new Precio;
+            $precio->precio_soles = "0";
+            $precio->precio_dolares = "0";
+        }
 
         $fecha_inicio = $input['fecha_inicio'];
         $inicio = Carbon::createFromFormat('Y/m/d H:i',$fecha_inicio);
