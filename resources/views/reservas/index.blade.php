@@ -1,6 +1,7 @@
 @extends('layout.user')
 @section('titulo')
-Reservas <a href="{{ route('reservas_new')}}" title="Agregar"  class="btn btn-primary btn-xs"><i class="fa fa-plus-circle"> </i></a>
+Reservas <a href="{{ route('reservas_new')}}" title="Agregar"  class="btn btn-primary btn-sm"><i class="fa fa-plus-circle fa-2x"> </i></a>
+<a href="{{ route('reservas_calendario')}}" title="Agregar"  class="btn btn-success btn-sm"><i class="fa fa-calendar fa-2x"></i></a>
 @stop
 @section('contenido')
 <table class="table table-bordered table-striped">

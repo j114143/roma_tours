@@ -2,13 +2,34 @@
 <monthly><event><id>1</id><name>Servicio: Cusco-poroy   Bus:XSC-41
 CLiente: Juan Eracleo Huamani Mendoza
 Lugar de Origen:Hotel casa andina   Lugar de Destino: Aeropuerto
- Estado: SIN CONFIRMAR</name><startdate>2016-02-07</startdate><enddate>2016-02-07</enddate><starttime>12:00</starttime><endtime>17:00</endtime><color>#F76F6F</color></event><event><id>3</id><name>Servicio: Cusco-poroy   Bus:XSC-41
-CLiente: Juan Eracleo Huamani Mendoza
-Lugar de Origen:Hotel casa andina   Lugar de Destino: Aeropuerto
- Estado: SIN CONFIRMAR</name><startdate>2016-02-25</startdate><enddate>2016-02-25</enddate><starttime>15:00</starttime><endtime>20:00</endtime><color>#F7E16D</color></event><event><id>2</id><name>Servicio: Cusco-poroy   Bus:XSC-41
+ Estado: SIN CONFIRMAR</name><startdate>2016-02-07</startdate><enddate>2016-02-07</enddate><starttime>12:00</starttime><endtime>17:00</endtime><color>#F76F6F</color></event><event><id>2</id><name>Servicio: Cusco-poroy   Bus:XSC-41
 CLiente: Llika Inversiones
 Lugar de Origen:hotel libertadoers   Lugar de Destino: Aeropuerto
- Estado: CONFIRMADO</name><startdate>2016-02-12</startdate><enddate>2016-02-12</enddate><starttime>11:00</starttime><endtime>16:00</endtime><color>#54FF00</color></event><event><id>4</id><name>Servicio: Cusco-poroy   Bus:XSC-41
+ Estado: CONFIRMADO</name><startdate>2016-02-12</startdate><enddate>2016-02-12</enddate><starttime>11:00</starttime><endtime>16:00</endtime><color>#54FF00</color></event><event><id>3</id><name>Servicio: Cusco-poroy   Bus:XSC-41
+CLiente: Juan Eracleo Huamani Mendoza
+Lugar de Origen:Hotel casa andina   Lugar de Destino: Aeropuerto
+ Estado: CONFIRMADO</name><startdate>2016-02-25</startdate><enddate>2016-02-25</enddate><starttime>15:00</starttime><endtime>20:00</endtime><color>#FBD300</color></event><event><id>4</id><name>Servicio: Cusco-poroy   Bus:XSC-41
 CLiente: Juan
 Lugar de Origen:Hastal sapitos   Lugar de Destino: Aeropuerto
- Estado: CONFIRMADO</name><startdate>2016-02-27</startdate><enddate>2016-02-28</enddate><starttime>19:00</starttime><endtime>00:00</endtime><color>#0515FB</color></event></monthly>
+ Estado: CONFIRMADO</name><startdate>2016-02-25</startdate><enddate>2016-02-25</enddate><starttime>19:00</starttime><endtime>00:00</endtime><color>#0515FB</color></event><event><id>5</id><name>Servicio: Cusco-poroy   Bus:XSC-41
+CLiente: Juan Eracleo Huamani Mendoza
+Lugar de Origen:sdfasd   Lugar de Destino: sadfasdfasdf
+ Estado: SIN CONFIRMAR</name><startdate>2016-02-29</startdate><enddate>2016-02-29</enddate><starttime>14:00</starttime><endtime>19:00</endtime><color>#D372F9</color></event><event><id>6</id><name>Servicio: Cusco-poroy   Bus:XSC-41
+CLiente: 12234234
+Lugar de Origen:Hotel casa andina   Lugar de Destino: Aeropuerto
+ Estado: SIN CONFIRMAR</name><startdate>2016-02-26</startdate><enddate>2016-02-26</enddate><starttime>17:00</starttime><endtime>22:00</endtime><color>#FF7EF4</color></event><event><id>9</id><name>Servicio: Cusco-poroy   Bus:XSC-41
+CLiente: escodigo
+Lugar de Origen:Hotel casa andina   Lugar de Destino: aeropuerto
+ Estado: SIN CONFIRMAR</name><startdate>2016-02-10</startdate><enddate>2016-02-10</enddate><starttime>11:00</starttime><endtime>16:00</endtime><color>#F76F6F</color></event><event><id>7</id><name>Servicio: Cusco-poroy   Bus:asdf
+CLiente: Juan Eracleo Huamani Mendoza
+Lugar de Origen:Hotel casa andina   Lugar de Destino: fgdfgdfg
+ Estado: SIN CONFIRMAR</name><startdate>2016-02-10</startdate><enddate>2016-02-10</enddate><starttime>12:00</starttime><endtime>17:00</endtime><color>#d58512</color></event><event><id>8</id><name>Servicio: Cusco-poroy   Bus:df
+CLiente: escodigo
+Lugar de Origen:Hotel casa andina   Lugar de Destino: Aeropuerto
+ Estado: CONFIRMADO</name><startdate>2016-02-10</startdate><enddate>2016-02-10</enddate><starttime>13:00</starttime><endtime>18:00</endtime><color>#03CDFD</color></event><event><id>10</id><name>Servicio: Cusco-poroy   Bus:asdfas
+CLiente: Juan Eracleo Huamani Mendoza
+Lugar de Origen:Hotel casa andina   Lugar de Destino: Lejos
+ Estado: SIN CONFIRMAR</name><startdate>2016-02-10</startdate><enddate>2016-02-10</enddate><starttime>13:00</starttime><endtime>18:00</endtime><color>#6FF77B</color></event><event><id>11</id><name>Servicio: Cusco-yucay   Bus:asdfas
+CLiente: Juan Eracleo Huamani Mendoza
+Lugar de Origen:asdfasd   Lugar de Destino: asdfasd
+ Estado: SIN CONFIRMAR</name><startdate>2016-02-10</startdate><enddate>2016-02-10</enddate><starttime>12:00</starttime><endtime>22:00</endtime><color>#F7E16D</color></event></monthly>

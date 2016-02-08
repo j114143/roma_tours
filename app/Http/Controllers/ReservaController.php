@@ -209,4 +209,41 @@ class ReservaController extends Controller
         Session::flash('alert-class','alert-success');
         return redirect(route('reservas_detail',['id'=>$obj->id]));
     }
+    public function calendario()
+    {
+        $buses = Bus::lists('placa','id');
+        return view('reservas.calendario',array('buses'=>$buses));
+    }
+    public function tojson(Request $request)
+    {
+
+        $fecha_inicio = $request->input('start');
+        $fecha_fin = $request->input('end');
+        $bus_id = $request->input('bus_id');
+
+        $inicio = Carbon::createFromFormat('Y-m-d',$fecha_inicio);
+        $fin = Carbon::createFromFormat('Y-m-d',$fecha_fin);
+
+        $reservas = Reserva::where('finalizado', '=', '0')
+                            ->where('bus_id','=',$bus_id)
+                            ->get();
+        $n = 0;
+        $calendario = array();
+        foreach ($reservas as $key => $reserva)
+        {
+            $calendario[$n]["id"] = $reserva->id;
+            $calendario[$n]["title"] = $reserva->sku();
+            $calendario[$n]["start"] = $reserva->fecha_inicio;
+            $calendario[$n]["end"] = $reserva->fecha_fin;
+            $calendario[$n]["url"] = route('reservas_detail',['id'=>$reserva->id]);
+            if ($reserva->confirmado)
+            {
+                $calendario[$n]["color"]= 'green';
+            }else{
+                $calendario[$n]["color"]= 'red';
+            }
+            $n++;
+        }
+        return json_encode($calendario );
+    }
 }
