@@ -35,6 +35,7 @@ Reservas
             var url_load = '{{ route("load_calendar") }}';
             $("#id_servicio").chained("#id_tipo_servicio");
             $('#mycalendar').monthly({
+                callFromUser: '1',
                 mode: 'event',
                 xmlUrl: '/assets/monthly/events.xml'
             }); 
@@ -74,13 +75,17 @@ Reservas
             data: {servicio_id:servicio_id},
             dataType: "json",
             beforeSend: function() {
+                alert('filtering');
             },
             success: function(data) {
-                $('#mycalendar').empty();
-                $('#mycalendar').monthly({
-                    mode: 'event',
+                //$('#mycalendar').empty();
+                var tmp = new Date();
+                var setMonth = tmp.getMonth() + 1;
+                var setYear = tmp.getFullYear();
+                /*$('#mycalendar').monthly({
+                    callFromUser: '1',
                     xmlUrl: '/assets/monthly/events.xml'
-                });
+                }); */
             },
             error: function(){
             }

@@ -63,7 +63,7 @@ class PrecioController extends Controller
      */
     public function show($servicio_id,$tipo_bus_id)
     {
-        $obj = Precio::where(array("servicio_id"=>$servicio_id,"tipo_bus_id"=>$tipo_bus_id))->firstOrFail();;
+        $obj = Precio::where(array("servicio_id"=>$servicio_id,"tipo_bus_id"=>$tipo_bus_id))->firstOrFail();
         return view('precios.show',array("obj"=>$obj));
     }
 
@@ -90,7 +90,7 @@ class PrecioController extends Controller
     {
         $input = $request->all();
 
-        $obj = Precio::where(array("servicio_id"=>$servicio_id,"tipo_bus_id"=>$tipo_bus_id))->firstOrFail();;
+        $obj = Precio::where(array("servicio_id"=>$servicio_id,"tipo_bus_id"=>$tipo_bus_id))->firstOrFail();
         $obj->servicio_id = $input['servicio_id'];
         $obj->tipo_bus_id = $input['tipo_bus_id'];
         $obj->precio_soles = $input['precio_soles'];

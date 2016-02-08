@@ -15,12 +15,18 @@
             <p><b>Lugar de inicio:</b> {{$obj->lugar_inicio}} </p>
             <p><b>Lugar de fin:</b> {{$obj->lugar_fin}} </p>
             <h2 class="text-center">
+            @if($obj->finalizado)
+                FINALIZADO
+            @else
                 @if($obj->confirmado)
                 Confirmado
+                <br>
+                <a class="btn btn-info" href="{{route('reservas_finalizar',['id'=>$obj->id])}}">Finalizar</a>
                 @else
                 No confirmado<br>
                 <a class="btn btn-primary" href="{{route('reservas_confirmar',['id'=>$obj->id])}}">Confirmar</a>
                 @endif
+            @endif
             </h2>
         </div>
     </div>
@@ -32,10 +38,10 @@
         <div class="panel-body">
             @if($obj->cliente->empresa)
             <p><b>Razon social:</b> {{$obj->cliente->nombre}}</p>
-            <p><b>RUC:</b> {{$obj->cliente->ruc}}</p>
+            <p><b>RUC:</b> {{$obj->cliente->di}}</p>
             @else
             <p><b>Nombres y apellidos:</b> {{$obj->cliente->nombre}}</p>
-            <p><b>DNI:</b> {{$obj->cliente->dni}}</p>
+            <p><b>DNI:</b> {{$obj->cliente->di}}</p>
             @endif
             <p><b>Dirección:</b> {{$obj->cliente->direccion}}</p>
             <p><b>Teléfono:</b> {{$obj->cliente->telefono}}</p>

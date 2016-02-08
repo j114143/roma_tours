@@ -8,15 +8,16 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			// These are overridden by options declared in footer
 			var defaults = {
 				weekStart: 'Sun',
-				mode: '',
+				mode: 'event',
 				xmlUrl: '',
 				target: '',
 				eventList: true,
 				maxWidth: false,
 				startHidden: false,
-				showTrigger: '',
+				showTriggerkey: "value",  '',
 				stylePast: false,
-				disablePast: false
+				disablePast: false,
+				callFromUser:''
 			}
 
 			var options = $.extend(defaults, options),
@@ -28,7 +29,6 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 				currentDay = d.getDate(),
 				monthNames = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"],
 				dayNames = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
-
 		if (options.maxWidth != false){
 			$('#'+uniqueId).css('maxWidth',options.maxWidth);
 		}
@@ -69,7 +69,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 		}
 
 		// Massive function to build the month
-		function setMonthly(m, y){
+		function setMonthly(m, y, sendByUser){
 			$('#' + uniqueId).data('setMonth', m).data('setYear', y);
 
 			// Get number of days
@@ -148,9 +148,11 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			}
 
 			// Events
-			if (options.mode == 'event') {
+			if (options.mode == 'event' ) {
 				// Remove previous events
 				// Add Events
+				//alert(currentMonth);
+				options.callFromUser = '0';
 				$.get(''+options.xmlUrl+'', function(d){
 					$(d).find('event').each(function(){
 						// Year [0]   Month [1]   Day [2]
@@ -269,7 +271,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 		}
 
 		// Set the calendar the first time
-		setMonthly(currentMonth, currentYear);
+		setMonthly(currentMonth, currentYear, '');
 
 		// Function to go back to the month view
 		function viewToggleButton(){
@@ -281,16 +283,17 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 
 		// Advance months
 		$(document.body).on('click', '#'+uniqueId+' .monthly-next', function (e) {
+			//alert("click");
 			var setMonth = $('#' + uniqueId).data('setMonth'),
 				setYear = $('#' + uniqueId).data('setYear');
 			if (setMonth == 12) {
 				var newMonth = 1,
 					newYear = setYear + 1;
-				setMonthly(newMonth, newYear);
+				setMonthly(newMonth, newYear, '');
 			} else {
 				var newMonth = setMonth + 1,
 					newYear = setYear;
-				setMonthly(newMonth, newYear);
+				setMonthly(newMonth, newYear, '');
 			}
 			viewToggleButton();
 			e.preventDefault();
@@ -303,11 +306,11 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			if (setMonth == 1) {
 				var newMonth = 12,
 					newYear = setYear - 1;
-				setMonthly(newMonth, newYear);
+				setMonthly(newMonth, newYear, '');
 			} else {
 				var newMonth = setMonth - 1,
 					newYear = setYear;
-				setMonthly(newMonth, newYear);
+				setMonthly(newMonth, newYear, '');
 			}
 			viewToggleButton();
 			e.preventDefault();
@@ -315,7 +318,7 @@ Monthly 2.0.3 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 
 		// Reset Month
 		$(document.body).on('click', '#'+uniqueId+' .monthly-reset', function (e) {
-			setMonthly(currentMonth, currentYear);
+			setMonthly(currentMonth, currentYear, '');
 			viewToggleButton();
 			e.preventDefault();
 			e.stopPropagation();

@@ -1,70 +1,193 @@
 @extends('layout.user')
 @section('titulo')
-Agregar cliente
+Crear una reserva
 @stop
 @section('contenido')
-<div class="row">
-    <div class="col-sm-8">
-      {!!Form::open(array('url' => route('clientes_new'),'id'=>'form','class'=>'form-horizontal'))!!}
-
+<div class="col-sm-4 ">
+        <form id="form" novalidate="novalidate" class="form-horizontal">
 
         <div class="form-group">
-          <label class="col-sm-2 control-label">Empresa</label>
-          <div class="col-sm-10">
-            {!! Form::checkbox('empresa', 'true') !!}
-          </div>
+            <label class="control-label">Tipo de servicios</label>
+            <select class="form-control" id="id_tipo_servicio" name="id_tipo_servicio">
+                <option>---</option>
+                @foreach ($tipoServicios as $tipo)
+                <option value="{{$tipo->id}}">{{$tipo->nombre}}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Nombre</label>
-          <div class="col-sm-10">
-            {!!Form::input('text','nombre', null ,['class'=>'form-control','maxlength' => 64])!!}
-          </div>
+            <label class="control-label">Servicio</label>
+            <select class="form-control" id="id_servicio" name="id_servicio">
+                <option>---</option>
+                @foreach ($servicios as $servicio)
+                <option value="{{$servicio->id}}" class="{{$servicio->tipo_id}}">{{$servicio->nombre}}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">RUC/DNI</label>
-          <div class="col-sm-10">
-            {!!Form::input('text','documento', null ,['class'=>'form-control','maxlength' => 11])!!}
-          </div>
+            <label class="control-label">Fecha y hora</label>
+            <input type="text" id="id_fecha_inicio" name="fecha_inicio" class="form-control" placeholder="2016/02/18 10:00" required>
         </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Teléfono</label>
-          <div class="col-sm-10">
-            {!!Form::input('text','telefono', null ,['class'=>'form-control','maxlength' => 9,'required'])!!}
-          </div>
+        <div class="form-group text-right">
+            <input type="button" class="btn btn-success" value="Buscar" id="id_buscar">
         </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Dirección</label>
-          <div class="col-sm-10">
-            {!!Form::input('text','direccion', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
-          </div>
-        </div>
+      </form>
+</div>
+<div class="col-sm-8">
+    <div id="resultado" class="alert text-center"></div>
+    <table class="table" id="disponibles">
+        <thead>
+            <tr>
+                <th> </th>
+                <th>Bus</th>
+                <th>Modelo</th>
+                <th>Asientos</th>
+                <th>Precios</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<div class="modal my-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Reservar bus</h4>
+      </div>
+      <div class="modal-body">
+          {!!Form::open(array('id'=>'form-1','class'=>'form-horizontal'))!!}
+                <input type="hidden" name="fecha_inicio" id="fecha_inicio_h" value="">
+                <input type="hidden" name="servicio_id" id="servicio_id_h" value="">
+                <input type="hidden" name="bus_id" id="bus_id_h" value="">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">DNI / RUC del cliente</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="di" placeholder="1122334455" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Lugar de inicio</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="lugar_inicio" placeholder="Ejm: Nombre del hotel" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Lugar de finalización</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="lugar_fin" placeholder="Ejm: Aeropuerto" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Reservar Bus</button>
+                </div>
 
-          <div class="form-group">
-            <label class="col-sm-2 control-label">E-mail</label>
-            <div class="col-sm-10">
-              {!!Form::input('text','email', null ,['class'=>'form-control','maxlength' => 64,'required'])!!}
+            </form>
             </div>
-          </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn-primary" type="submit">Guardar</button>
-            <a href="{{route('clientes')}}" class="btn btn-danger">Cancelar</a>
-          </div>
         </div>
-
-     {!!Form::close()!!}
     </div>
-  </div>
+</div>
+{!!Html::script('assets/js/jquery.chained.js')!!}
+{!!Html::script('assets/js/jquery.datetimepicker.full.js')!!}
 
 <script type="text/javascript">
+$("#id_servicio").chained("#id_tipo_servicio");
+$("#id_fecha_inicio" ).datetimepicker({
+    formatTime:'H:i',
+    formatDate:'d-m-Y',
+    defaultDate:'+03.01.1970', // it's my birthday
+    defaultTime:'10:00',
+    timepickerScrollbar:false
+});
 $(document).ready(function(){
+
+
+    var servicio_id, fecha_inicio;
+    var url = '{{ route("disponibilidad_bus") }}';
+    $('#id_buscar').on('click', function() {
+
+        if ($("#form").valid()) {
+            $("#fecha_inicio_h").val($("#id_fecha_inicio").val());
+            $("#servicio_id_h").val($("#id_servicio").val());
+            buscarBus(url);
+        } else {
+            $('#resultado').text('Elegir servicio y fecha para el cual quiere reservar bus');
+            $('#resultado').removeClass("alert-success");
+            $('#resultado').removeClass("alert-danger");
+            $('#resultado').removeClass("alert-warning");
+            $('#resultado').addClass("alert-danger");
+            $('#resultado').show();
+        }
+    });
+});
+    function print(bus) {
+        $("#bus_id_h").val($(bus).attr("id"));
+        $('#myModal').modal('show');
+    }
+    function buscarBus(url){
+        servicio_id = $("#id_servicio").val();
+        fecha_inicio = $("#id_fecha_inicio").val();
+        var urlBase = '{{ url("images") }}';
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: {servicio_id:servicio_id,fecha_inicio:fecha_inicio},
+            dataType: "json",
+            beforeSend: function() {
+                $('#resultado').html('<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Buscando...');
+                $('#resultado').removeClass("alert-success");
+                $('#resultado').removeClass("alert-danger");
+                $('#resultado').removeClass("alert-warning");
+                $('#resultado').addClass("alert-warning");
+                $('#resultado').show();
+            },
+            success: function(data) {
+                if (data.length>0)
+                {
+                    var items = "";http:
+                    $.each( data, function( key, bus ) {
+                        items += "<tr> <td><img src='"+urlBase+"/"+bus.image+"' height='60px'></td>";
+                        items += "<td>"+bus.placa+"</td>";
+                        items += "<td>"+bus.modelo+"</td>";
+                        items += "<td>"+bus.cantidad_asientos+"</td>";
+                        items += "<td><b>S/.</b> "+bus.precio_soles+" - <b>USD $</b> "+bus.precio_dolares+"</td>";
+                        items += '<td><a class="btn btn-primary reservarbus" id="'+bus.id+'" onClick="print(this)">Reservar</a></td></tr>';
+                    });
+
+                    $('#resultado').removeClass("alert-success");
+                    $('#resultado').removeClass("alert-danger");
+                    $('#resultado').removeClass("alert-warning");
+
+                    $('#resultado').text(data.length+" bus(es) disponibles");
+                    $('#resultado').addClass("alert-success");
+                    $("#disponibles tbody").html(items);
+                }else{
+                    $('#resultado').text("Buses no disponibles");
+                    $('#resultado').addClass("alert-danger");
+                    $("#disponibles tbody").html(" ");
+                }
+                $('#resultado').show();
+            },
+            error: function(){
+            }
+        });
+    }
+</script><script type="text/javascript">
+    $(document).ready(function(){
+
  $('#form').validate({
   errorElement: "span",
   rules: {
-      nombre: {
-        required: true,
-        minlength: 5,
-        maxlength: 32,
+      fecha_inicio: {
+        required: true
+      },
+      id_tipo_servicio: {
+        required: true
+      },
+      id_servicio: {
+        required: true
       }
   },
   highlight: function(element) {

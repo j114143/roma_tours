@@ -28,6 +28,7 @@ class CreateReservasTable extends Migration
             $table->string('lugar_fin');
 
             $table->boolean('confirmado')->default(false);
+            $table->boolean('finalizado')->default(false);
             $table->timestamps();
 
             $table->foreign('servicio_id')

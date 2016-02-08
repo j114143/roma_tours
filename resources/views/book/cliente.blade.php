@@ -1,29 +1,11 @@
 @extends('layout.basico')
 
 @section('titulo')
-Reservar
+Ingrese sus datos
 @stop
 @section('contenido')
-<div class="col-sm-2 col-offset-2 "></div>
-<div class="col-sm-4 ">
-    <p><b>Servicio</b>: {{$servicio->nombre}} ({{$servicio->duracion}} horas)</p>
-    <p><b>Fecha y Hora</b>: {{$fecha_inicio}}</p>
-    <p><b>Bus</b>: {{$bus->placa}}</p>
-    <p><b>Número asientos</b>: {{$bus->cantidad_asientos}}</p>
-    <p><b>Tipo de Bus</b>: {{$bus->tipo->nombre}}</p>
-    <h2> <small>S/</small> {{$precio->precio_soles}} - <small>USD $</small> {{$precio->precio_dolares}}</h2>
-</div>
-<div class="col-sm-4">
+<div class="col-sm-4 col-centered">
     {!!Form::open(array('id'=>'form','class'=>'form-horizontal'))!!}
-        <div class="form-group">
-        <input type="text" name="lugar_inicio" placeholder="Lugar de inicio" class="form-control" required>
-        </div>
-        <div class="form-group">
-        <input type="text" name="lugar_fin" placeholder="Lugar de finalización" class="form-control" required>
-        </div>
-        <input type="hidden" name="fecha_inicio" value="{{$fecha_inicio}}">
-        <input type="hidden" name="servicio_id" value="{{$servicio->id}}">
-        <input type="hidden" name="bus_id" value="{{$bus->id}}">
         <input type="hidden" name="es_empresa" id="es_empresa" value="0">
         <div class="form-group personal">
             <div class="btn-group" data-toggle="buttons">
@@ -36,22 +18,22 @@ Reservar
         </div>
         <div class="datos">
             <div class="form-group">
-                <input type="text" name="nombre" id="id_nombre" placeholder="Nombre o Razon Social" class="form-control" required>
+              {!!Form::input('text','nombre', null ,['class'=>'form-control','maxlength' => 64,'id'=>'id_nombre','placeholder'=>'Nombre o Razon Social','required'])!!}
             </div>
             <div class="form-group">
-                <input type="text" name="documento" id="id_dni" placeholder="DNI ó RUC" class="form-control" required>
+                {!!Form::input('text','di', null ,['class'=>'form-control','maxlength' => 11,'id'=>'id_dni','placeholder'=>'DNI ó RUC','required'])!!}
             </div>
             <div class="form-group">
-                <input type="text" name="telefono" placeholder="Teléfono" class="form-control" required>
+                {!!Form::input('text','telefono', null ,['class'=>'form-control','maxlength' => 124,'id'=>'id_telefono','placeholder'=>'Teléfono','required'])!!}
             </div>
             <div class="form-group">
-                <input type="email" name="email" placeholder="E-mail" class="form-control" required>
+                {!!Form::input('email','email', null ,['class'=>'form-control','id'=>'id_email','placeholder'=>'E-mail','required'])!!}
             </div>
             <div class="form-group">
-                <input type="text" name="direccion" placeholder="Dirección" class="form-control">
+                {!!Form::input('text','direccion', null ,['class'=>'form-control','minlength' => 5,'id'=>'id_direccion','placeholder'=>'Dirección','required'])!!}
             </div>
         </div>
-        <p class="text-right"><input type="submit" name="login" value="Reservar" class="btn btn-info"></p>
+        <p class="text-right"><input type="submit" name="login" value="Siguiente" class="btn btn-info"></p>
       </form>
 </div>
 <script type="text/javascript">
@@ -78,8 +60,11 @@ $(document).ready(function(){
             minlength: 5,
             maxlength: 128
           },
-          dni: {
-            required: true
+          di: {
+            required: true,
+            minlength: 8,
+            maxlength: 11,
+            digits: true
           },
           telefono: {
             required: true

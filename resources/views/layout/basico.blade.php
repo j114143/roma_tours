@@ -23,6 +23,13 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+    function checkSubmit() {
+        document.getElementById("btsubmit").value = "Enviando...";
+        document.getElementById("btsubmit").disabled = true;
+        return true;
+    }
+    </script>
 
 </head>
 
@@ -44,15 +51,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="page-scroll" href="/">Home</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="/">Services</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Contactenos</a>
-                    </li>
+                    <li><a class="page-scroll" href="{{ url() }}">Home</a></li>
+                    <li><a class="page-scroll" href="{{ url() }}">Services</a></li>
+                    <li><a class="page-scroll" href="{{ url() }}#contact">Contactenos</a></li>
+                    <li><a class="page-scroll" href="{{route('login')}}">Iniciar sesión</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -66,6 +68,14 @@
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">@yield('titulo')</h2>
                     <hr class="primary">
+                    @if($errors->any())
+                        @foreach($errors->all() as $error)
+                            <div  class="alert alert-danger">{{$error}}</div>
+                        @endforeach
+                    @endif
+                    @if(Session::has('mensaje'))
+                    <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('mensaje') }}</p>
+                    @endif
                 </div>
             </div>
         </div>
