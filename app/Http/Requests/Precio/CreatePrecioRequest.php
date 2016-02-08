@@ -26,8 +26,8 @@ class CreatePrecioRequest extends Request
         return [
             'servicio_id' => 'required|exists:servicios,id',
             'tipo_bus_id' => 'required|exists:tipo_buses,id',
-            'precio_soles' => 'required|numeric',
-            'precio_dolares' => 'required|numeric',
+            'precio_soles' => 'required|numeric|min:1',
+            'precio_dolares' => 'required|numeric|min:1',
         ];
     }
 }

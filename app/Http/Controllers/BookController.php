@@ -14,6 +14,7 @@ use App\Disponibilidad;
 use App\Bus;
 use App\Precio;
 use Carbon\Carbon;
+use App\Http\Requests\Reserva\BookNowReservaRequest;
 class BookController extends Controller
 {
     /**
@@ -40,14 +41,18 @@ class BookController extends Controller
     {
         $servicio = Servicio::findOrFail($servicioId);
         $bus = Bus::findOrFail($busId);
-        $precio = Precio::where(array("servicio_id"=>$servicioId,"tipo_bus_id"=>$bus->id))->firstOrFail();
+        $precio = Precio::where(array("servicio_id"=>$servicioId,"tipo_bus_id"=>$bus->id))->first();
 
+        if (count($precio)>0)
+        {
         $fecha_inicio = $request->input('fecha_inicio');
-
-        return view('book.create',array("servicio"=>$servicio,
-                                        "bus"=>$bus,
-                                        "precio"=>$precio,
-                                        "fecha_inicio"=>$fecha_inicio));
+            return view('book.create',array("servicio"=>$servicio,
+                                            "bus"=>$bus,
+                                            "precio"=>$precio,
+                                            "fecha_inicio"=>$fecha_inicio));
+        } else {
+            return view('book.mensaje',array("servicio"=>$servicio,"bus"=>$bus));
+        }
     }
 
     /**
@@ -56,7 +61,7 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $busId, $servicioId)
+    public function store(BookNowReservaRequest $request, $busId, $servicioId)
     {
         $servicio = Servicio::findOrFail($servicioId);
         $bus = Bus::findOrFail($busId);
@@ -65,15 +70,18 @@ class BookController extends Controller
         $inicio = Carbon::createFromFormat('Y/m/d H:i',$fecha_inicio);
 
         $input = $request->all();
-
-        $cliente = new Cliente;
-        $cliente->empresa = $input['es_empresa'];
-        $cliente->nombre = $input['nombre'];
-        $cliente->direccion = $input['direccion'];
-        $cliente->dni = $input['dni'];
-        $cliente->telefono = $input['telefono'];
-        $cliente->email = $input['email'];
-        $cliente->save();
+        $cliente = Cliente::where('di','=',$input['documento'])->first();
+        if (count($cliente)<1)
+        {
+            $cliente = new Cliente;
+            $cliente->empresa = $input['es_empresa'];
+            $cliente->nombre = $input['nombre'];
+            $cliente->direccion = $input['direccion'];
+            $cliente->di = $input['documento'];
+            $cliente->telefono = $input['telefono'];
+            $cliente->email = $input['email'];
+            $cliente->save();
+        }
 
         $reserva = new Reserva;
         $reserva->servicio_id = $servicio->id;
@@ -192,6 +200,14 @@ class BookController extends Controller
     }
     public function status()
     {
+        $this->loadCalendar();   
+        $tipoServicios = TipoServicio::all();
+        $servicios = Servicio::all();
+
+        return view('book.status', array('tipoServicios'=>$tipoServicios,'servicios'=>$servicios));
+    }
+    public function loadCalendar()
+    {
         $reservas = Reserva::getReservas();
         $xml = new \DOMDocument("1.0");
         $xml_montly = $xml->createElement("monthly");
@@ -220,12 +236,41 @@ class BookController extends Controller
             //echo $xml_event;
         }
         $xml->appendChild( $xml_montly );
+        $xml->save("../public/assets/monthly/events.xml");
+        
+    }
+    public function filterCalendar(Request $request)
+    {
+        $id_servicio = $request->input('servicio_id');   
+        $reservas = Reserva::filterReservas($id_servicio);
+        $xml = new \DOMDocument("1.0");
+        $xml_montly = $xml->createElement("monthly");
+        foreach($reservas as $reserva)
+        {
+            $xml_event = $xml->createElement("event");
+            $xml_id = $xml->createElement("id", $reserva->id);
+            $xml_name = $xml->createElement("name", $this->getName($reserva));
+            $xml_startdate = $xml->createElement("startdate", substr($reserva->fecha_inicio, 0, 10));
+            $xml_enddate = $xml->createElement("enddate", substr($reserva->fecha_fin, 0, 10));
+            $xml_starttime = $xml->createElement("starttime", substr($reserva->fecha_inicio, 11, 5));
+            $xml_endtime = $xml->createElement("endtime", substr($reserva->fecha_fin, 11, 5));
+            $xml_color = $xml->createElement("color", $this->getColor($reserva));
+            //$xml_url = $xml->createElement("url", getURL($reserva));
+            $xml_event->appendChild($xml_id);
+            $xml_event->appendChild($xml_name);
+            $xml_event->appendChild($xml_startdate);
+            $xml_event->appendChild($xml_enddate);
+            $xml_event->appendChild($xml_starttime);
+            $xml_event->appendChild($xml_endtime);
+            $xml_event->appendChild($xml_color);
+            //$xml_event->appendChild($xml_url);
 
-        $xml->save("../public/assets/monthly/events.xml"); 
-
-        $tipoServicios = TipoServicio::all();
-        $servicios = Servicio::all();
-
-        return view('book.status', array('tipoServicios'=>$tipoServicios,'servicios'=>$servicios));
+            $xml_montly->appendChild( $xml_event );
+            
+            //echo $xml_event;
+        }
+        $xml->appendChild( $xml_montly );
+        $xml->save("../public/assets/monthly/events.xml");
+        return json_encode(Reserva::all());
     }
 }

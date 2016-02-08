@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCLientesTable extends Migration
+class CreateClientesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,8 +16,7 @@ class CreateCLientesTable extends Migration
             $table->increments('id');
             $table->boolean('empresa')->default(false);
             $table->string('nombre',200)->default('');
-            $table->integer('ruc')->default('00000000000');
-            $table->integer('dni')->default('00000000');
+            $table->string('di')->default('00000000000');
             $table->string('direccion');
             $table->string('telefono',64);
             $table->string('email',120);

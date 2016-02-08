@@ -21,6 +21,10 @@ class Reserva extends Model
 
         return "R-".str_pad($this->id, 10, "0", STR_PAD_LEFT);;
     }
+    function cliente()
+    {
+        return $this->belongsTo('App\Cliente', 'cliente_id');
+    }
     public static function getReservas()
     {
         return  \DB::table('reservas')
@@ -29,6 +33,17 @@ class Reserva extends Model
         ->join('buses', 'reservas.bus_id', '=', 'buses.id')
         ->select('reservas.id', 'reservas.fecha_inicio', 'reservas.fecha_fin', 'reservas.lugar_inicio', 'reservas.confirmado',
         'reservas.lugar_fin', 'clientes.nombre as cliente','buses.placa as bus' ,'servicios.nombre as servicio', 'servicios.id as servicio_id')
+        ->get();
+    }
+    public static function filterReservas($servicio_id)
+    {
+        return  \DB::table('reservas')
+        ->join('clientes', 'reservas.cliente_id', '=', 'clientes.id')
+        ->join('servicios', 'reservas.servicio_id', '=', 'servicios.id')
+        ->join('buses', 'reservas.bus_id', '=', 'buses.id')
+        ->select('reservas.id', 'reservas.fecha_inicio', 'reservas.fecha_fin', 'reservas.lugar_inicio', 'reservas.confirmado',
+        'reservas.lugar_fin', 'clientes.nombre as cliente','buses.placa as bus' ,'servicios.nombre as servicio', 'servicios.id as servicio_id')
+        ->where('reservas.servicio_id','=',$servicio_id)
         ->get();
     }
 }

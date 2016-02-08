@@ -39,9 +39,7 @@
                 <li><a href="{{  route('clientes') }}">Clientes</a></li>
                 <li><a href="{{  route('conductores') }}">Conductores</a></li>
                 <li><a href="{{  route('precios') }}">Precios</a></li>
-                <li>
-                    <a href="#">Reservas</a>
-                </li>
+                <li><a href="{{  route('reservas') }}">Reservas</a></li>
                 <li><a href="{{url('auth/logout')}}"><i class="fa"></i>   Salir</a></li>
             </ul>
         </div>
@@ -55,11 +53,9 @@
                         <h1>@yield('titulo') <span class="pull-right"> <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Menu</a> </span></h1>
                         <hr>
                         @if($errors->any())
-                        <ul>
                             @foreach($errors->all() as $error)
-                                <li  class="alert alert-danger">{{$error}}</li>
+                                <div  class="alert alert-danger">{{$error}}</div>
                             @endforeach
-                        </ul>
                         @endif
                         @if(Session::has('mensaje'))
                         <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('mensaje') }}</p>

@@ -24,15 +24,6 @@ Reservas
                 @endforeach
     </select>
 </div>
-<div class="form-group">
-    <p><b>Bus</b></p>
-    <select class="form-control" id="id_servicio" name="id_servicio">
-                <option>---</option>
-                @foreach ($servicios as $servicio)
-                <option value="{{$servicio->id}}" class="{{$servicio->tipo_id}}">{{$servicio->nombre}}</option>
-                @endforeach
-    </select>
-</div>
 <div class="monthly" id="mycalendar"></div>
 
 
@@ -40,12 +31,60 @@ Reservas
     {!!Html::script('assets/monthly/js/monthly.js') !!}
     {!!Html::script('assets/js/jquery.chained.js')!!}
     <script type="text/javascript">
-    $("#id_servicio").chained("#id_tipo_servicio");
         $(window).load( function() {            
+            var url_load = '{{ route("load_calendar") }}';
+            $("#id_servicio").chained("#id_tipo_servicio");
             $('#mycalendar').monthly({
                 mode: 'event',
                 xmlUrl: '/assets/monthly/events.xml'
-            });    
+            }); 
+            //loadCalendar(url_load);
         });
+        $( "#id_servicio" ).change(function() {
+            var url_filter = '{{ route("filter_calendar") }}';
+            filterCalendar(url_filter);
+        });
+    function loadCalendar(url){
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: {},
+            dataType: "xml",
+            beforeSend: function() {
+                alert("se envia consulta");
+            },
+            success: function(data) {
+                alert("success");
+                alert(data);
+                $('#mycalendar').monthly({
+                mode: 'event',
+                xmlUrl: 'load_calendar'
+            });
+            },
+            error: function(){
+                alert("error");    
+            }
+        });
+    } 
+    function filterCalendar(url){
+        servicio_id = $("#id_servicio").val();
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: {servicio_id:servicio_id},
+            dataType: "json",
+            beforeSend: function() {
+            },
+            success: function(data) {
+                $('#mycalendar').empty();
+                $('#mycalendar').monthly({
+                    mode: 'event',
+                    xmlUrl: '/assets/monthly/events.xml'
+                });
+            },
+            error: function(){
+            }
+        });
+    }        
     </script>     
 @stop
