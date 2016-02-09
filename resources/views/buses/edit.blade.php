@@ -99,11 +99,10 @@ $(document).ready(function(){
         required: true,
         number: true,
         min: 4,
-        max: 24
+        max: 60
       },
       numero_motor: {
-        required: true,
-        min: 4
+        required: true
       },
       fecha_fabricacion: {
         required: true

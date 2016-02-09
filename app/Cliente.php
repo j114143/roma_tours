@@ -10,6 +10,6 @@ class Cliente extends Model
     protected $fillable = ['empresa','nombre', 'di','direccion','telefono','email'];
     function reservas()
     {
-        return $this->hasMany('App\Reserva','cliente_id', 'id');
+        return $this->hasMany('App\Reserva','cliente_id', 'id')->orderBy('id', 'desc');
     }
 }

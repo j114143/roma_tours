@@ -31,6 +31,6 @@ class Bus extends Model
     }
     function reservas()
     {
-        return $this->hasMany('App\Reserva','bus_id', 'id');
+        return $this->hasMany('App\Reserva','bus_id', 'id')->orderBy('id', 'desc');
     }
 }

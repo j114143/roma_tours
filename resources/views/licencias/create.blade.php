@@ -69,10 +69,17 @@ $(document).ready(function(){
     $('#form').validate({
         errorElement: "span",
         rules: {
-          nombre: {
-            required: true,
-            minlength: 5,
-            maxlength: 32,
+          numero_licencia: {
+            required: true
+          },
+          fecha_emision: {
+            required: true
+          },
+          fecha_revalidacion: {
+            required: true
+          },
+          direccion: {
+            required: true
           }
         },
         highlight: function(element) {

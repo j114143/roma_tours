@@ -24,6 +24,10 @@ Reservas
   $(document).ready(function(){
 
   $('#calendar').fullCalendar({
+        header: {
+            left: 'prev,next today',
+            right: 'month,basicWeek,basicDay'
+        },
         events:  {
             url: '{{route("reservas_tojson")}}',
             cache: true,
