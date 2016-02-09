@@ -45,7 +45,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Pequeña roma tours</a>
+                <a class="navbar-brand page-scroll" href="{{url()}}">Pequeña roma tours</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
