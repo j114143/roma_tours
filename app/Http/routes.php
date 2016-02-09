@@ -49,6 +49,10 @@ Route::post('admin/buses/new', 'BusController@store');
 Route::get('admin/buses/{id}', 'BusController@show')->name("buses_detail");
 Route::get('admin/buses/{id}/edit', 'BusController@edit')->name("buses_edit");
 Route::post('admin/buses/{id}/edit', 'BusController@update');
+Route::get('admin/buses/{id}/image', 'BusController@image')->name("buses_image");
+Route::post('admin/buses/{id}/image', 'BusController@imageStore');
+Route::get('admin/buses/{id}/conductor', 'BusController@conductor')->name("buses_conductor");
+Route::post('admin/buses/{id}/conductor', 'BusController@conductorUpdate');
 
 Route::get('admin/licencias/', 'LicenciaController@index')->name("licencias");
 Route::get('admin/licencias/new/{id}', 'LicenciaController@create')->name("licencias_new");
@@ -105,6 +109,7 @@ Route::get('admin/reservas/{id}/confirmar', 'ReservaController@confirmar')->name
 Route::post('admin/reservas/{id}/confirmar', 'ReservaController@confirmarUpdate');
 Route::get('admin/reservas/{id}/finalizar', 'ReservaController@finalizar')->name("reservas_finalizar");
 Route::post('admin/reservas/{id}/finalizar', 'ReservaController@finalizarUpdate');
+Route::get('admin/reservas_cantidad', 'ReservaController@cantidad')->name("reservas_cantidad");
 
 });
 

@@ -18,7 +18,7 @@
     </div>
 </div>
 <div class="col-sm-12">
-    <div class="panel panel-success">
+    <div class="panel panel-warning">
         <div class="panel-heading"><b>Reservas del cliente</b></div>
         <div class="panel-body">
         <table class="table">

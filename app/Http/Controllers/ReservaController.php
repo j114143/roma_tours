@@ -246,4 +246,37 @@ class ReservaController extends Controller
         }
         return json_encode($calendario );
     }
+    /**
+    *
+    */
+    public function cantidad()
+    {
+        $reservas = Reserva::select('id','confirmado','finalizado')
+                ->get();
+        $confirmados = 0;
+        $noconfirmados = 0;
+        $finalizados = 0;
+        $total = 0;
+        foreach ($reservas as $key => $reserva)
+        {
+            if ($reserva->finalizado)
+            {
+                $finalizados++;
+            }
+            if ($reserva->confirmado)
+            {
+                $confirmados++;
+            } else {
+                $noconfirmados++;
+            }
+            $total++;
+        }
+        $confirmados = $confirmados - $finalizados;
+        return array(
+            "confirmados"=>$confirmados,
+            "noconfirmados"=>$noconfirmados,
+            "total"=>$total,
+            "finalizados"=>$finalizados,
+            );
+    }
 }

@@ -11,8 +11,8 @@ Reservas <a href="{{ route('reservas_new')}}" title="Agregar"  class="btn btn-pr
                 <i class="fa fa-gears"></i>
             </span>
             <div class="info-box-content">
-              <span class="info-box-text">CPU Traffic</span>
-              <span class="info-box-number">90<small>%</small></span>
+              <span class="info-box-text">FINALIZADAS</span>
+              <span class="info-box-number" id="finalizados"> </span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -21,11 +21,11 @@ Reservas <a href="{{ route('reservas_new')}}" title="Agregar"  class="btn btn-pr
         <!-- /.col -->
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
+            <span class="info-box-icon bg-red"><i class="fa fa-remove"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Likes</span>
-              <span class="info-box-number">41,410</span>
+              <span class="info-box-text">NO CONFIRMADAS</span>
+              <span class="info-box-number" id="noconfirmados"> </span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -38,11 +38,11 @@ Reservas <a href="{{ route('reservas_new')}}" title="Agregar"  class="btn btn-pr
 
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+            <span class="info-box-icon bg-green"><i class="fa fa-check"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Sales</span>
-              <span class="info-box-number">760</span>
+              <span class="info-box-text">CONFIRMADAS</span>
+              <span class="info-box-number" id="confirmados"> </span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -51,11 +51,11 @@ Reservas <a href="{{ route('reservas_new')}}" title="Agregar"  class="btn btn-pr
         <!-- /.col -->
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+            <span class="info-box-icon bg-yellow"><i class="fa fa-tasks"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">New Members</span>
-              <span class="info-box-number">2,000</span>
+              <span class="info-box-text">TOTAL</span>
+              <span class="info-box-number" id="total"> </span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -165,4 +165,16 @@ Reservas <a href="{{ route('reservas_new')}}" title="Agregar"  class="btn btn-pr
 @endforeach
 </table>
 {!!$objs->render()!!}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $.getJSON( "{{ route('reservas_cantidad') }}", function( data ) {
+            $("#finalizados").text(data.finalizados);
+            $("#confirmados").text(data.confirmados);
+            $("#noconfirmados").text(data.noconfirmados);
+            $("#total").text(data.total);
+        })
+        .error(function() { })
+        .complete(function() { });
+    });
+</script>
 @stop

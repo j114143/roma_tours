@@ -13,6 +13,10 @@ class Bus extends Model
     {
         return $this->belongsTo('App\TipoBus', 'tipo_id');
     }
+    function conductor()
+    {
+        return $this->belongsTo('App\Conductor', 'conductor_id');
+    }
     function precios($servicioId)
     {
         $obj = Precio::where(array("servicio_id"=>$servicioId,"tipo_bus_id"=>$this->tipo_id))->first();

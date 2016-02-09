@@ -9,7 +9,7 @@ Servicio de transporte
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <h2 class="section-heading">Servicio de transporte turistico</h2>
                 <hr class="light">
-                <p class="text-faded">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p>
+                <p class="text-faded"><img src="{{ url('logo.png') }}"></p>
                 <a href="{{ route('book_now_cliente') }}" class="btn btn-default btn-xl">Reservar bus</a>
             </div>
         </div>
@@ -62,15 +62,16 @@ Servicio de transporte
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <h2 class="section-heading">Contactenos</h2>
                     <hr class="primary">
-                    <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                    <p>Para hacernos llegar sus reservas y/o consultas puede hacer usando los siguientes medios</p>
                 </div>
                 <div class="col-lg-4 col-lg-offset-2 text-center">
                     <i class="fa fa-phone fa-3x wow bounceIn"></i>
-                    <p>123-456-6789</p>
+                    <p>+ 084 271750</p>
+                    <p><b>Celular:</b> 951330747 - 951331569</p>
                 </div>
                 <div class="col-lg-4 text-center">
                     <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                    <p><a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a></p>
+                    <p><a href="mailto:p_romatours@hotmail.com">p_romatours@hotmail.com</a></p>
                 </div>
             </div>
         </div>

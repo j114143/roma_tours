@@ -17,12 +17,33 @@ Bus {{$obj->placa}}
     <p><b>Número Soat: </b> {{$obj->numero_soat}}</p>
     <p><b>Número seguro: </b> {{$obj->numero_seguro}}</p>
     <p><b>Revisiòn Técnica: </b> {{$obj->revision_tecnica}}</p>
-    <p><b>Conductor: </b> {{$obj->conductor}}</p>
         </div>
     </div>
 </div>
+<div class="col-sm-4">
+    <div class="panel panel-info">
+        <div class="panel-heading"><b>Detalles de conductor</b></div>
+        <div class="panel-body">
+            @if($obj->conductor_id)
+                <p><b>Nombre(s): </b> {{$obj->conductor->nombres}}</p>
+                <p><b>Apellidos: </b> {{$obj->conductor->apellidos}}</p>
+                <p><b>DNI: </b> {{$obj->conductor->dni}}</p>
+                <p><b>Dirección: </b> {{$obj->conductor->direccion}}</p>
+                <p><b>Teléfono: </b> {{$obj->conductor->telefono}}</p>
+                <p><b>E-mail: </b> {{$obj->conductor->email}}</p>
+                <p class="text-right"><a href="{{route('conductores_detail',['id'=>$obj->conductor_id])}}">Ver más</a></p>
+            @else
+                <a href="{{ route('buses_conductor',['id'=>$obj->id]) }}" class="btn btn-info">Asignar conductor</a>
+            @endif
+        </div>
+    </div>
+</div>
+<div class="col-sm-3">
+    <img src="{{ url($obj->image) }}" class="img-thumbnail ">
+    <p class="text-center"><a href="{{ route('buses_image',['id'=>$obj->id]) }}">Cambiar imagen</a></p>
+</div>
 <div class="col-sm-12">
-    <div class="panel panel-success">
+    <div class="panel panel-warning">
         <div class="panel-heading"><b>Reservas del bus</b></div>
         <div class="panel-body">
         <table class="table">
