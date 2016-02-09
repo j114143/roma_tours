@@ -205,13 +205,21 @@ class BookController extends Controller
     }
     public function status()
     {
+        $this->loadCalendar();   
+        $tipoServicios = TipoServicio::all();
+        $servicios = Servicio::all();
+
+        return view('book.status', array('tipoServicios'=>$tipoServicios,'servicios'=>$servicios));
+    }
+    public function loadCalendar()
+    {
         $reservas = Reserva::getReservas();
         $xml = new \DOMDocument("1.0");
         $xml_montly = $xml->createElement("monthly");
         foreach($reservas as $reserva)
         {
             $xml_event = $xml->createElement("event");
-            $xml_id = $xml->createElement("id", $reserva->id);
+            //$xml_id = $xml->createElement("id", $reserva->id);
             $xml_name = $xml->createElement("name", $this->getName($reserva));
             $xml_startdate = $xml->createElement("startdate", substr($reserva->fecha_inicio, 0, 10));
             $xml_enddate = $xml->createElement("enddate", substr($reserva->fecha_fin, 0, 10));
@@ -219,7 +227,7 @@ class BookController extends Controller
             $xml_endtime = $xml->createElement("endtime", substr($reserva->fecha_fin, 11, 5));
             $xml_color = $xml->createElement("color", $this->getColor($reserva));
             //$xml_url = $xml->createElement("url", getURL($reserva));
-            $xml_event->appendChild($xml_id);
+            //$xml_event->appendChild($xml_id);
             $xml_event->appendChild($xml_name);
             $xml_event->appendChild($xml_startdate);
             $xml_event->appendChild($xml_enddate);
@@ -233,8 +241,41 @@ class BookController extends Controller
             //echo $xml_event;
         }
         $xml->appendChild( $xml_montly );
-
         $xml->save("../public/assets/monthly/events.xml");
-        return view('book.status');
+        
+    }
+    public function filterCalendar(Request $request)
+    {
+        $id_servicio = $request->input('servicio_id');   
+        $reservas = Reserva::filterReservas($id_servicio);
+        $xml = new \DOMDocument("1.0");
+        $xml_montly = $xml->createElement("monthly");
+        foreach($reservas as $reserva)
+        {
+            $xml_event = $xml->createElement("event");
+            //$xml_id = $xml->createElement("id", $reserva->id);
+            $xml_name = $xml->createElement("name", $this->getName($reserva));
+            $xml_startdate = $xml->createElement("startdate", substr($reserva->fecha_inicio, 0, 10));
+            $xml_enddate = $xml->createElement("enddate", substr($reserva->fecha_fin, 0, 10));
+            $xml_starttime = $xml->createElement("starttime", substr($reserva->fecha_inicio, 11, 5));
+            $xml_endtime = $xml->createElement("endtime", substr($reserva->fecha_fin, 11, 5));
+            $xml_color = $xml->createElement("color", $this->getColor($reserva));
+            //$xml_url = $xml->createElement("url", getURL($reserva));
+            //$xml_event->appendChild($xml_id);
+            $xml_event->appendChild($xml_name);
+            $xml_event->appendChild($xml_startdate);
+            $xml_event->appendChild($xml_enddate);
+            $xml_event->appendChild($xml_starttime);
+            $xml_event->appendChild($xml_endtime);
+            $xml_event->appendChild($xml_color);
+            //$xml_event->appendChild($xml_url);
+
+            $xml_montly->appendChild( $xml_event );
+            
+            //echo $xml_event;
+        }
+        $xml->appendChild( $xml_montly );
+        $xml->save("../public/assets/monthly/events.xml");
+        return json_encode(Reserva::all());
     }
 }

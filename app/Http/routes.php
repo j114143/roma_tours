@@ -20,6 +20,7 @@ Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout')->name("logout");
 
 Route::group(['middleware' => ['auth']], function () {
+});
 Route::get('home/', function () { return view('admin');})->name("admin");
 Route::get('admin/', function () { return view('admin');})->name("admin");
 Route::get('admin/conductores/', 'ConductorController@index')->name("conductores");
@@ -100,6 +101,7 @@ Route::get('admin/reservas/', 'ReservaController@index')->name("reservas");
 Route::get('admin/reservas/new', 'ReservaController@create')->name("reservas_new");
 Route::post('admin/reservas/new', 'ReservaController@store');
 Route::get('admin/reservas/status', 'BookController@status')->name("reservas_status");
+//Route::get('admin/reservas/status', 'BookController@load')->name("calendario_load");
 Route::get('admin/reservas/calendario', 'ReservaController@calendario')->name("reservas_calendario");
 Route::get('admin/reservas/tojson', 'ReservaController@tojson')->name("reservas_tojson");
 Route::get('admin/reservas/{id}', 'ReservaController@show')->name("reservas_detail");
@@ -107,11 +109,11 @@ Route::get('admin/reservas/{id}/edit', 'ReservaController@edit')->name("reservas
 Route::post('admin/reservas/{id}/edit', 'ReservaController@update');
 Route::get('admin/reservas/{id}/confirmar', 'ReservaController@confirmar')->name("reservas_confirmar");
 Route::post('admin/reservas/{id}/confirmar', 'ReservaController@confirmarUpdate');
+
 Route::get('admin/reservas/{id}/finalizar', 'ReservaController@finalizar')->name("reservas_finalizar");
 Route::post('admin/reservas/{id}/finalizar', 'ReservaController@finalizarUpdate');
 Route::get('admin/reservas_cantidad', 'ReservaController@cantidad')->name("reservas_cantidad");
 
-});
 
 Route::get('book_bus/cliente', 'BookController@cliente')->name("book_now_cliente");
 Route::post('book_bus/cliente', 'BookController@clienteStore');
@@ -125,4 +127,6 @@ Route::post('book_now/verify', 'BookController@check');
 Route::get('disponibilidad_bus', 'BookController@disponibilidad')->name("disponibilidad_bus");
 Route::post('disponibilidad_bus', 'BookController@disponibilidadBus');
 
-
+Route::get('load_calendar', 'BookController@loadCalendar')->name("load_calendar");
+Route::get('filter_calendar/', 'BookController@filterCalendar')->name("filter_calendar");
+//Route::post('load_calendar', 'BookController@Loa');

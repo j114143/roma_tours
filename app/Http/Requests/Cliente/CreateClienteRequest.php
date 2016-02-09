@@ -25,7 +25,7 @@ class CreateClienteRequest extends Request
     {
         return [
             'nombre'  => 'required',
-            'di'  => 'required',
+            'di'  => 'required|min:8|max:11',
             'direccion'  => 'required',
             'telefono'  => 'required|numeric',
             'email'  => 'required|email',

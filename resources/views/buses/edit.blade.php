@@ -22,7 +22,7 @@ Editar bus {{$obj->placa}} <a href="{{ route('buses')}}" title="Listar"  class="
         <div class="form-group">
           <label class="col-sm-2 control-label">Cantidad asientos</label>
           <div class="col-sm-10">
-            {!!Form::input('text','cantidad_asientos', null ,['class'=>'form-control','maxlength' => 50,'required'])!!}
+            {!!Form::input('text','cantidad_asientos', null ,['class'=>'form-control','maxlength' => 50,'required','onKeyPress' =>'return validar(event)'])!!}
 
           </div>
         </div>
@@ -107,5 +107,23 @@ $(document).ready(function(){
   }
  });
 });
+function validar(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+      if (tecla==8) return true; 
+      if (tecla==44) return true; 
+      if (tecla==48) return true;
+      if (tecla==49) return true;
+      if (tecla==50) return true;
+      if (tecla==51) return true;
+      if (tecla==52) return true;
+      if (tecla==53) return true;
+      if (tecla==54) return true;
+      if (tecla==55) return true;
+      if (tecla==56) return true;
+      if (tecla==57) return true;
+      patron = /1/; //ver numero
+      te = String.fromCharCode(tecla);
+      return patron.test(te); 
+  } 
 </script>
 @stop
