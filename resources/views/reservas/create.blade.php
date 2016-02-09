@@ -97,7 +97,9 @@ $("#id_servicio").chained("#id_tipo_servicio");
 $("#id_fecha_inicio" ).datetimepicker({
     formatTime:'H:i',
     formatDate:'d-m-Y',
-    defaultDate:'+03.01.1970', // it's my birthday
+    minDate: 0 ,
+    maxDate: '+31.12.1970',
+    defaultDate:'+0.01.1970',
     defaultTime:'10:00',
     timepickerScrollbar:false
 });
@@ -188,7 +190,13 @@ $(document).ready(function(){
       },
       id_servicio: {
         required: true
-      }
+      },
+      di: {
+        required: true,
+        digits: true,
+        minlength: 8,
+        maxlength: 11
+      },
   },
   highlight: function(element) {
    $(element).closest('.form-group')

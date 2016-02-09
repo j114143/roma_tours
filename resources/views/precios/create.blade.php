@@ -21,13 +21,19 @@ Definir precio
         <div class="form-group">
             <label class="col-sm-2 control-label">Precio soles</label>
             <div class="col-sm-10">
-              {!!Form::input('text','precio_soles', null ,['class'=>'form-control','maxlength' => 64,'required', 'onKeyPress' =>'return validar(event)'])!!}
+              <div class="input-group">
+                <span class="input-group-addon">S/. </span>
+                {!!Form::input('text','precio_soles', null ,['class'=>'form-control','required'])!!}
+              </div>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Precio Dolares</label>
             <div class="col-sm-10">
-              {!!Form::input('text','precio_dolares', null ,['class'=>'form-control','maxlength' => 64,'required', 'onKeyPress' =>'return validar(event)'])!!}
+              <div class="input-group">
+                <span class="input-group-addon">USD $ </span>
+              {!!Form::input('text','precio_dolares', null ,['class'=>'form-control','required'])!!}
+              </div>
             </div>
         </div>
       <div class="form-group">
@@ -48,11 +54,15 @@ $(document).ready(function(){
   rules: {
       precio_soles: {
         required: true,
-        number: true
+        number: true,
+        min:1,
+        max:3000
       },
       precio_dolares: {
         required: true,
-        number: true
+        number: true,
+        min:1,
+        max:1000
       }
   },
   highlight: function(element) {

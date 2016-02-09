@@ -9,13 +9,13 @@ Editar precio <a href="{{ route('precios')}}" title="Listar"  class="btn btn-suc
         <div class="form-group">
             <label class="col-sm-2 control-label">Servicio</label>
             <div class="col-sm-10">
-            <p class="btn btn-link">{{$obj->servicio->nombre}}</p>
+            <p class="form-control-static">{{$obj->servicio->nombre}}</p>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Tipo bus</label>
             <div class="col-sm-10">
-            <p class="btn btn-link">{{$obj->tipoBus->nombre}}</p>
+            <p class="form-control-static">{{$obj->tipoBus->nombre}}</p>
 
             </div>
         </div>
@@ -48,11 +48,15 @@ $(document).ready(function(){
   rules: {
       precio_soles: {
         required: true,
-        number: true
+        number: true,
+        min:1,
+        max:3000
       },
       precio_dolares: {
         required: true,
-        number: true
+        number: true,
+        min:1,
+        max:1000
       }
   },
   highlight: function(element) {

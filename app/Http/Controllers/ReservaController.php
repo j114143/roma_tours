@@ -161,6 +161,12 @@ class ReservaController extends Controller
     public function confirmar($id)
     {
         $obj = Reserva::findOrFail($id);
+        if ($obj->confirmado)
+        {
+            Session::flash('mensaje', 'Esta reserva ya fue confirmado');
+            Session::flash('alert-class','alert-danger');
+            return redirect(route('reservas_detail',['id'=>$obj->id]));
+        }
         return view('reservas.confirmar', array('obj'=>$obj));
     }
 
@@ -174,6 +180,12 @@ class ReservaController extends Controller
     public function confirmarUpdate(Request $request, $id)
     {
         $obj = Reserva::findOrFail($id);
+        if ($obj->finalizado)
+        {
+            Session::flash('mensaje', 'Esta reserva ya fue confirmado');
+            Session::flash('alert-class','alert-danger');
+            return redirect(route('reservas_detail',['id'=>$obj->id]));
+        }
         $obj->confirmado = true;
         $obj->save();
         Session::flash('mensaje', 'Reserva '.$obj->sku().' confirmado');
@@ -190,6 +202,12 @@ class ReservaController extends Controller
     public function finalizar($id)
     {
         $obj = Reserva::findOrFail($id);
+        if ($obj->finalizado)
+        {
+            Session::flash('mensaje', 'Esta reserva ya fue finalizado');
+            Session::flash('alert-class','alert-warning');
+            return redirect(route('reservas_detail',['id'=>$obj->id]));
+        }
         return view('reservas.finalizar', array('obj'=>$obj));
     }
 
@@ -203,6 +221,12 @@ class ReservaController extends Controller
     public function finalizarUpdate(Request $request, $id)
     {
         $obj = Reserva::findOrFail($id);
+        if ($obj->finalizado)
+        {
+            Session::flash('mensaje', 'Esta reserva ya fue finalizado');
+            Session::flash('alert-class','alert-warning');
+            return redirect(route('reservas_detail',['id'=>$obj->id]));
+        }
         $obj->finalizado = true;
         $obj->save();
         Session::flash('mensaje', 'Reserva '.$obj->sku().' finalizado');
