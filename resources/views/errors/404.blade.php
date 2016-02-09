@@ -1,7 +1,7 @@
 @extends('layout.basico')
 @section('titulo')
-Error 503
+Error 404
 @stop
 @section('contenido')
-Servicio no diponible
+<p class="text-center">Pagina no encontrada vuelva mas tarde.</p>
 @stop

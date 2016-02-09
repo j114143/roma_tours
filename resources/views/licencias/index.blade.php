@@ -16,7 +16,7 @@ Licencias
     </thead>
     @foreach($objs as $obj)
         <tr>
-            <td>{{$obj->conductor_id}}</td>
+            <td>{{$obj->conductor->nombres}} {{$obj->conductor->apellidos}}</td>
             <td>{{$obj->numero_licencia}}</td>
             <td>{{$obj->fecha_emision}}</td>
             <td>{{$obj->fecha_revalidacion}}</td>

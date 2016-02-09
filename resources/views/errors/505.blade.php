@@ -1,7 +1,7 @@
 @extends('layout.basico')
 @section('titulo')
-Error 503
+Error 505
 @stop
 @section('contenido')
-Servicio no diponible
+Intente mas tarde
 @stop

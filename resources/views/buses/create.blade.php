@@ -16,7 +16,7 @@ Agregar bus
         <div class="form-group">
           <label class="col-sm-2 control-label">Placa</label>
           <div class="col-sm-10">
-            {!!Form::input('text','placa', null ,['class'=>'form-control','maxlength' => 6,'required'])!!}
+            {!!Form::input('text','placa', null ,['class'=>'form-control','maxlength' => 7,'required'])!!}
           </div>
         </div>
         <div class="form-group">
@@ -92,8 +92,8 @@ $(document).ready(function(){
   rules: {
       placa: {
         required: true,
-        minlength: 6,
-        maxlength: 6
+        minlength: 7,
+        maxlength: 7
       },
       cantidad_asientos: {
         required: true,
