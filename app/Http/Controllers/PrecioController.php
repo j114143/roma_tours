@@ -102,17 +102,14 @@ class PrecioController extends Controller
     {
         $input = $request->all();
 
-<<<<<<< HEAD
         $obj = Precio::where(array("servicio_id"=>$servicio_id,"tipo_bus_id"=>$tipo_bus_id))->firstOrFail();
         $obj->servicio_id = $input['servicio_id'];
         $obj->tipo_bus_id = $input['tipo_bus_id'];
         $obj->precio_soles = $input['precio_soles'];
         $obj->precio_dolares = $input['precio_dolares'];
         $obj->save();
-=======
         $obj = Precio::where(array("servicio_id"=>$servicio_id,"tipo_bus_id"=>$tipo_bus_id))
         ->update(['precio_soles' => $input['precio_soles'],'precio_dolares'=>$input['precio_dolares']]) ;
->>>>>>> 222943803a337ad35edbe0c287e3c45e208e03ec
         Session::flash('mensaje', 'Precio actualizado');
         Session::flash('alert-class','alert-success');
         return redirect(route('precios'));

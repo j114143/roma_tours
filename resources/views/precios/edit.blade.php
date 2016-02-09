@@ -5,7 +5,7 @@ Editar precio <a href="{{ route('precios')}}" title="Listar"  class="btn btn-suc
 @section('contenido')
 <div class="row">
       <div class="col-sm-8">
-        {!! Form::model($obj, [ 'method' => 'POST','url'=>route('precios_edit',['servicios_id'=>$obj->servicio_id,'tipo_bus_id'=>$obj->tipo_bus_id]),'id'=>'form','class'=>'form-horizontal']) !!}
+        {!! Form::model($obj, [ 'method' => 'POST','url'=>route('precios_edit',['servicio_id'=>$obj->servicio_id,'tipo_bus_id'=>$obj->tipo_bus_id]),'id'=>'form','class'=>'form-horizontal']) !!}
         <div class="form-group">
             <label class="col-sm-2 control-label">Servicio</label>
             <div class="col-sm-10">

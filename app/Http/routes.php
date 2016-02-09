@@ -20,6 +20,7 @@ Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout')->name("logout");
 
 Route::group(['middleware' => ['auth']], function () {
+});
 Route::get('home/', function () { return view('admin');})->name("admin");
 Route::get('admin/', function () { return view('admin');})->name("admin");
 Route::get('admin/conductores/', 'ConductorController@index')->name("conductores");
@@ -108,7 +109,6 @@ Route::post('admin/reservas/{id}/confirmar', 'ReservaController@confirmarUpdate'
 Route::get('admin/reservas/{id}/finalizar', 'ReservaController@finalizar')->name("reservas_finalizar");
 Route::post('admin/reservas/{id}/finalizar', 'ReservaController@finalizarUpdate');
 
-});
 
 Route::get('book_bus/cliente', 'BookController@cliente')->name("book_now_cliente");
 Route::post('book_bus/cliente', 'BookController@clienteStore');
