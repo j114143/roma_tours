@@ -51,8 +51,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="page-scroll" href="{{ url() }}">Home</a></li>
-                    <li><a class="page-scroll" href="{{ url() }}">Services</a></li>
+                    <li><a class="page-scroll" href="{{ url() }}">Inicio</a></li>
+                    <li><a class="page-scroll" href="{{ url() }}">Servicios</a></li>
                     <li><a class="page-scroll" href="{{ url() }}#contact">Contactenos</a></li>
                     <li><a class="page-scroll" href="{{route('login')}}">Iniciar sesión</a></li>
                 </ul>
