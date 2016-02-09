@@ -123,7 +123,7 @@ $(document).ready(function(){
     function buscarBus(url){
         servicio_id = $("#id_servicio").val();
         fecha_inicio = $("#id_fecha_inicio").val();
-        var urlBase = '{{ url("images") }}';
+        var urlBase = '{{ url("") }}';
         $.ajax({
             type: "GET",
             url: url,

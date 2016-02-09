@@ -8,8 +8,12 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Session;
 use App\Bus;
+use App\Conductor;
 use App\TipoBus;
 use App\Http\Requests\Bus\CreateBusRequest;
+use App\Http\Requests\Bus\ConductorBusRequest;
+use App\Http\Requests\ImageRequest;
+use App\Services\FileService;
 
 class BusController extends Controller
 {
@@ -123,5 +127,69 @@ class BusController extends Controller
     public function destroy($id)
     {
         //
+    }
+     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function image($id)
+    {
+
+        $obj = Bus::findOrFail($id);
+        return view('buses.image', array('obj'=>$obj));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function imageStore(ImageRequest $request, $id)
+    {
+        $file_service = new FileService();
+
+        $input = $request->all();
+
+        $obj = Bus::findOrFail($id);
+        $obj->image = $file_service->upload($request->file('image'),'buses');
+        $obj->save();
+        Session::flash('mensaje', 'Imagen actualizado');
+        Session::flash('alert-class','alert-success');
+        return redirect(route('buses_detail',['id'=>$id]));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function conductor($id)
+    {
+        $obj = Bus::findOrFail($id);
+        $conductores = Conductor::lists('nombres','id');
+
+        return view('buses.conductor', array('obj'=>$obj,'conductores'=>$conductores));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function conductorUpdate(ConductorBusRequest $request, $id)
+    {
+        $input = $request->all();
+
+        $obj = Bus::findOrFail($id);
+        $obj->conductor_id = $input['conductor_id'];
+        $obj->save();
+        Session::flash('mensaje', 'Conductor asignado a bus');
+        Session::flash('alert-class','alert-success');
+        return redirect(route('buses_detail',['id'=>$id]));
     }
 }

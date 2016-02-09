@@ -18,7 +18,7 @@
     </div>
 </div>
 <div class="col-sm-12">
-    <div class="panel panel-success">
+    <div class="panel panel-warning">
         <div class="panel-heading"><b>Reservas del cliente</b></div>
         <div class="panel-body">
         <table class="table">
@@ -48,17 +48,61 @@
                     <td>{{$reserva->sku()}}</td>
                     <td>
                     @if($reserva->finalizado)
-                    Finalizado
+                    <i class="fa fa-check-ok fa-lg text-info" ></i>
                     @else
                         @if($reserva->confirmado)
-                        Confirmado
+                        <i class="fa fa-check-circle fa-lg text-success" ></i>
                         @else
-                        <a title="Confirmar reserva" class="text-danger" href="{{ route('reservas_confirmar',['id'=>$reserva->id]) }}">No confirmado</a>
+                        <a title="Confirmar reserva" class="text-danger" href="{{ route('reservas_confirmar',['id'=>$reserva->id]) }}"><i class="fa fa-remove fa-lg text-danger" ></i></a>
                         @endif
                     @endif
                     </td>
-                    <td>{{$reserva->servicio->nombre}}</td>
-                    <td>{{$reserva->bus->placa}}</td>
+                    <td><a a class="btn" data-toggle="modal" data-target="#servicio{{$reserva->servicio_id}}">
+          {{$reserva->servicio->nombre}}
+        </a>
+            <div class="modal fade" id="#servicio{{$reserva->servicio_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{$reserva->servicio->nombre}}</h4>
+                  </div>
+                  <div class="modal-body">
+                  <p><b>Nombre</b>: {{$reserva->servicio->nombre}}</p>
+                  <p><b>Duración</b>: {{$reserva->servicio->duracion}} Horas</p>
+                  <p><b>Tipo</b>: {{$reserva->servicio->tipo->nombre}}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+                    </td>
+                    <td>
+        <a class="btn" data-toggle="modal" data-target="#myModal{{$reserva->bus->placa}}">
+          {{$reserva->bus->placa}}
+        </a>
+            <div class="modal fade" id="myModal{{$reserva->bus->placa}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">BUS {{$reserva->bus->placa}}</h4>
+                  </div>
+                  <div class="modal-body">
+                  <p><b>PLACA</b>: {{$reserva->bus->placa}}</p>
+                  <p><b>TIPO</b>: {{$reserva->bus->tipo->nombre}}</p>
+                  <p><b>MODELO</b>: {{$reserva->bus->modelo}}</p>
+                  <p><b>CANT. ASIENTOS</b>: {{$reserva->bus->cantidad_asientos}}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </td>
                     <td>{{$reserva->fecha_inicio}}</td>
                     <td>{{$reserva->fecha_fin}}</td>
                     <td>
