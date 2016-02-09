@@ -5,7 +5,7 @@ Agregar bus
 @section('contenido')
 <div class="row">
     <div class="col-sm-8">
-      {!!Form::open(array('url' => route('buses_new'),'id'=>'form','class'=>'form-horizontal','onsubmit'=>'return checkSubmit();'))!!}
+      {!!Form::open(array('url' => route('buses_new'),'id'=>'form','class'=>'form-horizontal'))!!}
 
         <div class="form-group">
           <label class="col-sm-2 control-label">Tipo de Bus</label>
@@ -90,10 +90,38 @@ $(document).ready(function(){
  $('#form').validate({
   errorElement: "span",
   rules: {
-      nombre: {
+      placa: {
         required: true,
-        minlength: 5,
-        maxlength: 32,
+        minlength: 6,
+        maxlength: 6
+      },
+      cantidad_asientos: {
+        required: true,
+        number: true,
+        min: 4,
+        max: 60
+      },
+      numero_motor: {
+        required: true,
+        min: 4
+      },
+      fecha_fabricacion: {
+        required: true
+      },
+      numero_soat: {
+        required: true,
+        minlength: 1,
+        maxlength: 16
+      },
+      numero_seguro: {
+        required: true,
+        minlength: 1,
+        maxlength: 16
+      },
+      revision_tecnica: {
+        required: true,
+        minlength: 1,
+        maxlength: 16
       }
   },
   highlight: function(element) {
@@ -110,8 +138,8 @@ $(document).ready(function(){
 });
 function validar(e) {
     tecla = (document.all) ? e.keyCode : e.which;
-      if (tecla==8) return true; 
-      if (tecla==44) return true; 
+      if (tecla==8) return true;
+      if (tecla==44) return true;
       if (tecla==48) return true;
       if (tecla==49) return true;
       if (tecla==50) return true;
@@ -124,7 +152,7 @@ function validar(e) {
       if (tecla==57) return true;
       patron = /1/; //ver numero
       te = String.fromCharCode(tecla);
-      return patron.test(te); 
-  } 
+      return patron.test(te);
+  }
 </script>
 @stop

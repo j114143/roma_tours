@@ -21,7 +21,7 @@ Agregar Conductor
               <div class="form-group">
                 <label class="col-sm-2 control-label">DNI</label>
                 <div class="col-sm-10">
-                  {!!Form::input('text','dni', null ,['class'=>'form-control','maxlength' => 8,'required', 'onKeyPress' =>'return validar(event)'])!!}
+                  {!!Form::input('text','dni', null ,['class'=>'form-control','maxlength' => 8,'required' ])!!}
                 </div>
               </div>
               <div class="form-group">
@@ -33,7 +33,7 @@ Agregar Conductor
               <div class="form-group">
                 <label class="col-sm-2 control-label">Telefono</label>
                 <div class="col-sm-10">
-                  {!!Form::input('text','telefono', null ,['class'=>'form-control','maxlength' => 9,'required', 'onKeyPress' =>'return validar(event)'])!!}
+                  {!!Form::input('text','telefono', null ,['class'=>'form-control','maxlength' => 9,'required'])!!}
                 </div>
               </div>
               <div class="form-group">
@@ -58,10 +58,38 @@ $(document).ready(function(){
  $('#form').validate({
   errorElement: "span",
   rules: {
-      nombre: {
+      nombres: {
+        required: true,
+        minlength: 3,
+        maxlength: 32
+      },
+      apellidos: {
         required: true,
         minlength: 5,
-        maxlength: 32,
+        maxlength: 32
+      },
+      dni: {
+        required: true,
+        digits: true,
+        minlength: 8,
+        maxlength: 8
+      },
+      telefono: {
+        required: true,
+        digits: true,
+        minlength: 6,
+        maxlength: 12
+      },
+      email: {
+        required: true,
+        email: true,
+        minlength: 6,
+        maxlength: 128
+      },
+      direccion: {
+        required: true,
+        minlength: 5,
+        maxlength: 128
       }
   },
   highlight: function(element) {
@@ -76,23 +104,5 @@ $(document).ready(function(){
   }
  });
 });
-function validar(e) {
-    tecla = (document.all) ? e.keyCode : e.which;
-      if (tecla==8) return true; 
-      if (tecla==44) return true; 
-      if (tecla==48) return true;
-      if (tecla==49) return true;
-      if (tecla==50) return true;
-      if (tecla==51) return true;
-      if (tecla==52) return true;
-      if (tecla==53) return true;
-      if (tecla==54) return true;
-      if (tecla==55) return true;
-      if (tecla==56) return true;
-      if (tecla==57) return true;
-      patron = /1/; //ver numero
-      te = String.fromCharCode(tecla);
-      return patron.test(te); 
-  } 
 </script>
 @stop

@@ -22,13 +22,13 @@ Editar precio <a href="{{ route('precios')}}" title="Listar"  class="btn btn-suc
         <div class="form-group">
             <label class="col-sm-2 control-label">Precio soles</label>
             <div class="col-sm-10">
-              {!!Form::input('text','precio_soles', null ,['class'=>'form-control','maxlength' => 64,'required', 'onKeyPress' =>'return validar(event)'])!!}
+              {!!Form::input('text','precio_soles', null ,['class'=>'form-control','required'])!!}
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Precio Dolares</label>
             <div class="col-sm-10">
-              {!!Form::input('text','precio_dolares', null ,['class'=>'form-control','maxlength' => 64,'required', 'onKeyPress' =>'return validar(event)'])!!}
+              {!!Form::input('text','precio_dolares', null ,['class'=>'form-control','required'])!!}
             </div>
         </div>
           <div class="form-group">
@@ -42,23 +42,31 @@ Editar precio <a href="{{ route('precios')}}" title="Listar"  class="btn btn-suc
       </div>
     </div>
 <script type="text/javascript">
-function validar(e) {
-    tecla = (document.all) ? e.keyCode : e.which;
-      if (tecla==8) return true; 
-      if (tecla==48) return true;
-      if (tecla==49) return true;
-      if (tecla==50) return true;
-      if (tecla==51) return true;
-      if (tecla==52) return true;
-      if (tecla==53) return true;
-      if (tecla==54) return true;
-      if (tecla==55) return true;
-      if (tecla==56) return true;
-      if (tecla==57) return true;
-      if (tecla==46) return true;
-      patron = /1/; //ver numero
-      te = String.fromCharCode(tecla);
-      return patron.test(te); 
-  } 
+$(document).ready(function(){
+ $('#form').validate({
+  errorElement: "span",
+  rules: {
+      precio_soles: {
+        required: true,
+        number: true
+      },
+      precio_dolares: {
+        required: true,
+        number: true
+      }
+  },
+  highlight: function(element) {
+   $(element).closest('.form-group')
+   .removeClass('has-success').addClass('has-error');
+  },
+  success: function(element) {
+   element
+   .addClass('help-inline')
+   .closest('.form-group')
+   .removeClass('has-error').addClass('has-success');
+  }
+ });
+});
+
 </script>
 @stop

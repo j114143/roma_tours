@@ -40,24 +40,33 @@ Definir precio
    {!!Form::close()!!}
   </div>
 </div>
+
 <script type="text/javascript">
-function validar(e) {
-    tecla = (document.all) ? e.keyCode : e.which;
-      if (tecla==8) return true; 
-      if (tecla==48) return true;
-      if (tecla==49) return true;
-      if (tecla==50) return true;
-      if (tecla==51) return true;
-      if (tecla==52) return true;
-      if (tecla==53) return true;
-      if (tecla==54) return true;
-      if (tecla==55) return true;
-      if (tecla==56) return true;
-      if (tecla==57) return true;
-      if (tecla==46) return true;
-      patron = /1/; //ver numero
-      te = String.fromCharCode(tecla);
-      return patron.test(te); 
-  } 
+$(document).ready(function(){
+ $('#form').validate({
+  errorElement: "span",
+  rules: {
+      precio_soles: {
+        required: true,
+        number: true
+      },
+      precio_dolares: {
+        required: true,
+        number: true
+      }
+  },
+  highlight: function(element) {
+   $(element).closest('.form-group')
+   .removeClass('has-success').addClass('has-error');
+  },
+  success: function(element) {
+   element
+   .addClass('help-inline')
+   .closest('.form-group')
+   .removeClass('has-error').addClass('has-success');
+  }
+ });
+});
+
 </script>
 @stop

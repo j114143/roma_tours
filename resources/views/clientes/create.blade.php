@@ -75,8 +75,31 @@ $(document).ready(function(){
   rules: {
       nombre: {
         required: true,
+        minlength: 3,
+        maxlength: 32
+      },
+      email: {
+        required: true,
+        email: true,
         minlength: 5,
-        maxlength: 32,
+        maxlength: 128
+      },
+      direccion: {
+        required: true,
+        minlength: 5,
+        maxlength: 128
+      },
+      di: {
+        required: true,
+        digits: true,
+        minlength: 8,
+        maxlength: 11
+      },
+      telefono: {
+        required: true,
+        digits: true,
+        minlength: 6,
+        maxlength: 12
       }
   },
   highlight: function(element) {
@@ -103,23 +126,6 @@ function empresaPlaceholder()
     $("#id_nombre").text("Razon social");
     $("#id_dni").text("RUC");
 }
-function validar(e) {
-    tecla = (document.all) ? e.keyCode : e.which;
-      if (tecla==8) return true; 
-      if (tecla==44) return true; 
-      if (tecla==48) return true;
-      if (tecla==49) return true;
-      if (tecla==50) return true;
-      if (tecla==51) return true;
-      if (tecla==52) return true;
-      if (tecla==53) return true;
-      if (tecla==54) return true;
-      if (tecla==55) return true;
-      if (tecla==56) return true;
-      if (tecla==57) return true;
-      patron = /1/; //ver numero
-      te = String.fromCharCode(tecla);
-      return patron.test(te); 
-  } 
+
 </script>
 @stop
