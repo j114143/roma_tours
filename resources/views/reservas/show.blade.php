@@ -46,7 +46,7 @@
             <p><b>Dirección:</b> {{$obj->cliente->direccion}}</p>
             <p><b>Teléfono:</b> {{$obj->cliente->telefono}}</p>
             <p><b>E-mail:</b> {{$obj->cliente->email}} </p>
-
+            <p class="text-right"><a href="{{ route('clientes_detail',['id'=>$obj->cliente_id])}}">Ver más</a></p>
         </div>
     </div>
 
@@ -58,6 +58,7 @@
             <p><b>Nombre:</b> {{$obj->servicio->nombre}}</p>
             <p><b>Duración:</b> {{$obj->servicio->duracion}} Horas</p>
             <p><b>Tipo de servicio:</b> {{$obj->servicio->tipo->nombre}}</p>
+            <p class="text-right"><a href="{{ route('servicios_detail',['id'=>$obj->servicio_id])}}">Ver más</a></p>
         </div>
     </div>
     <div class="panel panel-info">
@@ -66,7 +67,7 @@
             <p><b>Placa del BUS:</b> {{$obj->bus->placa}}</p>
             <p><b>Tipo de bus:</b> {{$obj->bus->tipo->nombre}}</p>
             <p><b>Cantidad asientos:</b> {{$obj->bus->cantidad_asientos}}</p>
-
+            <p class="text-right"><a href="{{ route('buses_detail',['id'=>$obj->bus_id])}}">Ver más</a></p>
         </div>
     </div>
 

@@ -75,7 +75,19 @@ $(document).ready(function(){
       nombre: {
         required: true,
         minlength: 5,
-        maxlength: 32,
+        maxlength: 32
+      },
+      email: {
+        required: true,
+        email: true
+      },
+      telefono: {
+        required: true,
+        minlength: 6
+      },
+      direccion: {
+        required: true,
+        minlength: 5
       }
   },
   highlight: function(element) {
