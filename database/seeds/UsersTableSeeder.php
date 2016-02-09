@@ -12,8 +12,8 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::insert(['nombre' => 'Administrador','apellidos' => 'Apellido', 'dni'=> "44011000", 'direccion'=>'Av. Admin',
-                        'email' => 'admin@llika.com', 'password' => bcrypt('admin132')]);
+                        'email' => 'p_romatours@hotmail.com', 'password' => bcrypt('admin132')]);
         User::insert(['nombre' => 'Administrador2','apellidos' => 'Apellido2', 'dni'=> "22011000", 'direccion'=>'Av. Admin',
-                        'email' => 'administrador@llika.com', 'password' => bcrypt('admin132')]);
+                        'email' => 'admin@llika.com', 'password' => bcrypt('admin132')]);
     }
 }

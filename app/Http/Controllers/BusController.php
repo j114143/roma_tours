@@ -50,7 +50,7 @@ class BusController extends Controller
         $input = $request->all();
 
         $obj = new Bus ;
-        $obj->placa = $input['placa'];
+        $obj->placa = strtoupper($input['placa']);
         $obj->cantidad_asientos = $input['cantidad_asientos'];
         $obj->numero_motor = $input['numero_motor'];
         $obj->fecha_fabricacion = $input['fecha_fabricacion'];
@@ -103,7 +103,7 @@ class BusController extends Controller
         $input = $request->all();
 
         $obj = Bus::findOrFail($id);
-        $obj->placa = $input['placa'];
+        $obj->placa = strtoupper($input['placa']);
         $obj->cantidad_asientos = $input['cantidad_asientos'];
         $obj->numero_motor = $input['numero_motor'];
         $obj->fecha_fabricacion = $input['fecha_fabricacion'];
@@ -135,7 +135,6 @@ class BusController extends Controller
      */
     public function image($id)
     {
-
         $obj = Bus::findOrFail($id);
         return view('buses.image', array('obj'=>$obj));
     }

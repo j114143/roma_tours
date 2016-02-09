@@ -112,7 +112,7 @@ Reservas <a href="{{ route('reservas_new')}}" title="Agregar"  class="btn btn-pr
         <h4 class="modal-title" id="myModalLabel">{{$obj->servicio->nombre}}</h4>
       </div>
       <div class="modal-body">
-      <p><b>DURACIÓN : </b> {{$obj->servicio->duracion}}</p>
+      <p><b>DURACIÓN : </b> {{$obj->servicio->duracion}} Horas</p>
       <p><b>TIPO : </b> {{$obj->servicio->tipo->nombre}}</p>
       <p><a href="{{ route('servicios_detail',['id'=>$obj->servicio_id]) }}">Más detalles</a></p>
       </div>

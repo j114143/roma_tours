@@ -98,7 +98,6 @@ $("#id_fecha_inicio" ).datetimepicker({
     formatTime:'H:i',
     formatDate:'d-m-Y',
     minDate: 0 ,
-    maxDate: '+31.12.1970',
     defaultDate:'+0.01.1970',
     defaultTime:'10:00',
     timepickerScrollbar:false

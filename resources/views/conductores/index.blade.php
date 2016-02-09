@@ -1,6 +1,9 @@
 @extends('layout.user')
 @section('titulo')
-Conductores <a href="{{ route('conductores_new')}}" title="Agregar"  class="btn btn-warning btn-xs"><i class="fa fa-plus-circle"> </i></a>
+Conductores
+<a href="{{ route('conductores_new')}}" title="Agregar"  class="btn btn-warning btn-xs">
+<i class="fa fa-plus-circle"> </i>
+</a>
 @stop
 @section('contenido')
     <table class="table table-bordered table-striped">
