@@ -93,17 +93,16 @@ Crear una reserva
 {!!Html::script('assets/js/jquery.datetimepicker.full.js')!!}
 
 <script type="text/javascript">
+jQuery.datetimepicker.setLocale('es');
 $("#id_servicio").chained("#id_tipo_servicio");
 $("#id_fecha_inicio" ).datetimepicker({
     formatTime:'H:i',
     formatDate:'d-m-Y',
     minDate: 0 ,
-    defaultDate:'+0.01.1970',
     defaultTime:'10:00',
     timepickerScrollbar:false
 });
 $(document).ready(function(){
-
 
     var servicio_id, fecha_inicio;
     var url = '{{ route("disponibilidad_bus") }}';

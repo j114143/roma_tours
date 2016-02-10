@@ -85,8 +85,8 @@ Buscar Bus
 </div>
 {!!Html::script('assets/js/jquery.chained.js')!!}
 {!!Html::script('assets/js/jquery.datetimepicker.full.js')!!}
-
 <script type="text/javascript">
+jQuery.datetimepicker.setLocale('es');
 $("#id_servicio").chained("#id_tipo_servicio");
 $("#id_fecha_inicio" ).datetimepicker({
     formatTime:'H:i',

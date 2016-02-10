@@ -3,7 +3,7 @@
 Reservas
 @stop
 @section('contenido')
-    {!!Html::script('assets/js/moment.min.js')!!}
+    {!!Html::script('assets/js/moment-with-locales.js')!!}
     {!!Html::script('assets/js/fullcalendar.min.js')!!}
     {!!Html::style('assets/css/fullcalendar.min.css')!!}
 <div class="row form-horizontal">
@@ -28,6 +28,7 @@ Reservas
             left: 'prev,next today',
             right: 'month,basicWeek,basicDay'
         },
+        lang: "es",
         events:  {
             url: '{{route("reservas_tojson")}}',
             cache: true,
