@@ -12,6 +12,7 @@ Buses de la empresa <a href="{{ route('buses_new')}}" title="Agregar"  class="bt
             <th>Número motor</th>
             <th>Número soat</th>
             <th>Número seguro</th>
+            <th>Conductor</th>
             <th> </th>
         </tr>
     </thead>
@@ -23,6 +24,13 @@ Buses de la empresa <a href="{{ route('buses_new')}}" title="Agregar"  class="bt
             <td>{{$obj->numero_motor}}</td>
             <td>{{$obj->numero_soat}}</td>
             <td>{{$obj->numero_seguro}}</td>
+            <td>
+                @if($obj->conductor_id)
+                <a href="{{ route('conductores_detail',['id'=>$obj->conductor_id])}}">{{$obj->conductor->nombres}} {{$obj->conductor->apellidos}}</a>
+                @else
+                <span class="text-danger">Sin conductor</span>
+                @endif
+            </td>
             <td>
             <a class="btn btn-info btn-xs" title="Ver detalles" href="{{ route('buses_detail',['id'=>$obj->id]) }}"><i class="fa fa-eye"></i></a>
             <a href="{{ route ('buses_edit',['id'=>$obj->id]) }}" title="Editar" class="btn btn-warning btn-xs"><i class="fa fa-pencil"> </i></a>

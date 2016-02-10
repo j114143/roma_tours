@@ -32,6 +32,7 @@ Bus {{$obj->placa}}
                 <p><b>Teléfono: </b> {{$obj->conductor->telefono}}</p>
                 <p><b>E-mail: </b> {{$obj->conductor->email}}</p>
                 <p class="text-right"><a href="{{route('conductores_detail',['id'=>$obj->conductor_id])}}">Ver más</a></p>
+                <a href="{{ route('buses_conductor',['id'=>$obj->id]) }}" class="btn btn-info">Cambiar conductor</a>
             @else
                 <a href="{{ route('buses_conductor',['id'=>$obj->id]) }}" class="btn btn-info">Asignar conductor</a>
             @endif

@@ -13,4 +13,8 @@ class Conductor extends Model
     {
         return $this->hasOne('App\Licencia');
     }
+    public function bus()
+    {
+        return $this->hasOne('App\Bus');
+    }
 }
