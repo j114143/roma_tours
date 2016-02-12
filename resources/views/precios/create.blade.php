@@ -23,7 +23,7 @@ Definir precio
             <div class="col-sm-10">
               <div class="input-group">
                 <span class="input-group-addon">S/. </span>
-                {!!Form::input('text','precio_soles', null ,['class'=>'form-control','required'])!!}
+                {!!Form::input('text','precio_soles', null ,['class'=>'form-control','required','id'=>'precio_soles'])!!}
               </div>
             </div>
         </div>
@@ -32,7 +32,7 @@ Definir precio
             <div class="col-sm-10">
               <div class="input-group">
                 <span class="input-group-addon">USD $ </span>
-              {!!Form::input('text','precio_dolares', null ,['class'=>'form-control','required'])!!}
+              {!!Form::input('text','precio_dolares', null ,['class'=>'form-control','required','id'=>'precio_dolares'])!!}
               </div>
             </div>
         </div>
@@ -49,6 +49,9 @@ Definir precio
 
 <script type="text/javascript">
 $(document).ready(function(){
+  $('#precio_dolares').change(function(){
+    $('#precio_soles').val(Math.round($('#precio_dolares').val() * 3.51));
+  });
  $('#form').validate({
   errorElement: "span",
   rules: {

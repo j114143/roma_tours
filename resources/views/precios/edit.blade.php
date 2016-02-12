@@ -22,13 +22,19 @@ Editar precio <a href="{{ route('precios')}}" title="Listar"  class="btn btn-suc
         <div class="form-group">
             <label class="col-sm-2 control-label">Precio soles</label>
             <div class="col-sm-10">
-              {!!Form::input('text','precio_soles', null ,['class'=>'form-control','required'])!!}
+              <div class="input-group">
+                <span class="input-group-addon">S/. </span>
+                {!!Form::input('text','precio_soles', null ,['class'=>'form-control','required','id'=>'precio_soles'])!!}
+              </div>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Precio Dolares</label>
             <div class="col-sm-10">
-              {!!Form::input('text','precio_dolares', null ,['class'=>'form-control','required'])!!}
+              <div class="input-group">
+                <span class="input-group-addon">USD $ </span>
+              {!!Form::input('text','precio_dolares', null ,['class'=>'form-control','required','id'=>'precio_dolares'])!!}
+              </div>
             </div>
         </div>
           <div class="form-group">
