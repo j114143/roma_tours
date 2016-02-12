@@ -1,7 +1,7 @@
 @extends('layout.basico')
 
 @section('titulo')
-Iniciar sesión
+<i class="fa fa-user fa-3x"></i><br>Iniciar sesión
 @stop
 @section('contenido')
 <style type="text/css">

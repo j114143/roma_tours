@@ -30,7 +30,7 @@
 
 <div class="col-sm-4">
     <div class="panel panel-warning">
-        <div class="panel-heading"><b>Conductor de </b></div>
+        <div class="panel-heading"><b>Detalles del bus asignado </b></div>
         <div class="panel-body">
         @if($obj->bus)
         <p><b>Placa</b>: {{$obj->bus->placa}}</p>
@@ -39,7 +39,7 @@
         <p><b>Soat</b>: {{$obj->bus->numero_soat}}</p>
         <p> <a href="{{ route('buses_detail',['id'=>$obj->bus->id]) }}">Detalles del bus</a></p>
         @else
-        <p><a href="{{ route('licencias_new',['id'=>$obj->id]) }}" title="Agregar Licencia" class="btn btn-info"><i class="fa fa-plus"> </i> Agregar licencia</a></p>
+        <p><a href="{{ route('licencias_new',['id'=>$obj->id]) }}" title="Asignar bus" class="btn btn-info"><i class="fa fa-plus"> </i> Asignar bus</a></p>
         @endif
         </div>
     </div>

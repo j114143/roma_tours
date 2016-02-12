@@ -18,6 +18,12 @@ Servicio de transporte
 @stop
 @section('contenido')
 <div class="row">
+    <div class="col-sm-12">
+        <p class="text-center" style="font-size: 20px;">Nos dedicamos al transporte de pasajeros nacionales e internacionales por todos los lugares turisticos, de la ciudad imperial del Cusco. Dando comodidad
+        Y confianza al pasajero para que tenga una impresión buena de nuestros servicios</p>
+    </div>
+</div>
+<div class="row">
     <div class="col-lg-3 col-md-6 text-center">
         <div class="service-box">
             <i class="fa fa-4x fa-diamond wow bounceIn text-primary"></i>
@@ -55,6 +61,22 @@ Servicio de transporte
     </form>
     </div>
 </aside>
+    <section id="nosotros">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Misión</h2>
+                    <hr class="primary">
+                    <p>Buscar la excelencia en el servicio y la atención de los usuarios basandonos en la dedicación, eficiencia, puntualidad, limpieza, calidad y seguridad.</p>
+                </div>
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Visión</h2>
+                    <hr class="primary">
+                    <p>Ser la mejor empresa de transporte turístico a nivel regional de pasajeros nacionales e internacionales que requieren nuestros servicios en la ciudad imperial del cusco.</p>
+                </div>
+            </div>
+        </div>
+    </section>
     <section id="contact">
         <div class="container">
             <div class="row">

@@ -973,3 +973,6 @@ body {
 table#disponibles >tbody>tr>td{
     vertical-align: middle;
 }
+#contact {
+    background: #F1F1F1;
+}

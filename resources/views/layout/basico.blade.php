@@ -52,6 +52,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a class="page-scroll" href="{{ url() }}">Inicio</a></li>
+                    <li><a class="page-scroll" href="{{ url() }}#nosotros">Acerca de nosotros</a></li>
                     <li><a class="page-scroll" href="{{ url() }}">Servicios</a></li>
                     <li><a class="page-scroll" href="{{ url() }}#contact">Contactenos</a></li>
                     <li><a class="page-scroll" href="{{route('login')}}">Iniciar sesión</a></li>
@@ -84,7 +85,7 @@
         </div>
     </section>
             @yield('footer')
-            <p class="text-center text-muted">Pequeña Roma Trous S.R.Lta</p>
+            <p class="text-center text-muted">Pequeña Roma Tours S.R.Lta</p>
 
     <!-- jQuery -->
     {!!Html::script('assets/js/jquery.js')!!}
