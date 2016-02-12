@@ -24,7 +24,7 @@ class CreateServicioRequest extends Request
     public function rules()
     {
         return [
-            'nombre'     => 'required|min:3|max:32',
+            'nombre'     => 'required|min:3|max:128',
             'duracion' => 'required|numeric|max:24|min:1',
             'tipo_id' => 'required|exists:tipo_servicios,id',
             'descripcion'  => 'required',

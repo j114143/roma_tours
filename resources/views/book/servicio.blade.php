@@ -20,9 +20,10 @@ Buscar Bus
             <select class="form-control" id="id_servicio" name="id_servicio">
                 <option>---</option>
                 @foreach ($servicios as $servicio)
-                <option value="{{$servicio->id}}" class="{{$servicio->tipo_id}}">{{$servicio->nombre}}</option>
+                <option value="{{$servicio->id}}" class="{{$servicio->tipo_id}}" id="{{$servicio->descripcion}}">{{$servicio->nombre}}</option>
                 @endforeach
             </select>
+            <div id="descripcion"></div>
         </div>
         <div class="form-group">
             <label class="control-label">Fecha y hora</label>
@@ -99,6 +100,9 @@ $("#id_fecha_inicio" ).datetimepicker({
 });
 $(document).ready(function(){
 
+    $("#id_servicio").change(function(){
+        $('#descripcion').text($("#id_servicio").children(":selected").attr("id"));
+    });
 
     var servicio_id, fecha_inicio;
     var url = '{{ route("disponibilidad_bus") }}';
