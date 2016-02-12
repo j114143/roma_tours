@@ -26,25 +26,25 @@ Servicio de transporte
 <div class="row">
     <div class="col-lg-3 col-md-6 text-center">
         <div class="service-box">
-            <i class="fa fa-4x fa-diamond wow bounceIn text-primary"></i>
+            <img src="{{ url('cusco.jpg')}}">
             <h3>Traslados locales</h3>
         </div>
     </div>
     <div class="col-lg-3 col-md-6 text-center">
         <div class="service-box">
-            <i class="fa fa-4x fa-paper-plane wow bounceIn text-primary" data-wow-delay=".1s"></i>
+            <img src="{{ url('cusco3.jpg')}}">
             <h3>Tours de medio día</h3>
         </div>
     </div>
     <div class="col-lg-3 col-md-6 text-center">
         <div class="service-box">
-            <i class="fa fa-4x fa-newspaper-o wow bounceIn text-primary" data-wow-delay=".2s"></i>
+            <img src="{{ url('vallesagrado.jpg')}}">
             <h3>Tours de un día</h3>
         </div>
     </div>
     <div class="col-lg-3 col-md-6 text-center">
         <div class="service-box">
-            <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".3s"></i>
+            <img src="{{ url('patacancha.jpg')}}">
             <h3>Otras servicios</h3>
         </div>
     </div>
