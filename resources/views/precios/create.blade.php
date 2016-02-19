@@ -49,9 +49,6 @@ Definir precio
 
 <script type="text/javascript">
 $(document).ready(function(){
-  $('#precio_dolares').change(function(){
-    $('#precio_soles').val(Math.round($('#precio_dolares').val() * 3.51));
-  });
  $('#form').validate({
   errorElement: "span",
   rules: {
