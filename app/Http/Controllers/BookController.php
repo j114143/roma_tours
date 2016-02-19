@@ -93,7 +93,7 @@ class BookController extends Controller
 
         $reserva->fecha_inicio = $inicio->toDateTimeString();
         $reserva->precio_soles = $precio->precio_soles;
-        $reserva->precio_dolares = $precio->precio_soles;
+        $reserva->precio_dolares = $precio->precio_dolares;
 
         $reserva->lugar_inicio = $input['lugar_inicio'];
         $reserva->lugar_fin = $input['lugar_fin'];;
